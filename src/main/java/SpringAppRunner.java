@@ -43,13 +43,10 @@ public class SpringAppRunner {
         Order order = orderService.placeNewOrder(null, 1, 3);
         System.out.println(order);
 
-        //пересоздание бина после close родителя
         repoContext.close();  //вызывает метод destroy у бина, но не удаляет, можем пользоваться им!
 
-        //у родителя repo есть бины T1 и T2, у потомка app их нет
-        //после вызова appContext.getBean() он увидит бин T1 родителя, хотя и закрыли его
-        //вызывается init() метод
-        System.out.println("context1 getBean: " + appContext.getBean("T1", SomeService.class).getString());
+
         appContext.close();
+
     }
 }

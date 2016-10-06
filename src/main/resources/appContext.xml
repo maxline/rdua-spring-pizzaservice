@@ -9,7 +9,8 @@
 
     <!--можно ли создать два экземпляра класса-->
     <!--бины не синглтоны, с одинаковыми именами name два бина нельзя создать-->
-    <!--<bean name = "T1" class="ua.rd.pizzaservice04.services.Test2SomeService"/>-->
+
+    <bean name = "T1" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
 
     <bean name="pizzaService"
           class="ua.rd.pizzaservice04.services.SimplePizzaService">
@@ -18,12 +19,24 @@
     </bean>
 
 
+    <!--рефы берутся из парент контекста-->
     <bean name="orderService"
           class="ua.rd.pizzaservice04.services.SimpleOrderService">
         <constructor-arg ref="pizzaService"/>
         <constructor-arg ref="orderRepository"/>
 
     </bean>
+
+
+    <!--обращаемся к бину парентовской конфигурации-->
+    <bean class="ua.rd.pizzaservice04.services.UsageSomeService" init-method="init">
+          <constructor-arg>
+                  <ref  parent="T2"/>
+        </constructor-arg>
+    </bean>
+
+    <!--references to other beans-->
+    <!--<ref bean=""/>-->
 
 
 
