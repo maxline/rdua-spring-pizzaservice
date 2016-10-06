@@ -4,39 +4,21 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
     <!--можно ли создать два бина имплементят один интерфес-->
 
     <!--можно ли создать два экземпляра класса-->
     <!--бины не синглтоны, с одинаковыми именами name два бина нельзя создать-->
-    <bean name = "T1" class="ua.rd.pizzaservice04.services.Test1SomeService"/>
-    <bean name = "T2" class="ua.rd.pizzaservice04.services.Test1SomeService"/>
-
-
-    <!-- bean definitions here -->
-    <bean name="pizzaRepository"
-          class="ua.rd.pizzaservice04.repository.InMemoryPizzaRepository"
-          init-method="init"
-    />
-
-    <bean name="orderRepository"
-          class="ua.rd.pizzaservice04.repository.InMemoryOrderRepository"
-    />
-
+    <bean name = "T1" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
 
     <bean name="pizzaService"
           class="ua.rd.pizzaservice04.services.SimplePizzaService">
         <constructor-arg ref="pizzaRepository"/>
-
     </bean>
 
     <bean name="orderService"
           class="ua.rd.pizzaservice04.services.SimpleOrderService">
         <constructor-arg ref="pizzaService"/>
         <constructor-arg ref="orderRepository"/>
-
     </bean>
-
-
 
 </beans>

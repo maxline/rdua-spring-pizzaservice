@@ -15,36 +15,36 @@ public class SpringAppRunner {
 
         //в контексте может быть только один бин, overriding bean T1
 
-//        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("appContext.xml", "appContext1.xml");  //запускает создание контейнера и считывает все бины
+//        ConfigurableApplicationContext repoContext = new ClassPathXmlApplicationContext("repoContext.xml", "appContext.xml");  //запускает создание контейнера и считывает все бины
         //в веб приложении не будем вручную запускать спринг контейнер (выше)
 
-        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("appContext.xml");  //запускает создание контейнера и считывает все бины
-        System.out.println(Arrays.toString(context.getBeanDefinitionNames()));
+        ConfigurableApplicationContext repoContext = new ClassPathXmlApplicationContext("repoContext.xml");  //запускает создание контейнера и считывает все бины
+        System.out.println(Arrays.toString(repoContext.getBeanDefinitionNames()));
 
-        ConfigurableApplicationContext context1 = new ClassPathXmlApplicationContext(
-                new String[]{"appContext1.xml"});  //запускает создание контейнера и считывает все бины
-        //context1 не включает бины из context
-//context1.setParent(context);
-
-
-        System.out.println(Arrays.toString(context1.getBeanDefinitionNames()));
-        System.out.println("concext getBean: " + context.getBean("T1", SomeService.class).getString());  //поздний заменяет ранний T1, вывело Test2
-        System.out.println("concext1 getBean: " + context1.getBean("T1", SomeService.class).getString());  //покажет Test2
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(
+                new String[]{"appContext.xml"}, repoContext);  //запускает создание контейнера и считывает все бины
+        //appContext не включает бины из repoContext
+//appContext.setParent(repoContext);
 
 
-        PizzaRepository pizzaRepository = (PizzaRepository) context.getBean("pizzaRepository"); //имя плюс тип тогда не нужно будет делать каст
+        System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
+        //System.out.println("concext getBean: " + repoContext.getBean("T1", SomeService.class).getString());  //поздний заменяет ранний T1, вывело Test2
+        System.out.println("appContext getBean: " + appContext.getBean("T1", SomeService.class).getString());  //покажет Test2
+
+
+        PizzaRepository pizzaRepository = (PizzaRepository) repoContext.getBean("pizzaRepository"); //имя плюс тип тогда не нужно будет делать каст
         System.out.println(pizzaRepository.find(1));  // null т.к. не вызвался метод init
 
 
-        OrderRepository orderRepository = (OrderRepository) context.getBean("orderRepository");
+        OrderRepository orderRepository = (OrderRepository) repoContext.getBean("orderRepository");
         //System.out.println(orderRepository.find());
 
-        OrderService orderService = (OrderService) context.getBean("orderService");
+        OrderService orderService = (OrderService) appContext.getBean("orderService");
         Order order = orderService.placeNewOrder(null, 1, 3);
         System.out.println(order);
 
 
-        context.close();
+        repoContext.close();
 
     }
 }

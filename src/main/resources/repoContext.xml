@@ -9,7 +9,21 @@
 
     <!--можно ли создать два экземпляра класса-->
     <!--бины не синглтоны, с одинаковыми именами name два бина нельзя создать-->
-    <bean name = "T1" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
+
+
+
+    <!-- bean definitions here -->
+
+    <bean name="pizzaRepository"
+          class="ua.rd.pizzaservice04.repository.InMemoryPizzaRepository"
+          init-method="init"
+    />
+
+
+
+    <bean name="orderRepository"
+          class="ua.rd.pizzaservice04.repository.InMemoryOrderRepository"
+    />
 
 
 </beans>
