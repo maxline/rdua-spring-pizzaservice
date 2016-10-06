@@ -29,7 +29,7 @@ public class SpringAppRunner {
 
         System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
         //System.out.println("concext getBean: " + repoContext.getBean("T1", SomeService.class).getString());  //поздний заменяет ранний T1, вывело Test2
-        System.out.println("appContext getBean: " + appContext.getBean("T1", SomeService.class).getString());  //покажет Test2
+        System.out.println("context1 getBean: " + appContext.getBean("T1", SomeService.class).getString());  //покажет Test2
 
 
         PizzaRepository pizzaRepository = (PizzaRepository) repoContext.getBean("pizzaRepository"); //имя плюс тип тогда не нужно будет делать каст
@@ -43,8 +43,13 @@ public class SpringAppRunner {
         Order order = orderService.placeNewOrder(null, 1, 3);
         System.out.println(order);
 
+        //пересоздание бина после close родителя
+        repoContext.close();  //вызывает метод destroy у бина, но не удаляет, можем пользоваться им!
 
-        repoContext.close();
-
+        //у родителя repo есть бины T1 и T2, у потомка app их нет
+        //после вызова appContext.getBean() он увидит бин T1 родителя, хотя и закрыли его
+        //вызывается init() метод
+        System.out.println("context1 getBean: " + appContext.getBean("T1", SomeService.class).getString());
+        appContext.close();
     }
 }

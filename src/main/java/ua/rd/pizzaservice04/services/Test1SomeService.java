@@ -8,4 +8,8 @@ public class Test1SomeService implements SomeService {
     public String getString() {
         return "Test1";
     }
+
+    public void destroy(){
+        System.out.println("Destroy");
+    }
 }
