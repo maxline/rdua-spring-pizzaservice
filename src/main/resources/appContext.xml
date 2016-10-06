@@ -31,13 +31,18 @@
     <!--обращаемся к бину парентовской конфигурации-->
     <bean class="ua.rd.pizzaservice04.services.UsageSomeService" init-method="init">
           <constructor-arg>
-                  <ref  parent="T2"/>
+              <!--вложенный бин inner bean-->
+              <!--в контекст попадает и не попадает, не можем получить через гетБин, но будут вызываться методы Инит и Дестрой-->
+              <!--дестрой вызывается у тех бинов которые есть в контексте-->
+              <bean name ="AAAA" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
         </constructor-arg>
     </bean>
 
+    <!--lazy-init по умолчанию false, если true то ускорит запуск контейнера, но при использовании могут быть ошибки, которые не увидим на старте-->
+<!--factory-bean-->
+<!--factory-method-->
+
     <!--references to other beans-->
     <!--<ref bean=""/>-->
-
-
 
 </beans>
