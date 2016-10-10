@@ -1,48 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    
+    <bean  name="T1" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
 
-    <!--можно ли создать два бина имплементят один интерфес-->
-
-    <!--можно ли создать два экземпляра класса-->
-    <!--бины не синглтоны, с одинаковыми именами name два бина нельзя создать-->
-
-    <bean name = "T1" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
-
-    <bean name="pizzaService"
-          class="ua.rd.pizzaservice04.services.SimplePizzaService">
+    <bean name="pizzaService" class="ua.rd.pizzaservice04.services.SimplePizzaService">
         <constructor-arg ref="pizzaRepository"/>
-
     </bean>
-
-
-    <!--рефы берутся из парент контекста-->
-    <bean name="orderService"
-          class="ua.rd.pizzaservice04.services.SimpleOrderService">
+    
+    <bean name="orderService" class="ua.rd.pizzaservice04.services.SimpleOrderService">
         <constructor-arg ref="pizzaService"/>
         <constructor-arg ref="orderRepository"/>
-
     </bean>
-
-
-    <!--обращаемся к бину парентовской конфигурации-->
+    
     <bean class="ua.rd.pizzaservice04.services.UsageSomeService" init-method="init">
-          <constructor-arg>
-              <!--вложенный бин inner bean-->
-              <!--в контекст попадает и не попадает, не можем получить через гетБин, но будут вызываться методы Инит и Дестрой-->
-              <!--дестрой вызывается у тех бинов которые есть в контексте-->
-              <bean name ="AAAA" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
+        <constructor-arg>
+            <bean name="AAA" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
         </constructor-arg>
     </bean>
-
-    <!--lazy-init по умолчанию false, если true то ускорит запуск контейнера, но при использовании могут быть ошибки, которые не увидим на старте-->
-<!--factory-bean-->
-<!--factory-method-->
-
-    <!--references to other beans-->
-    <!--<ref bean=""/>-->
-
+    
 </beans>

@@ -1,12 +1,17 @@
 package ua.rd.pizzaservice04.infrastructure;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
-import java.util.Arrays;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ * @author andrii
+ */
 public class ApplicationContext implements Context {
+
     private final Config config;
     private final Map<String, Object> beans = new HashMap<>();
 
@@ -15,119 +20,90 @@ public class ApplicationContext implements Context {
     }
 
     @Override
-    public <T> T getBean(String beanName) {
+    public <T> T getBean(String beanName) throws Exception {
         Class<?> type = config.getImpl(beanName);
         Object bean = beans.get(beanName);
+
         if (bean != null) {
             return (T) bean;
         }
+
         BeanBuilder builder = new BeanBuilder(type);
-        builder.createBean();
-        //  builder.callPostCreateMethod();
-        try {
-            builder.callInitMethod();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        builder.createBean();        
+        builder.callPostCreateMethod();
+        builder.callInitMethod();
         builder.createBeanProxy();
         bean = builder.build();
+
         beans.put(beanName, bean);
+
         return (T) bean;
     }
 
-    private class BeanBuilder<T> {
-
+    class BeanBuilder {
         private final Class<?> type;
-        private T bean;  //Object
+        private Object bean;
 
         public BeanBuilder(Class<?> type) {
             this.type = type;
         }
 
+        public void createBean() throws Exception {
+            Constructor<?> constructor = type.getConstructors()[0];
 
-        public void createBean() {
-            try {
-                Constructor<?> constructor = getTypeConstructor(type);
-                if (constructor.getParameterCount() == 0) {
-                    bean = (T) type.newInstance();
-                } else {
-                    bean = (T) constructor.newInstance(getParameters(constructor));
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if (constructor.getParameterCount() == 0) {
+                bean = type.newInstance();
+            } else {
+                bean = newInstanceWithParameters(constructor);
             }
         }
 
-        private Constructor<?> getTypeConstructor(Class<?> clazz) {
-            return clazz.getConstructors()[0];
-        }
+        private Object newInstanceWithParameters(Constructor<?> constructor) throws Exception {
+            Parameter[] parameters = constructor.getParameters();
 
-        private Object[] getParameters(Constructor<?> constructor) {
-            Parameter[] constructorParams = constructor.getParameters();
-            Object[] beans = new Object[constructorParams.length];
-            for (int i = 0; i < constructorParams.length; i++) {
-                beans[i] = getBean(convertToBeanName(constructorParams[i].getType()));
+            Object[] paramsVal = new Object[parameters.length];
+
+            for (int i = 0; i < parameters.length; i++) {
+                Class<?> paramType = parameters[i].getType();
+                String beanName = getBeanNameByType(paramType);
+                paramsVal[i] = getBean(beanName);
             }
-            return beans;
+
+            return constructor.newInstance(paramsVal);
         }
 
-        private String convertToBeanName(Class<?> typeName) {
-            char[] chars = typeName.getSimpleName().toCharArray();
-            chars[0] += 32; //converts to lowerCase first char;
-            return new String(chars);
+        private String getBeanNameByType(Class<?> paramType) {
+            System.out.println(paramType);
+            String paramTypeName = paramType.getSimpleName();
+            String localBeanName
+                    = Character.toLowerCase(paramTypeName.charAt(0)) + paramTypeName.substring(1);
+            return localBeanName;
         }
-
-        public T build() {
-            return bean;
-        }
-
 
         public void callInitMethod() throws Exception {
-            Class<?> clazz = bean.getClass();
+            Class<?> clazz = bean.getClass();            
             Method method;
             try {
                 method = clazz.getMethod("init");
-            } catch (NoSuchMethodException e) {
-                System.out.println("caught init");
+            } catch (NoSuchMethodException ex) {              
+                
                 return;
-            }
+            }            
             method.invoke(bean);
         }
 
+        private void callPostCreateMethod() {
+            // implement
+        }
+
         public void createBeanProxy() {
-            if (hasMethodAnnotation(BenchMark.class)) {
-                Class<?> clazz = bean.getClass();
-                T original = bean;
-                bean = (T) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(), type.getInterfaces(),
-                        new InvocationHandler() {
-                            @Override
-                            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                                Method beanMethod = type.getMethod(method.getName(), method.getParameterTypes());
-                                if (isBenchMarkAnnotationPresentAndTrue(beanMethod)) {
-                                    return wrapMethodInBenchmark(original, beanMethod, args);
-                                }
-                                return beanMethod.invoke(original, args);
-                            }
-                        });
-            }
-
+            // implement
+            // Proxy.newProxyInstance
         }
 
-        public boolean hasMethodAnnotation(Class<? extends Annotation> aClass) {
-            return Arrays.stream(type.getDeclaredMethods()).anyMatch(e -> e.isAnnotationPresent(aClass));
-        }
-
-        public <T> Object wrapMethodInBenchmark(T original, Method beanMethod, Object[] args)
-                throws InvocationTargetException, IllegalAccessException {
-            long start = System.nanoTime();
-            Object invoke = beanMethod.invoke(original, args);
-            long end = System.nanoTime();
-            System.out.println(String.format("Method '%s', execution time %d", beanMethod.getName(), end - start));
-            return invoke;
-        }
-
-        public boolean isBenchMarkAnnotationPresentAndTrue(Method beanMethod) {
-            return beanMethod.isAnnotationPresent(BenchMark.class) && beanMethod.getAnnotation(BenchMark.class).value();
+        public Object build() {
+            return bean;
         }
     }
+
 }

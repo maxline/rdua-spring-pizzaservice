@@ -1,56 +1,29 @@
 package ua.rd.pizzaservice04.domain;
 
-import java.math.BigDecimal;
-
+/**
+ *
+ * @author andrii
+ */
 public class Pizza {
-    private Long id;
-    private String name;
-    private BigDecimal price;
-    private PizzaType type;
 
     public enum PizzaType {
-        VEGETARIAN, SEA, MEAT
+
+        VEGETARIAN, SEA, MEAT;
+
     }
 
+    private Integer id;
+    private String name;
+    private PizzaType pizzaType;
 
-    public Pizza(Long id, String name, BigDecimal price, PizzaType type) {
+    public Pizza(Integer id, String name, PizzaType pizzaType) {
         this.id = id;
         this.name = name;
-        this.price = price;
-        this.type = type;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+        this.pizzaType = pizzaType;
     }
 
     @Override
     public String toString() {
-        return "Pizza{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", type=" + type +
-                '}';
+        return "Pizza{" + "name=" + name + ", pizzaType=" + pizzaType + '}';
     }
 }

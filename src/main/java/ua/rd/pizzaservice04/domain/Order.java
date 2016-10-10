@@ -1,23 +1,21 @@
 package ua.rd.pizzaservice04.domain;
 
 import java.util.List;
-
+/**
+ *
+ * @author andrii
+ */
 public class Order {
-    private Long id = 0L;
-    private Customer customer;
+
+    private Long id;
     private List<Pizza> pizzas;
+    private Customer customer;
+
+    public Order() {
+    }
 
     public Order(Customer customer, List<Pizza> pizzas) {
-        id++;
-        this.customer = customer;
         this.pizzas = pizzas;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -37,13 +35,18 @@ public class Order {
         this.pizzas = pizzas;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", pizzas=" + pizzas +
-                '}';
+        return "Order{pizzas=" + pizzas + '}';
     }
+
 }
+

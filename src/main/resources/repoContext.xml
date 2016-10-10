@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
-
-
-    <bean name = "T1" class="ua.rd.pizzaservice04.services.Test1SomeService"
-    destroy-method="destroy"/>
-
-    <bean name = "T2" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
-
+    
+    <bean name="T1" class="ua.rd.pizzaservice04.services.Test1SomeService"
+          destroy-method="destroy"/>
+    <bean name="T2" class="ua.rd.pizzaservice04.services.Test1SomeService"/>
+    
+    
     <!-- bean definitions here -->
-
-    <bean name="pizzaRepository"
+    <bean name="pizzaRepository" 
           class="ua.rd.pizzaservice04.repository.InMemoryPizzaRepository"
-          init-method="init"
-    />
+          init-method="init"/>
 
-
-
-    <bean name="orderRepository"
-          class="ua.rd.pizzaservice04.repository.InMemoryOrderRepository"
-    />
-
-
+    <bean name="orderRepository" class="ua.rd.pizzaservice04.repository.InMemoryOrderRepository"/>
+    
+    
 </beans>

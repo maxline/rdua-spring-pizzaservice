@@ -1,25 +1,21 @@
 package ua.rd.pizzaservice04.repository;
 
-import ua.rd.pizzaservice04.domain.Order;
-
 import java.util.ArrayList;
 import java.util.List;
+import ua.rd.pizzaservice04.domain.Order;
 
 /**
- * не умеет создавать order , умеет искать
- * по сути repository это dao
+ *
+ * @author andrii
  */
-public class InMemoryOrderRepository implements OrderRepository {
+public class InMemoryOrderRepository implements OrderRepository  {
 
-    private final List<Order> orders = new ArrayList();
-
-    public List<Order> getOrders() {
-        return orders;
-    }
+    private final List<Order> orders = new ArrayList<>();
 
     @Override
     public Order save(Order order) {
         orders.add(order);
         return order;
     }
+
 }
