@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class Order {
 
-    public static final int MIN_PIZZAS_FOR_DISCOUNT = 4;
-    public static final String DISCOUNT_PERCENT = "0.3";
+    private static final int MIN_PIZZAS_FOR_DISCOUNT = 4;
+    private static final String DISCOUNT_PERCENT = "0.3";
     private Long id;
     private List<Pizza> pizzas;
     private Customer customer;
@@ -52,21 +52,21 @@ public class Order {
 
     private BigDecimal calculateDiscount() {
         BigDecimal maxPrice = new BigDecimal("0.0");
-        for(Pizza pizza:pizzas){
+        for (Pizza pizza : pizzas) {
             maxPrice = maxPrice.max(pizza.getPrice());
         }
 
         return maxPrice.multiply(new BigDecimal(DISCOUNT_PERCENT));
     }
 
-    public BigDecimal getPrice(){
+    public BigDecimal getPrice() {
         BigDecimal orderPrice = new BigDecimal("0.0");
 
-        for(Pizza pizza:pizzas){
+        for (Pizza pizza : pizzas) {
             orderPrice = orderPrice.add(pizza.getPrice());
         }
 
-        if (isDiscountNeeded()){
+        if (isDiscountNeeded()) {
             orderPrice = orderPrice.subtract(calculateDiscount());
         }
 
@@ -75,7 +75,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{pizzas=" + pizzas + ". Price="+ getPrice() + '}';
+        return "Order{pizzas=" + pizzas + ". Price=" + getPrice() + '}';
     }
 }
 

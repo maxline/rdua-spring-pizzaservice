@@ -26,7 +26,7 @@ public class SimpleOrderService implements OrderService {
 
     @Override
     public Order placeNewOrder(Customer customer, int... pizzaID) {
-        if (pizzaID.length > maxOrderCount) {
+        if (checkParameters(pizzaID)) {
             throw new IllegalArgumentException();
         }
         List<Pizza> pizzas = new ArrayList<>();
@@ -38,6 +38,10 @@ public class SimpleOrderService implements OrderService {
 
         saveOrder(newOrder);  // set Order Id and save Order to in-memory list
         return newOrder;
+    }
+
+    private boolean checkParameters(int[] pizzaID) {
+        return (pizzaID.length < 1) || (pizzaID.length > maxOrderCount);
     }
 
     private Pizza findPizzaByID(Integer id) {

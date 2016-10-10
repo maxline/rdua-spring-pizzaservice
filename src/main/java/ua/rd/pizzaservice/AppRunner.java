@@ -28,7 +28,9 @@ public class AppRunner {
         PizzaRepository pizzaRepository = context.getBean("pizzaRepository");
         System.out.println(pizzaRepository.find(1));
 
+        //Ошибка видимо из-за в SimpleOrderSercice в конструктор добавили новый параметр int maxOrderCount
         OrderService orderService = context.getBean("orderService");
+
         Order order = orderService.placeNewOrder(customer, 1, 2, 3);
         System.out.println(order);
     }
