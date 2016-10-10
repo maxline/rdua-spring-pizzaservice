@@ -2,6 +2,9 @@ package ua.rd.pizzaservice.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static ua.rd.pizzaservice.domain.Order.Status.*;
+
 /**
  *
  * @author andrii
@@ -13,6 +16,11 @@ public class Order {
     private Long id;
     private List<Pizza> pizzas;
     private Customer customer;
+    private Status status;
+
+    public enum Status {
+        NEW, IN_PROGRESS, CANCELED, DONE;
+    }
 
     public Order() {
     }
@@ -20,6 +28,7 @@ public class Order {
     public Order(Customer customer, List<Pizza> pizzas) {
         this.pizzas = pizzas;
         this.customer = customer;
+        this.status = NEW;
     }
 
     public Long getId() {
@@ -73,9 +82,34 @@ public class Order {
         return orderPrice;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        switch (this.status){
+            case NEW:
+                if (status != IN_PROGRESS && status !=CANCELED){
+                    throw new IllegalArgumentException("From NEW you can move to IN_PROGRESS or to CANCELED!");
+                }
+                break;
+            case IN_PROGRESS:
+                if (status != DONE && status !=CANCELED){
+                    throw new IllegalArgumentException("From IN_PROGRESS you can move to DONE or to CANCELED!");
+                }
+                break;
+            case CANCELED:
+                throw new IllegalArgumentException("Order status CANCELED can not be changed!");
+            case DONE:
+                throw new IllegalArgumentException("Order status DONE can not be changed!");
+        }
+
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "Order{pizzas=" + pizzas + ". Price=" + getPrice() + '}';
+        return "Order{pizzas=" + pizzas + ". Price=" + getPrice() + ". Status=" + getStatus() + '}';
     }
 }
 

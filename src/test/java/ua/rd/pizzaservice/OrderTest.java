@@ -18,7 +18,7 @@ public class OrderTest {
     }
 
     @Test
-    public void getPriceWithoutDiscountTest() throws Exception {
+    public void getPriceWithoutDiscount() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
 
         pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
@@ -31,7 +31,7 @@ public class OrderTest {
     }
 
     @Test
-    public void getPriceWithDiscountTest() throws Exception {
+    public void getPriceWithDiscount() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
 
         pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
@@ -45,4 +45,73 @@ public class OrderTest {
         //assertEquals(new BigDecimalCloseTo(new BigDecimal("540.0"), new BigDecimal("0.00001")), order.getPrice());
         assertEquals(new BigDecimal("540.0"), order.getPrice());
     }
+
+    @Test
+    public void setOrderStatusNew() throws Exception {
+        List<Pizza> pizzas = new ArrayList<>(3);
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+
+        Order order = new Order(null, pizzas);
+
+        assertEquals(Order.Status.NEW, order.getStatus());
+        order.setStatus(Order.Status.IN_PROGRESS);
+
+        assertEquals(Order.Status.IN_PROGRESS, order.getStatus());
+
+        order.setStatus(Order.Status.DONE);
+        assertEquals(Order.Status.DONE, order.getStatus());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setWrongOrderStatusFromNew() throws Exception {
+        List<Pizza> pizzas = new ArrayList<>(3);
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+
+        Order order = new Order(null, pizzas);
+
+        assertEquals(Order.Status.NEW, order.getStatus());
+        order.setStatus(Order.Status.DONE);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setWrongOrderStatusFromInProgress() throws Exception {
+        List<Pizza> pizzas = new ArrayList<>(3);
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+
+        Order order = new Order(null, pizzas);
+
+        assertEquals(Order.Status.NEW, order.getStatus());
+        order.setStatus(Order.Status.IN_PROGRESS);
+        assertEquals(Order.Status.IN_PROGRESS, order.getStatus());
+        order.setStatus(Order.Status.NEW);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setWrongOrderStatusFromCanceled() throws Exception {
+        List<Pizza> pizzas = new ArrayList<>(3);
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+
+        Order order = new Order(null, pizzas);
+
+        assertEquals(Order.Status.NEW, order.getStatus());
+        order.setStatus(Order.Status.CANCELED);
+        assertEquals(Order.Status.CANCELED, order.getStatus());
+        order.setStatus(Order.Status.NEW);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setWrongOrderStatusFromDone() throws Exception {
+        List<Pizza> pizzas = new ArrayList<>(3);
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+
+        Order order = new Order(null, pizzas);
+
+        assertEquals(Order.Status.NEW, order.getStatus());
+        order.setStatus(Order.Status.IN_PROGRESS);
+        assertEquals(Order.Status.IN_PROGRESS, order.getStatus());
+        order.setStatus(Order.Status.DONE);
+        assertEquals(Order.Status.DONE, order.getStatus());
+        order.setStatus(Order.Status.NEW);
+    }
+
 }
