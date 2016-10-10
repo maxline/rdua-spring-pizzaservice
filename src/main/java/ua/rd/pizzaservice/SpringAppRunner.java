@@ -31,7 +31,7 @@ public class SpringAppRunner {
         System.out.println(pizzaRepository.find(1));
 
         OrderService orderService = (OrderService) appContext.getBean("orderService");
-        Order order = orderService.placeNewOrder(null, 1, 2, 3);
+        Order order = orderService.placeNewOrder(null, 1, 1, 1, 2, 3);
         System.out.println(order);
 
         repoContext.close();

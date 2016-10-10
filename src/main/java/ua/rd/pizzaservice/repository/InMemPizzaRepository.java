@@ -21,7 +21,7 @@ public class InMemPizzaRepository implements PizzaRepository {
 
     public void init() {
         pizzas.put(1, new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
-        pizzas.put(2, new Pizza(2, "meat", Pizza.PizzaType.MEAT, new BigDecimal(100.00)));
+        pizzas.put(2, new Pizza(2, "meat", Pizza.PizzaType.MEAT, new BigDecimal(200.00)));
         pizzas.put(3, new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal(100.00)));
     }
 
