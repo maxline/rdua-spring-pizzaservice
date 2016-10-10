@@ -1,21 +1,20 @@
 package ua.rd.pizzaservice.infrastructure;
 
 /**
- *
  * @author andrii
  */
 public class InitialContext {
-    
-    private static Config config = new JavaConfig();    
+
+    private static Config config = new JavaConfig();
 
     public <T> T getInstance(String name) {
         Class<?> type = config.getImpl(name);
         try {
-            return (T)type.newInstance();
+            return (T) type.newInstance();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        
+
     }
-    
+
 }

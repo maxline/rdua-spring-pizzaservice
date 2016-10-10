@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author andrii
  */
 public class ApplicationContext implements Context {
@@ -29,7 +28,7 @@ public class ApplicationContext implements Context {
         }
 
         BeanBuilder builder = new BeanBuilder(type);
-        builder.createBean();        
+        builder.createBean();
         builder.callPostCreateMethod();
         builder.callInitMethod();
         builder.createBeanProxy();
@@ -81,14 +80,14 @@ public class ApplicationContext implements Context {
         }
 
         public void callInitMethod() throws Exception {
-            Class<?> clazz = bean.getClass();            
+            Class<?> clazz = bean.getClass();
             Method method;
             try {
                 method = clazz.getMethod("init");
-            } catch (NoSuchMethodException ex) {              
-                
+            } catch (NoSuchMethodException ex) {
+
                 return;
-            }            
+            }
             method.invoke(bean);
         }
 

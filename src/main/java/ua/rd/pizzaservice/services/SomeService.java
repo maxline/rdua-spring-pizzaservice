@@ -1,7 +1,6 @@
 package ua.rd.pizzaservice.services;
 
 /**
- *
  * @author andrii
  */
 public interface SomeService {

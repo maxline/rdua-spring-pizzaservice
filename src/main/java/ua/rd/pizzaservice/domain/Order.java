@@ -1,5 +1,6 @@
 package ua.rd.pizzaservice.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 /**
  *
@@ -43,9 +44,17 @@ public class Order {
         this.customer = customer;
     }
 
+    public BigDecimal getPrice(){
+        BigDecimal totalPrice = new BigDecimal("0.0");
+        for(Pizza pizza:pizzas){
+            totalPrice = totalPrice.add(pizza.getPrice());
+        }
+        return totalPrice;
+    }
+
     @Override
     public String toString() {
-        return "Order{pizzas=" + pizzas + '}';
+        return "Order{pizzas=" + pizzas + ". Price="+ getPrice() + '}';
     }
 
 }

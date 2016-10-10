@@ -1,7 +1,6 @@
 package ua.rd.pizzaservice.infrastructure;
 
 /**
- *
  * @author andrii
  */
 public interface Context {

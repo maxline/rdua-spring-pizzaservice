@@ -1,7 +1,6 @@
 package ua.rd.pizzaservice.services;
 
 /**
- *
  * @author andrii
  */
 public class UsageSomeService {
@@ -10,9 +9,9 @@ public class UsageSomeService {
     public UsageSomeService(SomeService someService) {
         this.someService = someService;
     }
-    
-    public void init(){
+
+    public void init() {
         System.out.println("Call: " + someService.getString());
     }
-    
+
 }
