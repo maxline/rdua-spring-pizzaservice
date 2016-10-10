@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice04.domain;
+package ua.rd.pizzaservice.domain;
 
 /**
  *

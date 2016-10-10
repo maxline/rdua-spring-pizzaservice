@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice04;
+package ua.rd.pizzaservice;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

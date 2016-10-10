@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice04.repository;
+package ua.rd.pizzaservice.repository;
 
 /**
  *
@@ -6,14 +6,14 @@ package ua.rd.pizzaservice04.repository;
  */
 import java.util.HashMap;
 import java.util.Map;
-import ua.rd.pizzaservice04.domain.Pizza;
+import ua.rd.pizzaservice.domain.Pizza;
 
 
 /**
  *
  * @author andrii
  */
-public class InMemoryPizzaRepository implements PizzaRepository {
+public class InMemPizzaRepository implements PizzaRepository {
 
     private final Map<Integer, Pizza> pizzas = new HashMap<>();
 

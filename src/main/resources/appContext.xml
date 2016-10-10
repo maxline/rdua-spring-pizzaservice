@@ -9,20 +9,20 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     
-    <bean  name="T1" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
+    <bean  name="T1" class="ua.rd.pizzaservice.services.Test2SomeService"/>
 
-    <bean name="pizzaService" class="ua.rd.pizzaservice04.services.SimplePizzaService">
+    <bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService">
         <constructor-arg ref="pizzaRepository"/>
     </bean>
     
-    <bean name="orderService" class="ua.rd.pizzaservice04.services.SimpleOrderService">
+    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
         <constructor-arg ref="pizzaService"/>
         <constructor-arg ref="orderRepository"/>
     </bean>
     
-    <bean class="ua.rd.pizzaservice04.services.UsageSomeService" init-method="init">
+    <bean class="ua.rd.pizzaservice.services.UsageSomeService" init-method="init">
         <constructor-arg>
-            <bean name="AAA" class="ua.rd.pizzaservice04.services.Test2SomeService"/>
+            <bean name="AAA" class="ua.rd.pizzaservice.services.Test2SomeService"/>
         </constructor-arg>
     </bean>
     

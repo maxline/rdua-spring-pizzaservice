@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice04.infrastructure;
+package ua.rd.pizzaservice.infrastructure;
 
 /**
  *

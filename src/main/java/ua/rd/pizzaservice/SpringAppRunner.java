@@ -1,12 +1,12 @@
-package ua.rd.pizzaservice04;
+package ua.rd.pizzaservice;
 
 import java.util.Arrays;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.rd.pizzaservice04.domain.Order;
-import ua.rd.pizzaservice04.repository.PizzaRepository;
-import ua.rd.pizzaservice04.services.OrderService;
-import ua.rd.pizzaservice04.services.SomeService;
+import ua.rd.pizzaservice.domain.Order;
+import ua.rd.pizzaservice.repository.PizzaRepository;
+import ua.rd.pizzaservice.services.OrderService;
+import ua.rd.pizzaservice.services.SomeService;
 
 /**
  *

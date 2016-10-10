@@ -1,11 +1,11 @@
-package ua.rd.pizzaservice04.infrastructure;
+package ua.rd.pizzaservice.infrastructure;
 
 import java.util.HashMap;
 import java.util.Map;
-import ua.rd.pizzaservice04.repository.InMemoryOrderRepository;
-import ua.rd.pizzaservice04.repository.InMemoryPizzaRepository;
-import ua.rd.pizzaservice04.services.SimpleOrderService;
-import ua.rd.pizzaservice04.services.SimplePizzaService;
+import ua.rd.pizzaservice.repository.InMemOrderRepository;
+import ua.rd.pizzaservice.repository.InMemPizzaRepository;
+import ua.rd.pizzaservice.services.SimpleOrderService;
+import ua.rd.pizzaservice.services.SimplePizzaService;
 
 /**
  *
@@ -15,8 +15,8 @@ public class JavaConfig implements Config {
 
     private Map<String, Class<?>> classes = new HashMap<>();
     {
-        classes.put("pizzaRepository", InMemoryPizzaRepository.class);
-        classes.put("orderRepository", InMemoryOrderRepository.class);
+        classes.put("pizzaRepository", InMemPizzaRepository.class);
+        classes.put("orderRepository", InMemOrderRepository.class);
         classes.put("orderService", SimpleOrderService.class);
         classes.put("pizzaService", SimplePizzaService.class);
     }

@@ -1,6 +1,6 @@
-package ua.rd.pizzaservice04.services;
+package ua.rd.pizzaservice.services;
 
-import ua.rd.pizzaservice04.domain.Pizza;
+import ua.rd.pizzaservice.domain.Pizza;
 
 /**
  *

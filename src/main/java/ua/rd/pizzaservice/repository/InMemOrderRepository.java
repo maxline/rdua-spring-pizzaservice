@@ -1,14 +1,14 @@
-package ua.rd.pizzaservice04.repository;
+package ua.rd.pizzaservice.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import ua.rd.pizzaservice04.domain.Order;
+import ua.rd.pizzaservice.domain.Order;
 
 /**
  *
  * @author andrii
  */
-public class InMemoryOrderRepository implements OrderRepository  {
+public class InMemOrderRepository implements OrderRepository  {
 
     private final List<Order> orders = new ArrayList<>();
 

@@ -1,12 +1,12 @@
-package ua.rd.pizzaservice04;
+package ua.rd.pizzaservice;
 
-import ua.rd.pizzaservice04.domain.Customer;
-import ua.rd.pizzaservice04.domain.Order;
-import ua.rd.pizzaservice04.infrastructure.ApplicationContext;
-import ua.rd.pizzaservice04.infrastructure.Context;
-import ua.rd.pizzaservice04.infrastructure.JavaConfig;
-import ua.rd.pizzaservice04.repository.PizzaRepository;
-import ua.rd.pizzaservice04.services.OrderService;
+import ua.rd.pizzaservice.domain.Customer;
+import ua.rd.pizzaservice.domain.Order;
+import ua.rd.pizzaservice.infrastructure.ApplicationContext;
+import ua.rd.pizzaservice.infrastructure.Context;
+import ua.rd.pizzaservice.infrastructure.JavaConfig;
+import ua.rd.pizzaservice.repository.PizzaRepository;
+import ua.rd.pizzaservice.services.OrderService;
 
 /**
  *

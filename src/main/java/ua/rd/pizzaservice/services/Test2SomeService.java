@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice04.services;
+package ua.rd.pizzaservice.services;
 
 /**
  *

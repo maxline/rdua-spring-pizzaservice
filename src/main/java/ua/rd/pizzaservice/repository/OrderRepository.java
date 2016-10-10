@@ -1,6 +1,6 @@
-package ua.rd.pizzaservice04.repository;
+package ua.rd.pizzaservice.repository;
 
-import ua.rd.pizzaservice04.domain.Order;
+import ua.rd.pizzaservice.domain.Order;
 
 /**
  *
