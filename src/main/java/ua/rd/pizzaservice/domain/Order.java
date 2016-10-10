@@ -19,13 +19,20 @@ public class Order {
     private Status status;
 
     public enum Status {
-        NEW, IN_PROGRESS, CANCELED, DONE;
+        NEW, IN_PROGRESS, CANCELED, DONE
     }
 
     public Order() {
     }
 
     public Order(Customer customer, List<Pizza> pizzas) {
+        if (customer == null) {
+            throw new NullPointerException("Exception! Customer can not be null!");
+        }
+        if (customer.getAddress() == null || customer.getAddress().equals("")) {
+            throw new NullPointerException("Exception! Customer address can not be empty!");
+        }
+
         this.pizzas = pizzas;
         this.customer = customer;
         this.status = NEW;
