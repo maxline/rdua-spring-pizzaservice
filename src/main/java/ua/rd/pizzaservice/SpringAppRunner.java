@@ -26,7 +26,7 @@ public class SpringAppRunner {
 
 
         OrderService orderService = (OrderService) appContext.getBean("orderService");
-        ((SimpleOrderService)orderService).setContext(appContext);
+        //((SimpleOrderService)orderService).setContext(appContext);
 
         Order order = orderService.placeNewOrder(null, 1, 1, 1, 2, 3);
         System.out.println(order);

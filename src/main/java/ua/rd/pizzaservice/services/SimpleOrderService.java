@@ -1,6 +1,8 @@
 package ua.rd.pizzaservice.services;
 
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.domain.Pizza;
@@ -13,7 +15,7 @@ import java.util.List;
 /**
  * @author andrii
  */
-public class SimpleOrderService implements OrderService {
+public class SimpleOrderService implements OrderService, ApplicationContextAware {
 
     private final OrderRepository orderRepository;  //тут ссылка на интерфейс, завязка не на конкретный экземпляр, а на абстакцию - на это направлен IoC
     private final PizzaService pizzaService;
@@ -53,10 +55,10 @@ public class SimpleOrderService implements OrderService {
         }
     }
 
-    // контекст не может инжектить через аутовайред
-    public void setContext(ApplicationContext context) {
-        this.context = context;
-    }
+//    // контекст не может инжектить через аутовайред
+//    public void setContext(ApplicationContext context) {
+//        this.context = context;
+//    }
 
     private boolean checkParameters(int[] pizzaID) {
         return (pizzaID.length < 1) || (pizzaID.length > maxOrderCount);
@@ -68,5 +70,12 @@ public class SimpleOrderService implements OrderService {
 
     private void saveOrder(Order newOrder) {
         orderRepository.save(newOrder);
+    }
+
+    //т.к в конструкте третий парамерт примитивного типа autowired нельзя использовать
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+
     }
 }
