@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
 
 
@@ -10,9 +13,21 @@
 
     <bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>
 
-    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService" autowire="constructor">
-        <lookup-method name="createNewOrder" bean="order"/>
-    </bean>
+    <!--<bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService" autowire="constructor">-->
+        <!--<lookup-method name="createNewOrder" bean="order"/>-->
+    <!--</bean>-->
+
+    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
+            <constructor-arg ref="pizzaService"/>
+            <constructor-arg ref="orderRepository"/>
+            <constructor-arg value="10"/>
+        </bean>
+
+
+    <context:annotation-config/>
+    <!--раньше чтобы что-то новое заработало, надо было включать бины, помнить включать в каком порядке-->
+    <!--придумали специальные теги с аттрибутами, когда спринг будет сканировать наш хмл, значит я должен
+    проинициализировать вот такие бины, в конкекст будут попадать бины-->
 
 
 </beans>
