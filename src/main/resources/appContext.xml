@@ -12,7 +12,9 @@
 
     <!--<bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>-->
 
-    <bean name="pizza" class="ua.rd.pizzaservice.infrastructure.MyFactoryBean"/>
+    <!--можно не давать имя этому бину-->
+    <!--для репозитори методы created initialized postProcessBeforeInitialization  postProcessAfterInitialization не вызываются-->
+    <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanPostProcessor "/>
 
 
     <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
