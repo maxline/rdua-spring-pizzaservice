@@ -18,6 +18,12 @@ public class SimpleOrderService implements OrderService {
 
     private int maxOrderCount;
 
+    public SimpleOrderService(PizzaService pizzaService) {
+        this.orderRepository = null;
+        this.pizzaService = pizzaService;
+        this.maxOrderCount = 0;
+    }
+
     public SimpleOrderService(OrderRepository orderRepository, PizzaService pizzaService, int maxOrderCount) {
         this.orderRepository = orderRepository;
         this.pizzaService = pizzaService;

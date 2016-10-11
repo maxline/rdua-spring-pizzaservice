@@ -4,15 +4,25 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService">
-        <constructor-arg ref="pizzaRepository"/>
-    </bean>
+    <!--<bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="byName"/> хочет заинжектить через сеттер, должен быть дефолтный конструктор-->
+    <bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>
+    <!--будет стараться взять конструктор с бОльшим числом параметров, совет не создавать несколько бинов одного типа в контексте-->
 
-    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
-        <constructor-arg ref="pizzaService"/>
-        <constructor-arg ref="orderRepository"/>
-        <constructor-arg value="10"/>
-    </bean>
+
+    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService" autowire="constructor"/>
+    <!--<import resource=""></import> можно делать импорт конфигураций, склеивание-->
+
+    <!--<bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">-->
+        <!--<constructor-arg ref="pizzaService"/>-->
+        <!--<constructor-arg ref="orderRepository"/>-->
+        <!--<constructor-arg value="10"/>-->
+    <!--</bean>-->
+
+
+
+
+
+
 
 
 
