@@ -1,8 +1,10 @@
 package ua.rd.pizzaservice.services;
 
+import org.springframework.context.ApplicationContext;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.domain.Pizza;
+//import ua.rd.pizzaservice.infrastructure.ApplicationContext;
 import ua.rd.pizzaservice.repository.OrderRepository;
 
 import java.util.ArrayList;
@@ -15,14 +17,9 @@ public class SimpleOrderService implements OrderService {
 
     private final OrderRepository orderRepository;  //тут ссылка на интерфейс, завязка не на конкретный экземпляр, а на абстакцию - на это направлен IoC
     private final PizzaService pizzaService;
+    private ApplicationContext context;
 
     private int maxOrderCount;
-
-    public SimpleOrderService(PizzaService pizzaService) {
-        this.orderRepository = null;
-        this.pizzaService = pizzaService;
-        this.maxOrderCount = 0;
-    }
 
     public SimpleOrderService(OrderRepository orderRepository, PizzaService pizzaService, int maxOrderCount) {
         this.orderRepository = orderRepository;
@@ -40,10 +37,25 @@ public class SimpleOrderService implements OrderService {
         for (Integer id : pizzaID) {
             pizzas.add(findPizzaByID(id));  // get Pizza from predifined in-memory list
         }
-        Order newOrder = new Order(customer, pizzas);
+        Order newOrder = createNewOrder();
+        newOrder.setCustomer(customer);
+        newOrder.setPizzas(pizzas);
 
         saveOrder(newOrder);  // set Order Id and save Order to in-memory list
         return newOrder;
+    }
+
+    private Order createNewOrder() {
+        try {
+            return (Order) context.getBean("order");
+        } catch (Exception e) {
+            throw  new RuntimeException(e);
+        }
+    }
+
+    // контекст не может инжектить через аутовайред
+    public void setContext(ApplicationContext context) {
+        this.context = context;
     }
 
     private boolean checkParameters(int[] pizzaID) {
