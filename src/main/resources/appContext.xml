@@ -10,7 +10,9 @@
 
     <bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>
 
-    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService" autowire="constructor"/>
+    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService" autowire="constructor">
+        <lookup-method name="createNewOrder" bean="order"/>
+    </bean>
 
 
 </beans>

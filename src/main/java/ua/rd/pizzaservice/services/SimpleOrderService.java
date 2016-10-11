@@ -15,11 +15,10 @@ import java.util.List;
 /**
  * @author andrii
  */
-public class SimpleOrderService implements OrderService, ApplicationContextAware {
+public class SimpleOrderService implements OrderService{
 
     private final OrderRepository orderRepository;  //тут ссылка на интерфейс, завязка не на конкретный экземпляр, а на абстакцию - на это направлен IoC
     private final PizzaService pizzaService;
-    private ApplicationContext context;
 
     private int maxOrderCount;
 
@@ -47,12 +46,9 @@ public class SimpleOrderService implements OrderService, ApplicationContextAware
         return newOrder;
     }
 
-    private Order createNewOrder() {
-        try {
-            return (Order) context.getBean("order");
-        } catch (Exception e) {
-            throw  new RuntimeException(e);
-        }
+    Order createNewOrder() {
+        throw  new IllegalStateException("Container не смог!");
+
     }
 
 //    // контекст не может инжектить через аутовайред
@@ -72,10 +68,4 @@ public class SimpleOrderService implements OrderService, ApplicationContextAware
         orderRepository.save(newOrder);
     }
 
-    //т.к в конструкте третий парамерт примитивного типа autowired нельзя использовать
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
-
-    }
 }

@@ -24,12 +24,12 @@ public class SpringAppRunner {
                         new String[]{"appContext.xml"}, repoContext);
         System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
 
-
         OrderService orderService = (OrderService) appContext.getBean("orderService");
         //((SimpleOrderService)orderService).setContext(appContext);
 
         Order order = orderService.placeNewOrder(null, 1, 1, 1, 2, 3);
         System.out.println(order);
+        System.out.println(orderService.getClass());  // сделает проктси
 
         repoContext.close();
         appContext.close();
