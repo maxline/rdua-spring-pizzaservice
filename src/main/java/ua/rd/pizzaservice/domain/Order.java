@@ -1,5 +1,8 @@
 package ua.rd.pizzaservice.domain;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -9,6 +12,8 @@ import static ua.rd.pizzaservice.domain.Order.Status.*;
  *
  * @author andrii
  */
+@Component
+@Scope("prototype")
 public class Order {
 
     private static final int MIN_PIZZAS_FOR_DISCOUNT = 4;

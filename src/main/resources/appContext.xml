@@ -8,20 +8,22 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+    <!--<bean name="order" class="ua.rd.pizzaservice.domain.Order" scope="prototype"/>-->
 
-    <bean name="order" class="ua.rd.pizzaservice.domain.Order" scope="prototype"/>
-
-    <bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>
-
-    <!--<bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService" autowire="constructor">-->
-        <!--<lookup-method name="createNewOrder" bean="order"/>-->
-    <!--</bean>-->
+    <!--<bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>-->
 
     <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
-            <constructor-arg ref="pizzaService"/>
-            <constructor-arg ref="orderRepository"/>
-            <constructor-arg value="10"/>
-        </bean>
+        <lookup-method name="createNewOrder" bean="order"/>
+    </bean>
+
+    <!--<bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">-->
+        <!--<constructor-arg ref="pizzaService"/>-->
+        <!--<constructor-arg ref="orderRepository"/>-->
+        <!--<constructor-arg value="10"/>-->
+    <!--</bean>-->
+
+    <context:component-scan base-package="ua.rd.pizzaservice.services"/>
+    <context:component-scan base-package="ua.rd.pizzaservice.domain"/>
 
 
     <context:annotation-config/>

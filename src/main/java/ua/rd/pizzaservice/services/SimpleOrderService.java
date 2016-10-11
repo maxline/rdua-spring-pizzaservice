@@ -1,6 +1,7 @@
 package ua.rd.pizzaservice.services;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import ua.rd.pizzaservice.domain.Customer;
@@ -15,17 +16,21 @@ import java.util.List;
 /**
  * @author andrii
  */
+//@Service - не ставим, прописано создание бина в хмл
 public class SimpleOrderService implements OrderService{
 
+    public static final int MAX_ORDER_COUNT_DEFAULT = 10;
     private final OrderRepository orderRepository;  //тут ссылка на интерфейс, завязка не на конкретный экземпляр, а на абстакцию - на это направлен IoC
     private final PizzaService pizzaService;
 
+
     private int maxOrderCount;
 
-    public SimpleOrderService(OrderRepository orderRepository, PizzaService pizzaService, int maxOrderCount) {
+    @Autowired
+    public SimpleOrderService(OrderRepository orderRepository, PizzaService pizzaService) {
         this.orderRepository = orderRepository;
         this.pizzaService = pizzaService;
-        this.maxOrderCount = maxOrderCount;
+        this.maxOrderCount = MAX_ORDER_COUNT_DEFAULT;
     }
 
     @Override
@@ -48,7 +53,6 @@ public class SimpleOrderService implements OrderService{
 
     Order createNewOrder() {
         throw  new IllegalStateException("Container не смог!");
-
     }
 
 //    // контекст не может инжектить через аутовайред
