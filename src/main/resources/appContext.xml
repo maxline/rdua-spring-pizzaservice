@@ -12,6 +12,9 @@
 
     <!--<bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>-->
 
+    <bean name="pizza" class="ua.rd.pizzaservice.infrastructure.MyFactoryBean"/>
+
+
     <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
         <lookup-method name="createNewOrder" bean="order"/>
     </bean>
@@ -30,6 +33,8 @@
     <!--раньше чтобы что-то новое заработало, надо было включать бины, помнить включать в каком порядке-->
     <!--придумали специальные теги с аттрибутами, когда спринг будет сканировать наш хмл, значит я должен
     проинициализировать вот такие бины, в конкекст будут попадать бины-->
+
+
 
 
 </beans>
