@@ -17,6 +17,8 @@
     <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanPostProcessor "/>
 
 
+    <!--иначе будет исплючение throw, спринг за нас переписывает инициализацию метода createNewOrder
+       создает EnhancedBean extends наш SimpleOrderService -->
     <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
         <lookup-method name="createNewOrder" bean="order"/>
     </bean>
