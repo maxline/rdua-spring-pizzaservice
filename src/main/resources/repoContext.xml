@@ -5,10 +5,6 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean name="T1" class="ua.rd.pizzaservice.services.Test1SomeService"
-          destroy-method="destroy"/>
-    <bean name="T2" class="ua.rd.pizzaservice.services.Test1SomeService"/>
-
 
     <!-- bean definitions here -->
     <bean name="pizzaRepository"

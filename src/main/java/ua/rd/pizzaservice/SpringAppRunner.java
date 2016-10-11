@@ -5,7 +5,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.OrderService;
-import ua.rd.pizzaservice.services.SomeService;
 
 import java.util.Arrays;
 
@@ -24,8 +23,6 @@ public class SpringAppRunner {
                         new String[]{"appContext.xml"}, repoContext);
         System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
 
-        System.out.println(repoContext.getBean("T1", SomeService.class).getString());
-        System.out.println(appContext.getBean("T1", SomeService.class).getString());
 
         PizzaRepository pizzaRepository = (PizzaRepository) repoContext.getBean("pizzaRepository");
         System.out.println(pizzaRepository.find(1));

@@ -4,9 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-    <bean name="T1" class="ua.rd.pizzaservice.services.Test2SomeService"/>
-
     <bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService">
         <constructor-arg ref="pizzaRepository"/>
     </bean>
@@ -17,10 +14,6 @@
         <constructor-arg value="10"/>
     </bean>
 
-    <bean class="ua.rd.pizzaservice.services.UsageSomeService" init-method="init">
-        <constructor-arg>
-            <bean name="AAA" class="ua.rd.pizzaservice.services.Test2SomeService"/>
-        </constructor-arg>
-    </bean>
+
 
 </beans>
