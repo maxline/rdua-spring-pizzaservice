@@ -22,6 +22,6 @@ public class InMemCustomerRepository implements CustomerRepository {
 
     @Override
     public Customer find(Integer id) {
-        return null;
+        return customers.get(id);
     }
 }

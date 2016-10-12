@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.*;
 
 import static ua.rd.pizzaservice.domain.Order.Status.*;
 
@@ -27,10 +27,16 @@ public class Order {
         NEW, IN_PROGRESS, CANCELED, DONE
     }
 
+    public Map<Status, Set<Status>> transitionTable = new HashMap<Status,Set<Status>>(){{
+        put(NEW, new HashSet<Status>(){{add(IN_PROGRESS); add(CANCELED);}});
+        put(IN_PROGRESS, new HashSet<Status>(){{add(CANCELED); add(DONE);}});
+        put(CANCELED, null);
+        put(DONE, null); } };
+
     public Order() {
     }
 
-    public Order(Customer customer, List<Pizza> pizzas) {
+    public Order(Customer customer, List<Pizza> pizzas, Status status) {
         if (customer == null) {
             throw new NullPointerException("Exception! Customer can not be null!");
         }
@@ -40,8 +46,14 @@ public class Order {
 
         this.pizzas = pizzas;
         this.customer = customer;
-        this.status = NEW;
+        this.status = status;
     }
+
+
+    public Order(Customer customer, List<Pizza> pizzas) {
+        this (customer, pizzas, NEW);
+    }
+
 
     public Long getId() {
         return id;
@@ -98,25 +110,14 @@ public class Order {
         return status;
     }
 
-    public void setStatus(Status status) {
-        switch (this.status){
-            case NEW:
-                if (status != IN_PROGRESS && status !=CANCELED){
-                    throw new IllegalArgumentException("From NEW you can move to IN_PROGRESS or to CANCELED!");
-                }
-                break;
-            case IN_PROGRESS:
-                if (status != DONE && status !=CANCELED){
-                    throw new IllegalArgumentException("From IN_PROGRESS you can move to DONE or to CANCELED!");
-                }
-                break;
-            case CANCELED:
-                throw new IllegalArgumentException("Order status CANCELED can not be changed!");
-            case DONE:
-                throw new IllegalArgumentException("Order status DONE can not be changed!");
-        }
+    //todo рефакторинг
+    public void changeStatus(Status statusTo) {
 
-        this.status = status;
+        if (transitionTable.get(status).contains(statusTo)) {
+            status = statusTo;
+        } else {
+            throw new IllegalArgumentException("It is not allowed moving from " + status + " to " + statusTo + " status!");
+        }
     }
 
     @Override

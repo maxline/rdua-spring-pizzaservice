@@ -51,6 +51,11 @@ public class SimpleOrderService implements OrderService{
         return newOrder;
     }
 
+    @Override
+    public void changeOrderStatus(Order order, Order.Status status) {
+        order.changeStatus(status);
+    }
+
     Order createNewOrder() {
         throw  new IllegalStateException("Container не смог!");
     }
