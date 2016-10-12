@@ -1,23 +1,23 @@
 package ua.rd.pizzaservice.services;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.domain.Pizza;
-//import ua.rd.pizzaservice.infrastructure.ApplicationContext;
 import ua.rd.pizzaservice.repository.OrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static ua.rd.pizzaservice.domain.StatusManager.Status;
+
+//import ua.rd.pizzaservice.infrastructure.ApplicationContext;
+
 /**
  * @author andrii
  */
 //@Service - не ставим, прописано создание бина в хмл
-public class SimpleOrderService implements OrderService{
+public class SimpleOrderService implements OrderService {
 
     public static final int MAX_ORDER_COUNT_DEFAULT = 10;
     private final OrderRepository orderRepository;  //тут ссылка на интерфейс, завязка не на конкретный экземпляр, а на абстакцию - на это направлен IoC
@@ -52,12 +52,12 @@ public class SimpleOrderService implements OrderService{
     }
 
     @Override
-    public void changeOrderStatus(Order order, Order.Status status) {
+    public void changeOrderStatus(Order order, Status status) {
         order.changeStatus(status);
     }
 
     Order createNewOrder() {
-        throw  new IllegalStateException("Container не смог!");
+        throw new IllegalStateException("Container не смог!");
     }
 
 //    // контекст не может инжектить через аутовайред

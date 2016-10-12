@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static ua.rd.pizzaservice.domain.Order.Status.*;
+import static ua.rd.pizzaservice.domain.StatusManager.Status.*;
 
 public class OrderTest {
 
@@ -77,18 +77,18 @@ public class OrderTest {
     public void changeStatus() throws Exception {
         Order order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), NEW);
         order.changeStatus(CANCELED);
-        assertEquals(Order.Status.CANCELED, order.getStatus());
+        assertEquals(CANCELED, order.getStatus());
 
         order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), NEW);
         order.changeStatus(IN_PROGRESS);
-        assertEquals(Order.Status.IN_PROGRESS, order.getStatus());
+        assertEquals(IN_PROGRESS, order.getStatus());
 
         order.changeStatus(DONE);
-        assertEquals(Order.Status.DONE, order.getStatus());
+        assertEquals(DONE, order.getStatus());
 
         order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), IN_PROGRESS);
         order.changeStatus(CANCELED);
-        assertEquals(Order.Status.CANCELED, order.getStatus());
+        assertEquals(CANCELED, order.getStatus());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -97,6 +97,25 @@ public class OrderTest {
         order.changeStatus(DONE);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void setWrongStatusFromInProgress() throws Exception {
+        Order order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), IN_PROGRESS);
+
+        order.changeStatus(NEW);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setWrongStatusFromCanceled() throws Exception {
+        Order order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), CANCELED);
+
+        order.changeStatus(NEW);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setWrongStatusFromDone() throws Exception {
+        Order order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), DONE);
+        order.changeStatus(NEW);
+    }
 
     @Test(expected = NullPointerException.class)
     public void setNullCustomer() throws Exception {

@@ -3,9 +3,7 @@ package ua.rd.pizzaservice;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.rd.pizzaservice.domain.Order;
-import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.OrderService;
-import ua.rd.pizzaservice.services.SimpleOrderService;
 
 import java.util.Arrays;
 
@@ -29,7 +27,10 @@ public class SpringAppRunner {
 
         Order order = orderService.placeNewOrder(null, 1, 1, 1, 2, 3);
         System.out.println(order);
-        System.out.println(orderService.getClass());  // сделает проктси
+        System.out.println(orderService.getClass());  // сделает прокси
+
+        //orderService.changeOrderStatus(order, IN_PROGRESS);
+        System.out.println(order);
 
         repoContext.close();
         appContext.close();

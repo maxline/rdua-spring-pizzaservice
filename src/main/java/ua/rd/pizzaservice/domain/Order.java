@@ -2,14 +2,16 @@ package ua.rd.pizzaservice.domain;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ua.rd.pizzaservice.domain.StatusManager.Status;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-import static ua.rd.pizzaservice.domain.Order.Status.*;
+import static ua.rd.pizzaservice.domain.StatusManager.Status.NEW;
+import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
+
 
 /**
- *
  * @author andrii
  */
 @Component
@@ -22,16 +24,6 @@ public class Order {
     private List<Pizza> pizzas;
     private Customer customer;
     private Status status;
-
-    public enum Status {
-        NEW, IN_PROGRESS, CANCELED, DONE
-    }
-
-    public Map<Status, Set<Status>> transitionTable = new HashMap<Status,Set<Status>>(){{
-        put(NEW, new HashSet<Status>(){{add(IN_PROGRESS); add(CANCELED);}});
-        put(IN_PROGRESS, new HashSet<Status>(){{add(CANCELED); add(DONE);}});
-        put(CANCELED, null);
-        put(DONE, null); } };
 
     public Order() {
     }
@@ -51,7 +43,7 @@ public class Order {
 
 
     public Order(Customer customer, List<Pizza> pizzas) {
-        this (customer, pizzas, NEW);
+        this(customer, pizzas, NEW);
     }
 
 
@@ -110,10 +102,8 @@ public class Order {
         return status;
     }
 
-    //todo рефакторинг
     public void changeStatus(Status statusTo) {
-
-        if (transitionTable.get(status).contains(statusTo)) {
+        if (isTransitionAllowed(status, statusTo)){
             status = statusTo;
         } else {
             throw new IllegalArgumentException("It is not allowed moving from " + status + " to " + statusTo + " status!");
