@@ -7,6 +7,7 @@ import ua.rd.pizzaservice.domain.StatusManager.Status;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static ua.rd.pizzaservice.domain.DiscountCalculator.calculateDiscount;
 import static ua.rd.pizzaservice.domain.StatusManager.Status.NEW;
 import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
 
@@ -18,8 +19,6 @@ import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
 @Scope("prototype")
 public class Order {
 
-    private static final int MIN_PIZZAS_FOR_DISCOUNT = 4;
-    private static final String DISCOUNT_PERCENT = "0.3";
     private Long id;
     private List<Pizza> pizzas;
     private Customer customer;
@@ -71,19 +70,6 @@ public class Order {
         this.customer = customer;
     }
 
-    private boolean isDiscountNeeded() {
-        return pizzas.size() > MIN_PIZZAS_FOR_DISCOUNT;
-    }
-
-    private BigDecimal calculateDiscount() {
-        BigDecimal maxPrice = new BigDecimal("0.0");
-        for (Pizza pizza : pizzas) {
-            maxPrice = maxPrice.max(pizza.getPrice());
-        }
-
-        return maxPrice.multiply(new BigDecimal(DISCOUNT_PERCENT));
-    }
-
     public BigDecimal getPrice() {
         BigDecimal orderPrice = new BigDecimal("0.0");
 
@@ -91,10 +77,7 @@ public class Order {
             orderPrice = orderPrice.add(pizza.getPrice());
         }
 
-        if (isDiscountNeeded()) {
-            orderPrice = orderPrice.subtract(calculateDiscount());
-        }
-
+        orderPrice = orderPrice.subtract(calculateDiscount(this));
         return orderPrice;
     }
 
