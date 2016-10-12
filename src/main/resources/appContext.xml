@@ -8,37 +8,17 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <!--<bean name="order" class="ua.rd.pizzaservice.domain.Order" scope="prototype"/>-->
-
-    <!--<bean name="pizzaService" class="ua.rd.pizzaservice.services.SimplePizzaService" autowire="constructor"/>-->
-
-    <!--можно не давать имя этому бину-->
-    <!--для репозитори методы created initialized postProcessBeforeInitialization  postProcessAfterInitialization не вызываются-->
     <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanPostProcessor "/>
 
 
-    <!--иначе будет исплючение throw, спринг за нас переписывает инициализацию метода createNewOrder
-       создает EnhancedBean extends наш SimpleOrderService -->
     <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
         <lookup-method name="createNewOrder" bean="order"/>
     </bean>
-
-    <!--<bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">-->
-        <!--<constructor-arg ref="pizzaService"/>-->
-        <!--<constructor-arg ref="orderRepository"/>-->
-        <!--<constructor-arg value="10"/>-->
-    <!--</bean>-->
 
     <context:component-scan base-package="ua.rd.pizzaservice.services"/>
     <context:component-scan base-package="ua.rd.pizzaservice.domain"/>
 
 
     <context:annotation-config/>
-    <!--раньше чтобы что-то новое заработало, надо было включать бины, помнить включать в каком порядке-->
-    <!--придумали специальные теги с аттрибутами, когда спринг будет сканировать наш хмл, значит я должен
-    проинициализировать вот такие бины, в конкекст будут попадать бины-->
-
-
-
 
 </beans>
