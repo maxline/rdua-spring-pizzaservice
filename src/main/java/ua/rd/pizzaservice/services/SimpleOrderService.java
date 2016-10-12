@@ -48,6 +48,9 @@ public class SimpleOrderService implements OrderService {
         newOrder.setPizzas(pizzas);
 
         saveOrder(newOrder);  // set Order Id and save Order to in-memory list
+
+        //todo можно ли дергать кастомера напрямую (увеличивать его счет) или надо как-то через сервисы?
+        customer.increaseCardBalance(newOrder.getPrice());
         return newOrder;
     }
 
