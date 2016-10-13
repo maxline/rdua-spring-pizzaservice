@@ -4,8 +4,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ua.rd.pizzaservice.domain.StatusManager.Status;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.List;
 
 import static ua.rd.pizzaservice.domain.DiscountCalculator.calculateDiscount;
 import static ua.rd.pizzaservice.domain.StatusManager.Status.NEW;
@@ -45,6 +46,10 @@ public class Order {
         this(customer, pizzas, NEW);
     }
 
+    @PostConstruct    //чтобы инит заработал через аннотакции
+    public void init() {
+        this.status = NEW;
+    }
 
     public Long getId() {
         return id;
@@ -70,15 +75,18 @@ public class Order {
         this.customer = customer;
     }
 
+
     public BigDecimal getPrice() {
         BigDecimal orderPrice = new BigDecimal("0.0");
-
         for (Pizza pizza : pizzas) {
             orderPrice = orderPrice.add(pizza.getPrice());
         }
-
-        orderPrice = orderPrice.subtract(calculateDiscount(this));
         return orderPrice;
+    }
+
+    public BigDecimal getPriceWithDiscount() {
+        BigDecimal orderPrice = getPrice();
+        return orderPrice.subtract(calculateDiscount(this));
     }
 
     public Status getStatus() {
@@ -86,7 +94,7 @@ public class Order {
     }
 
     public void changeStatus(Status statusTo) {
-        if (isTransitionAllowed(status, statusTo)){
+        if (isTransitionAllowed(status, statusTo)) {
             status = statusTo;
         } else {
             throw new IllegalArgumentException("It is not allowed moving from " + status + " to " + statusTo + " status!");
@@ -95,7 +103,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{pizzas=" + pizzas + ". Price=" + getPrice() + ". Status=" + getStatus() + '}';
+        return "Order{pizzas=" + pizzas + ". Price=" + getPriceWithDiscount() + ". Status=" + getStatus() + '}';
     }
 }
 

@@ -39,7 +39,7 @@ public class OrderTest {
         pizzas.add(new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal(100.00)));
 
         Order order = new Order(DEFAULT_CUSTOMER, pizzas);
-        assertEquals(new BigDecimal("400.0"), order.getPrice());
+        assertEquals(new BigDecimal("400.0"), order.getPriceWithDiscount());
     }
 
     @Test
@@ -54,8 +54,8 @@ public class OrderTest {
 
         Order order = new Order(DEFAULT_CUSTOMER, pizzas);
 
-        //assertEquals(new BigDecimalCloseTo(new BigDecimal("540.0"), new BigDecimal("0.00001")), order.getPrice());
-        assertEquals(new BigDecimal("540.0"), order.getPrice());
+        //assertEquals(new BigDecimalCloseTo(new BigDecimal("540.0"), new BigDecimal("0.00001")), order.getPriceWithDiscount());
+        assertEquals(new BigDecimal("540.0"), order.getPriceWithDiscount());
     }
 
     @Test

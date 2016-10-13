@@ -41,7 +41,7 @@ public class SimpleOrderService implements OrderService {
         List<Pizza> pizzas = new ArrayList<>();
 
         for (Integer id : pizzaID) {
-            pizzas.add(findPizzaByID(id));  // get Pizza from predifined in-memory list
+            pizzas.add(findPizzaByID(id));  // get Pizza from predefined in-memory list
         }
         Order newOrder = createNewOrder();
         newOrder.setCustomer(customer);
@@ -50,7 +50,7 @@ public class SimpleOrderService implements OrderService {
         saveOrder(newOrder);  // set Order Id and save Order to in-memory list
 
         //todo можно ли дергать кастомера напрямую (увеличивать его счет) или надо как-то через сервисы?
-        customer.increaseCardBalance(newOrder.getPrice());
+        customer.increaseCardBalance(newOrder.getPriceWithDiscount());
         return newOrder;
     }
 
