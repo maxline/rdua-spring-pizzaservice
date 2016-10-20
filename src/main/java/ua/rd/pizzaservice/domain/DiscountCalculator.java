@@ -22,10 +22,10 @@ class DiscountCalculator {
 
     private static BigDecimal calculateDiscountMoreThenFour(Order order) {
         if (!isDiscountNeeded(order)){
-            return new BigDecimal("0.0");
+            return new BigDecimal("0.00");
         }
 
-        BigDecimal maxPrice = new BigDecimal("0.0");
+        BigDecimal maxPrice = new BigDecimal("0.00");
         for (Pizza pizza : order.getPizzas()) {
             maxPrice = maxPrice.max(pizza.getPrice());
         }
@@ -37,14 +37,14 @@ class DiscountCalculator {
         BigDecimal cardBalanceDiscount = order.getCustomer().getCardBalance().multiply(DISCOUNT_FOR_CARD_BALANCE);
         BigDecimal orderPriceDiscount = order.getPrice().multiply(DISCOUNT_PERCENT_FOR_ORDER_PRICE);
 
-        return cardBalanceDiscount.min(orderPriceDiscount);
+        return cardBalanceDiscount.min(orderPriceDiscount).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     protected static BigDecimal calculateDiscount(Order order) {
-        BigDecimal totalDiscount = new BigDecimal("0.0");
+        BigDecimal totalDiscount = new BigDecimal("0.00");
         totalDiscount = totalDiscount.add(calculateDiscountMoreThenFour(order));
         totalDiscount = totalDiscount.add(calculateDiscountTenPercentFromCardBalance(order));
 
-        return totalDiscount;
+        return totalDiscount.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 }

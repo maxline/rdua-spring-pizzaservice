@@ -55,7 +55,7 @@ public class OrderTest {
         Order order = new Order(DEFAULT_CUSTOMER, pizzas);
 
         //assertEquals(new BigDecimalCloseTo(new BigDecimal("540.0"), new BigDecimal("0.00001")), order.getPriceWithDiscount());
-        assertEquals(new BigDecimal("540.0"), order.getPriceWithDiscount());
+        assertEquals(new BigDecimal("540.00"), order.getPriceWithDiscount());
     }
 
     @Test
