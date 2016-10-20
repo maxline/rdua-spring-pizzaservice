@@ -11,7 +11,6 @@ import java.util.List;
 
 import static ua.rd.pizzaservice.domain.StatusManager.Status;
 
-//import ua.rd.pizzaservice.infrastructure.ApplicationContext;
 
 /**
  * @author andrii
@@ -43,7 +42,9 @@ public class SimpleOrderService implements OrderService {
         for (Integer id : pizzaID) {
             pizzas.add(findPizzaByID(id));  // get Pizza from predefined in-memory list
         }
-        Order newOrder = createNewOrder();
+
+        //todo будет ли контейнер создавать новые объекты для ордеров в таком случае, или будет синглтон?
+        Order newOrder = new Order(customer, pizzas);
         newOrder.setCustomer(customer);
         newOrder.setPizzas(pizzas);
 
@@ -58,15 +59,6 @@ public class SimpleOrderService implements OrderService {
     public void changeOrderStatus(Order order, Status status) {
         order.changeStatus(status);
     }
-
-    Order createNewOrder() {
-        throw new IllegalStateException("Container не смог!");
-    }
-
-//    // контекст не может инжектить через аутовайред
-//    public void setContext(ApplicationContext context) {
-//        this.context = context;
-//    }
 
     private boolean checkParameters(int[] pizzaID) {
         return (pizzaID.length < 1) || (pizzaID.length > maxOrderCount);

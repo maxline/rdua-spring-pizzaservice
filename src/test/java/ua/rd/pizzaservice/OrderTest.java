@@ -34,9 +34,9 @@ public class OrderTest {
     public void getPriceWithoutDiscount() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
 
-        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
-        pizzas.add(new Pizza(2, "meat", Pizza.PizzaType.MEAT, new BigDecimal(200.00)));
-        pizzas.add(new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal(100.00)));
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
+        pizzas.add(new Pizza(2, "meat", Pizza.PizzaType.MEAT, new BigDecimal("200.00")));
+        pizzas.add(new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal("100.00")));
 
         Order order = new Order(DEFAULT_CUSTOMER, pizzas);
         assertEquals(new BigDecimal("400.0"), order.getPriceWithDiscount());
@@ -46,11 +46,11 @@ public class OrderTest {
     public void getPriceWithDiscount() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
 
-        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
-        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
-        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
-        pizzas.add(new Pizza(2, "meat", Pizza.PizzaType.MEAT, new BigDecimal(200.00)));
-        pizzas.add(new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal(100.00)));
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
+        pizzas.add(new Pizza(2, "meat", Pizza.PizzaType.MEAT, new BigDecimal("200.00")));
+        pizzas.add(new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal("100.00")));
 
         Order order = new Order(DEFAULT_CUSTOMER, pizzas);
 
@@ -61,7 +61,7 @@ public class OrderTest {
     @Test
     public void createOrderWithStatus() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(1);
-        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
 
         Order order = new Order(DEFAULT_CUSTOMER, pizzas);
         assertEquals(NEW, order.getStatus());
@@ -120,14 +120,15 @@ public class OrderTest {
     @Test(expected = NullPointerException.class)
     public void setNullCustomer() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
-        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
         new Order(null, pizzas);
     }
 
     @Test(expected = NullPointerException.class)
     public void setEmptyCustomerAddress() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
-        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
+
+        pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
 
         Customer customerEmptyAddress = new Customer("Adam", "");
         new Order(customerEmptyAddress, pizzas);

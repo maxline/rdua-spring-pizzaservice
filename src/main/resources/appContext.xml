@@ -10,16 +10,10 @@
 
     <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanPostProcessor "/>
 
-
-    <!--todo разобраться как работает createNewOrder,
-    из-за этого orderService.placeNewOrder не устанавливает status в NEW-->
-    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService">
-        <lookup-method name="createNewOrder" bean="order"/>
-    </bean>
+    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService"></bean>
 
     <context:component-scan base-package="ua.rd.pizzaservice.services"/>
     <context:component-scan base-package="ua.rd.pizzaservice.domain"/>
-
 
     <context:annotation-config/>
 
