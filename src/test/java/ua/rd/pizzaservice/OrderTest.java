@@ -39,11 +39,11 @@ public class OrderTest {
         pizzas.add(new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal("100.00")));
 
         Order order = new Order(DEFAULT_CUSTOMER, pizzas);
-        assertEquals(new BigDecimal("400.0"), order.getPriceWithDiscount());
+        assertEquals(new BigDecimal("400.00"), order.getPriceWithDiscount());
     }
 
     @Test
-    public void getPriceWithDiscount() throws Exception {
+    public void getPriceWithDiscountFourPizza() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
 
         pizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal("100.00")));
@@ -100,14 +100,12 @@ public class OrderTest {
     @Test(expected = IllegalArgumentException.class)
     public void setWrongStatusFromInProgress() throws Exception {
         Order order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), IN_PROGRESS);
-
         order.changeStatus(NEW);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void setWrongStatusFromCanceled() throws Exception {
         Order order = new Order(DEFAULT_CUSTOMER, DEFAULT_ORDER.getPizzas(), CANCELED);
-
         order.changeStatus(NEW);
     }
 
