@@ -20,7 +20,7 @@ public class OrderTest {
     private static List<Pizza> defaultPizzas;
 
     @BeforeClass
-    public static void setupOnce(){
+    public static void setupOnce() {
         defaultPizzas = new ArrayList<>(1);
         defaultPizzas.add(new Pizza(1, "sea", Pizza.PizzaType.SEA, new BigDecimal(100.00)));
     }

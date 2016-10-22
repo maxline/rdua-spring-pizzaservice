@@ -18,7 +18,8 @@ public class Pizza implements Serializable {
     }
 
     //@Id @GeneratedValue(strategy = GenerationType.TABLE)   //создается отельная табличка hybernate_sequences, можно делать несколько сиквенсов, в табличке разными строчками
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 //    @SequenceGenerator(name = "PizzaSEQ", allocationSize = 10)
 //    @Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "PizzaSEQ")
     private Integer id;

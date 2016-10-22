@@ -30,7 +30,8 @@ public class StatusManager {
             put(CANCELED, Collections.EMPTY_SET);
             put(DONE, Collections.EMPTY_SET);
 
-        } };
+        }
+    };
 
     public static boolean isTransitionAllowed(Status statusFrom, Status statusTo) {
 

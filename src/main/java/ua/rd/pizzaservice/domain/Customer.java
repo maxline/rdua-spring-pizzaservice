@@ -16,7 +16,7 @@ public class Customer {
         this.cardBalance = new BigDecimal("0.0");
     }
 
-    public void increaseCardBalance(BigDecimal sum){
+    public void increaseCardBalance(BigDecimal sum) {
         cardBalance = cardBalance.add(sum);
     }
 

@@ -46,7 +46,6 @@ public class JPAAppRunner {
         transaction.commit(); // update будет делаться на коммите
 
 
-
         //em.clear(); //чтобы подтягивал из базы а не из менеджера
         Pizza p = em.find(Pizza.class, 3);
         System.out.println(p == pizza);

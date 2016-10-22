@@ -12,7 +12,7 @@ public class DiscountFourPizza implements Discount {
 
     @Override
     public BigDecimal calculateDiscount(Order order) {
-        if (!isDiscountNeeded(order)){
+        if (!isDiscountNeeded(order)) {
             return new BigDecimal("0.00");
         }
 
