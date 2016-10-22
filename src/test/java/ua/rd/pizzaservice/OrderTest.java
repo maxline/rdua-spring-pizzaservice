@@ -26,6 +26,7 @@ public class OrderTest {
         DEFAULT_ORDER = new Order(DEFAULT_CUSTOMER, pizzas);
     }
 
+    //todo default_castomer
     @Before
     public void setup() {
     }
@@ -42,6 +43,7 @@ public class OrderTest {
         assertEquals(new BigDecimal("400.00"), order.getPriceWithDiscount());
     }
 
+    //todo добавить тест второй скидки
     @Test
     public void getPriceWithDiscountFourPizza() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(3);
@@ -131,5 +133,4 @@ public class OrderTest {
         Customer customerEmptyAddress = new Customer("Adam", "");
         new Order(customerEmptyAddress, pizzas);
     }
-
 }

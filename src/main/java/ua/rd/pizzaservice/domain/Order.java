@@ -6,12 +6,11 @@ import ua.rd.pizzaservice.domain.StatusManager.Status;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
-import static ua.rd.pizzaservice.domain.DiscountCalculator.calculateDiscount;
 import static ua.rd.pizzaservice.domain.StatusManager.Status.NEW;
 import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
-
 
 /**
  * @author andrii
@@ -24,6 +23,8 @@ public class Order {
     private List<Pizza> pizzas;
     private Customer customer;
     private Status status;
+
+    List<Discount> discountList = Arrays.asList(new DiscountFourPizza(), new DiscountCardBalance());
 
     public Order() {
     }
@@ -40,7 +41,6 @@ public class Order {
         this.customer = customer;
         this.status = status;
     }
-
 
     public Order(Customer customer, List<Pizza> pizzas) {
         this(customer, pizzas, NEW);
@@ -75,7 +75,6 @@ public class Order {
         this.customer = customer;
     }
 
-
     public BigDecimal getPrice() {
         BigDecimal orderPrice = new BigDecimal("0.0");
         for (Pizza pizza : pizzas) {
@@ -85,8 +84,16 @@ public class Order {
     }
 
     public BigDecimal getPriceWithDiscount() {
-        BigDecimal orderPrice = getPrice();
-        return orderPrice.subtract(calculateDiscount(this));
+        return getPrice().subtract(calculateTotalDiscount());
+    }
+
+    private BigDecimal calculateTotalDiscount() {
+        BigDecimal discountTotal = new BigDecimal("0.00");
+
+        for (Discount discount : discountList) {
+            discountTotal = discountTotal.add(discount.calculateDiscount(this));
+        }
+        return discountTotal;
     }
 
     public Status getStatus() {

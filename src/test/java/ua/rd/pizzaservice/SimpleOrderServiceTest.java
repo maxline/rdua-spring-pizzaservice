@@ -29,7 +29,6 @@ public class SimpleOrderServiceTest extends Mockito {
         orderService = new SimpleOrderService(orderRepository, pizzaService);
     }
 
-
     @Test(expected = NullPointerException.class)
     public void placeNewOrderNullCustomer() {
         orderService.placeNewOrder(null, 1);
