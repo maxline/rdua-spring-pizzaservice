@@ -15,12 +15,10 @@ public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
     @Test
     public void find() throws Exception {
         //jdbcTemplate.query()   и т.д. чтобы проверять насколько правильно отработали запросы
-
     }
 
-
     @Test
-    @Rollback(true)
+    @Rollback(false)
     public void save() throws Exception {
         Pizza pizza = new Pizza();
         pizza.setName("Sea");
