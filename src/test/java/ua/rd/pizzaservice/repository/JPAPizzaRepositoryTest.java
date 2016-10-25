@@ -3,8 +3,10 @@ package ua.rd.pizzaservice.repository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ua.rd.pizzaservice.domain.Pizza;
 
 import static org.junit.Assert.*;
@@ -19,6 +21,8 @@ public class JPAPizzaRepositoryTest {
 
     //нужно чтобы во время этого теста поднялся реальный спринговый контейнер
     @Test
+    @Transactional
+    @Rollback(true)
     public void save() throws Exception {
 
         Pizza pizza = new Pizza();
