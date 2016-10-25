@@ -2,9 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:tx="http://www.springframework.org/schema/tx"
 
+
+
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- bean definitions here -->
     <!--<bean name="pizzaRepository"-->
@@ -17,5 +25,51 @@
     <!--правильно прописать component-scan-->
     <context:component-scan base-package="ua.rd.pizzaservice.repository"/>
 
+
+    <!--прописываем подключение хибернейта к спрингу-->
+
+    <!--ентити менеджер не может быть бином, можно попробовать сделать прототайпом но сложно, придется управлять его жц самостоятельно-->
+    <!--будет создаваться ентити менеджер фактори, и спринг будет инжектить-->
+    <!--нужен отдельный транзакшн менеджер, спринг над жпайными транзакциями наворачивает свои апи, чтобы дальше мог управлять транзакциями-->
+
+
+    <!--по умолчанию использует системные пропертиес, оверрайд чтобы перекрывались нашим файликом-->
+    <context:property-placeholder
+            system-properties-mode="OVERRIDE"
+            location="classpath:jdbc.properties"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="5"/>
+    </bean>
+
+
+    <bean name="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--        <property name="persistenceUnitName" value="HiberantePostgreSQL" />-->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="packagesToScan" value="ua.rd.pizzaservice.domain"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--можно проперти не указывать т.к. будет создаваться по умолчанию такое-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>
