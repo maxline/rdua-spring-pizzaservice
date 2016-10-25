@@ -3,7 +3,6 @@ package ua.rd.pizzaservice.repository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 import ua.rd.pizzaservice.domain.Pizza;
 
 import static org.junit.Assert.assertNotNull;
@@ -14,7 +13,13 @@ public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
     private PizzaRepository pizzaRepository;
 
     @Test
-    @Transactional
+    public void find() throws Exception {
+        //jdbcTemplate.query()   и т.д. чтобы проверять насколько правильно отработали запросы
+
+    }
+
+
+    @Test
     @Rollback(true)
     public void save() throws Exception {
         Pizza pizza = new Pizza();
