@@ -9,4 +9,6 @@ public interface PizzaRepository {
 
     Pizza find(Integer id);
 
+    Pizza save(Pizza pizza);
+
 }

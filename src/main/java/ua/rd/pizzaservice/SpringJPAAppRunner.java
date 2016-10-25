@@ -3,6 +3,8 @@ package ua.rd.pizzaservice;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.rd.pizzaservice.domain.Order;
+import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.CustomerService;
 import ua.rd.pizzaservice.services.OrderService;
 
@@ -25,18 +27,31 @@ public class SpringJPAAppRunner {
                         new String[]{"appContext.xml"}, repoContext);
         System.out.println("appContext.xml: " + Arrays.toString(appContext.getBeanDefinitionNames()));
 
-        OrderService orderService = (OrderService) appContext.getBean("orderService");
-        //((SimpleOrderService)orderService).setContext(appContext);
 
-        CustomerService customerService = (CustomerService) appContext.getBean("simpleCustomerService");
+        //по типу не сможем получить
+        PizzaRepository  pizzaRepository = (PizzaRepository) appContext.getBean("pizzaRepository"); //см аннотацию Repository
 
-        Order order = orderService.placeNewOrder(customerService.find(1), 1, 1, 1, 2, 3);
-        System.out.println(order);
-        System.out.println(orderService.getClass());  // сделает прокси
+        Pizza pizza = new Pizza();
+        pizza.setName("Sea");
+        pizza.setPizzaType(Pizza.PizzaType.SEA);
 
-        orderService.changeOrderStatus(order, IN_PROGRESS);
-        System.out.println(order);
-        System.out.println(customerService.find(1));
+        pizza = pizzaRepository.save(pizza);
+
+        System.out.println(pizza);
+
+
+//        OrderService orderService = (OrderService) appContext.getBean("orderService");
+//        //((SimpleOrderService)orderService).setContext(appContext);
+//
+//        CustomerService customerService = (CustomerService) appContext.getBean("simpleCustomerService");
+//
+//        Order order = orderService.placeNewOrder(customerService.find(1), 1, 1, 1, 2, 3);
+//        System.out.println(order);
+//        System.out.println(orderService.getClass());  // сделает прокси
+//
+//        orderService.changeOrderStatus(order, IN_PROGRESS);
+//        System.out.println(order);
+//        System.out.println(customerService.find(1));
 
         repoContext.close();
         appContext.close();

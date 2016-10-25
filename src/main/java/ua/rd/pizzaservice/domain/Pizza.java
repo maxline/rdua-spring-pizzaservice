@@ -50,8 +50,13 @@ public class Pizza implements Serializable {
         this.name = name;
     }
 
+
+    public void setPizzaType(PizzaType pizzaType) {
+        this.pizzaType = pizzaType;
+    }
+
     @Override
     public String toString() {
-        return "Pizza{" + "name=" + name + ", pizzaType=" + pizzaType + '}';
+        return "Pizza{" + id + ", name=" + name + ", pizzaType=" + pizzaType + '}';
     }
 }
