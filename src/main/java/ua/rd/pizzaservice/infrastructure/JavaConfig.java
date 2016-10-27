@@ -1,5 +1,6 @@
 package ua.rd.pizzaservice.infrastructure;
 
+import ua.rd.pizzaservice.repository.InMemCustomerRepository;
 import ua.rd.pizzaservice.repository.InMemOrderRepository;
 import ua.rd.pizzaservice.repository.InMemPizzaRepository;
 import ua.rd.pizzaservice.services.SimpleOrderService;
@@ -18,6 +19,7 @@ public class JavaConfig implements Config {
     {
         classes.put("pizzaRepository", InMemPizzaRepository.class);
         classes.put("orderRepository", InMemOrderRepository.class);
+        classes.put("customerRepository", InMemCustomerRepository.class);
         classes.put("orderService", SimpleOrderService.class);
         classes.put("pizzaService", SimplePizzaService.class);
     }

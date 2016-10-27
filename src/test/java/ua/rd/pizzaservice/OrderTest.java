@@ -3,6 +3,7 @@ package ua.rd.pizzaservice;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import ua.rd.pizzaservice.domain.Address;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.domain.Pizza;
@@ -27,7 +28,7 @@ public class OrderTest {
 
     @Before
     public void setup() {
-        customer = new Customer("Adam", "Earth");
+        customer = new Customer("Adam", new Address("Earth"));
     }
 
     @Test
@@ -120,7 +121,7 @@ public class OrderTest {
 
     @Test(expected = NullPointerException.class)
     public void setEmptyCustomerAddress() throws Exception {
-        Customer customerEmptyAddress = new Customer("Adam", "");
+        Customer customerEmptyAddress = new Customer("Adam", null);
         new Order(customerEmptyAddress, defaultPizzas);
     }
 }

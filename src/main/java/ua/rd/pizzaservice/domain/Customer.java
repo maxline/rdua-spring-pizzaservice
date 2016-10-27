@@ -7,10 +7,10 @@ import java.math.BigDecimal;
  */
 public class Customer {
     private String name;
-    private String address;
+    private Address address;
     private BigDecimal cardBalance;
 
-    public Customer(String name, String address) {
+    public Customer(String name, Address address) {
         this.name = name;
         this.address = address;
         this.cardBalance = new BigDecimal("0.0");
@@ -28,7 +28,7 @@ public class Customer {
         return name;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 

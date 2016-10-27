@@ -3,6 +3,7 @@ package ua.rd.pizzaservice;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import ua.rd.pizzaservice.domain.Address;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.repository.OrderRepository;
@@ -23,7 +24,7 @@ public class SimpleOrderServiceTest extends Mockito {
 
     @Before
     public void setup() {
-        customer = new Customer("Adam", "Earth");
+        customer = new Customer("Adam", new Address("Earth"));
         pizzaService = mock(PizzaService.class);
         orderRepository = mock(OrderRepository.class);
         orderService = new SimpleOrderService(orderRepository, pizzaService);

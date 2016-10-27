@@ -1,10 +1,12 @@
 package ua.rd.pizzaservice;
 
+import ua.rd.pizzaservice.domain.Address;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.infrastructure.ApplicationContext;
 import ua.rd.pizzaservice.infrastructure.Context;
 import ua.rd.pizzaservice.infrastructure.JavaConfig;
+import ua.rd.pizzaservice.repository.CustomerRepository;
 import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.OrderService;
 
@@ -13,9 +15,8 @@ import ua.rd.pizzaservice.services.OrderService;
  */
 public class AppRunner {
     public static void main(String[] args) throws Exception {
-        System.out.println("Pizza Srervice");
+        System.out.println("Pizza Service");
 
-        Customer customer = null;
 //        Order order;
 //        
 //        SimpleOrderService orderService = new SimpleOrderService();
@@ -27,6 +28,9 @@ public class AppRunner {
 
         PizzaRepository pizzaRepository = context.getBean("pizzaRepository");
         System.out.println(pizzaRepository.find(1));
+
+        CustomerRepository customerRepository = context.getBean("customerRepository");
+        Customer customer = customerRepository.find(1);
 
         //Ошибка видимо из-за в SimpleOrderSercice в конструктор добавили новый параметр int maxOrderCount
         OrderService orderService = context.getBean("orderService");
