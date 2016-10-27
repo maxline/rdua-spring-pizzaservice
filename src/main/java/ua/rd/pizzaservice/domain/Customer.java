@@ -1,31 +1,35 @@
 package ua.rd.pizzaservice.domain;
 
-import java.math.BigDecimal;
-
 /**
  * @author andrii
  */
 public class Customer {
     private String name;
     private Address address;
-    private BigDecimal cardBalance;
+    //private BigDecimal cardBalance;
+    private CustomerCard customerCard;
 
-    public Customer(String name, Address address) {
+    //todo проверить где создается customerCard, контейнер?
+    public Customer(String name, Address address, CustomerCard customerCard) {
         this.name = name;
         this.address = address;
-        this.cardBalance = new BigDecimal("0.0");
+        this.customerCard = customerCard;
     }
 
-    public void increaseCardBalance(BigDecimal sum) {
-        cardBalance = cardBalance.add(sum);
-    }
-
-    public BigDecimal getCardBalance() {
-        return cardBalance;
-    }
+//    public void increaseBalance(BigDecimal sum) {
+//        customerCard.increaseBalance(sum);
+//    }
+//
+//    public BigDecimal getBalance() {
+//        return cardBalance;
+//    }
 
     public String getName() {
         return name;
+    }
+
+    public CustomerCard getCustomerCard() {
+        return customerCard;
     }
 
     public Address getAddress() {
@@ -36,7 +40,7 @@ public class Customer {
     public String toString() {
         return "Customer{" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", card balance ='" + cardBalance + '\'' +
+                ", card balance ='" + customerCard.getBalance() + '\'' +
                 '}';
     }
 }

@@ -1,11 +1,8 @@
-package ua.rd.pizzaservice;
+package ua.rd.pizzaservice.domain;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ua.rd.pizzaservice.domain.Address;
-import ua.rd.pizzaservice.domain.Customer;
-import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.repository.OrderRepository;
 import ua.rd.pizzaservice.services.OrderService;
 import ua.rd.pizzaservice.services.PizzaService;
@@ -24,7 +21,7 @@ public class SimpleOrderServiceTest extends Mockito {
 
     @Before
     public void setup() {
-        customer = new Customer("Adam", new Address("Earth"));
+        customer = new Customer("Adam", new Address("Earth"), new CustomerCard());
         pizzaService = mock(PizzaService.class);
         orderRepository = mock(OrderRepository.class);
         orderService = new SimpleOrderService(orderRepository, pizzaService);
@@ -55,7 +52,7 @@ public class SimpleOrderServiceTest extends Mockito {
 
         orderService.placeNewOrder(customer, PIZZA_ID);
 
-        assertEquals(new BigDecimal("100.00"), customer.getCardBalance());
+        assertEquals(new BigDecimal("100.00"), customer.getCustomerCard().getBalance());
     }
 
     @Test
@@ -74,6 +71,6 @@ public class SimpleOrderServiceTest extends Mockito {
         orderService.placeNewOrder(customer, PIZZA_ID2);
         orderService.placeNewOrder(customer, PIZZA_ID1, PIZZA_ID2);
 
-        assertEquals(new BigDecimal("480.00"), customer.getCardBalance());
+        assertEquals(new BigDecimal("480.00"), customer.getCustomerCard().getBalance());
     }
 }

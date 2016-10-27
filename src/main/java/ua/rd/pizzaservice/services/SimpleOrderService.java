@@ -51,7 +51,7 @@ public class SimpleOrderService implements OrderService {
         saveOrder(newOrder);  // set Order Id and save Order to in-memory list
 
         //todo можно ли дергать кастомера напрямую (увеличивать его счет) или надо как-то через сервисы?
-        customer.increaseCardBalance(newOrder.getPriceWithDiscount());
+        customer.getCustomerCard().increaseBalance(newOrder.getPriceWithDiscount());
         return newOrder;
     }
 

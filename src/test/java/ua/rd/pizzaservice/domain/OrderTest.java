@@ -1,12 +1,9 @@
-package ua.rd.pizzaservice;
+package ua.rd.pizzaservice.domain;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import ua.rd.pizzaservice.domain.Address;
-import ua.rd.pizzaservice.domain.Customer;
-import ua.rd.pizzaservice.domain.Order;
-import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.domain.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,7 +25,7 @@ public class OrderTest {
 
     @Before
     public void setup() {
-        customer = new Customer("Adam", new Address("Earth"));
+        customer = new Customer("Adam", new Address("Earth"), new CustomerCard());
     }
 
     @Test
@@ -121,7 +118,7 @@ public class OrderTest {
 
     @Test(expected = NullPointerException.class)
     public void setEmptyCustomerAddress() throws Exception {
-        Customer customerEmptyAddress = new Customer("Adam", null);
+        Customer customerEmptyAddress = new Customer("Adam", null, null);
         new Order(customerEmptyAddress, defaultPizzas);
     }
 }

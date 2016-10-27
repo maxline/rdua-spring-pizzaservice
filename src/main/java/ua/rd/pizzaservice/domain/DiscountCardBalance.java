@@ -11,7 +11,7 @@ public class DiscountCardBalance implements Discount {
 
     @Override
     public BigDecimal calculateDiscount(Order order) {
-        BigDecimal cardBalanceDiscount = order.getCustomer().getCardBalance().multiply(DISCOUNT_FOR_CARD_BALANCE);
+        BigDecimal cardBalanceDiscount = order.getCustomer().getCustomerCard().getBalance().multiply(DISCOUNT_FOR_CARD_BALANCE);
         BigDecimal orderPriceDiscount = order.getPrice().multiply(DISCOUNT_PERCENT_FOR_ORDER_PRICE);
 
         return cardBalanceDiscount.min(orderPriceDiscount).setScale(2, BigDecimal.ROUND_HALF_UP);

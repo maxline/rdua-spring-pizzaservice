@@ -3,6 +3,7 @@ package ua.rd.pizzaservice.repository;
 import org.springframework.stereotype.Repository;
 import ua.rd.pizzaservice.domain.Address;
 import ua.rd.pizzaservice.domain.Customer;
+import ua.rd.pizzaservice.domain.CustomerCard;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class InMemCustomerRepository implements CustomerRepository {
 
     @PostConstruct    //чтобы инит заработал через аннотакции
     public void init() {
-        customers.put(1, new Customer("Adam", new Address("Earth")));
+        customers.put(1, new Customer("Adam", new Address("Earth"), new CustomerCard()));
     }
 
     @Override
