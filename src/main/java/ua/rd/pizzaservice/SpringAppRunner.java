@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.services.CustomerService;
 import ua.rd.pizzaservice.services.OrderService;
+import ua.rd.pizzaservice.services.PizzaService;
 
 import java.util.Arrays;
 
@@ -29,6 +30,9 @@ public class SpringAppRunner {
         //((SimpleOrderService)orderService).setContext(appContext);
 
         CustomerService customerService = (CustomerService) appContext.getBean("simpleCustomerService");
+
+        PizzaService pizzaService = (PizzaService) appContext.getBean("simplePizzaService");
+        System.out.println(pizzaService.find(1));
 
         Order order = orderService.placeNewOrder(customerService.find(1), 1, 1, 1, 2, 3);
         System.out.println(order);

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.infrastructure.Benchmark;
 import ua.rd.pizzaservice.repository.OrderRepository;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class SimpleOrderService implements OrderService {
         this.maxOrderCount = MAX_ORDER_COUNT_DEFAULT;
     }
 
+    @Benchmark
     @Override
     public Order placeNewOrder(Customer customer, int... pizzaID) {
         if (checkParameters(pizzaID)) {

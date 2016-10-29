@@ -3,6 +3,7 @@ package ua.rd.pizzaservice.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.infrastructure.Benchmark;
 import ua.rd.pizzaservice.repository.PizzaRepository;
 
 /**
@@ -20,6 +21,7 @@ public class SimplePizzaService implements PizzaService {
         this.pizzaRepository = pizzaRepository;
     }
 
+    @Benchmark
     @Override
     public Pizza find(Integer id) {
         return pizzaRepository.find(id);

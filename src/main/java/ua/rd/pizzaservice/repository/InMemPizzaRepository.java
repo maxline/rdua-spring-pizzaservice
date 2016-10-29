@@ -6,6 +6,7 @@ package ua.rd.pizzaservice.repository;
 
 import org.springframework.stereotype.Repository;
 import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.infrastructure.Benchmark;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
@@ -27,6 +28,8 @@ public class InMemPizzaRepository implements PizzaRepository {
         pizzas.put(3, new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal(100.00)));
     }
 
+
+    @Benchmark
     @Override
     public Pizza find(Integer id) {
         return pizzas.get(id);
