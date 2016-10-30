@@ -19,7 +19,7 @@ public class SpringAppRunner {
         ConfigurableApplicationContext repoContext =
                 new ClassPathXmlApplicationContext(
                         "repoContext.xml");
-        System.out.println(Arrays.toString(repoContext.getBeanDefinitionNames()));
+        System.out.println("repoContext.xml: " + Arrays.toString(repoContext.getBeanDefinitionNames()));
 
         ConfigurableApplicationContext appContext =
                 new ClassPathXmlApplicationContext(
