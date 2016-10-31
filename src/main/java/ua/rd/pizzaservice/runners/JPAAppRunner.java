@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice;
+package ua.rd.pizzaservice.runners;
 
 import ua.rd.pizzaservice.domain.Address;
 import ua.rd.pizzaservice.domain.Customer;

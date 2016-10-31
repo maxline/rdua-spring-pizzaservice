@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice;
+package ua.rd.pizzaservice.runners;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

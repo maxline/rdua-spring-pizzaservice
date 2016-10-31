@@ -5,13 +5,11 @@ import org.springframework.stereotype.Component;
 import ua.rd.pizzaservice.domain.StatusManager.Status;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static ua.rd.pizzaservice.domain.StatusManager.Status.NEW;
 import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
@@ -27,10 +25,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private List<Pizza> pizzas;
+
 
     private Customer customer;
     private Status status;
+
+
+    private Map<Pizza, Integer> pizzas;
 
     List<Discount> discountList = Arrays.asList(new DiscountFourPizza(), new DiscountCardBalance());
 
@@ -39,7 +40,7 @@ public class Order {
     }
 
     public Order(Customer customer, List<Pizza> pizzas, Status status) {
-        this.pizzas = pizzas;
+        this.pizzas = listToMap(pizzas);
         this.customer = customer;
         this.status = status;
     }
@@ -61,12 +62,35 @@ public class Order {
         this.id = id;
     }
 
-    public List<Pizza> getPizzas() {
-        return pizzas;
+    public void setPizzas(Map<Pizza, Integer> pizzas) {
+        this.pizzas = pizzas;
     }
 
     public void setPizzas(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
+        this.pizzas = listToMap(pizzas);
+    }
+
+    private Map<Pizza, Integer> listToMap(List<Pizza> pizzasList) {
+        Map<Pizza, Integer> map = new HashMap<>();
+        for (Pizza pizza : pizzasList) {
+            if (map.containsKey(pizza)) {
+                int quantity = map.get(pizza);
+                map.put(pizza, quantity + 1);
+            } else {
+                map.put(pizza, 1);
+            }
+        }
+        return map;
+    }
+
+    public List<Pizza> getPizzas() {
+        List<Pizza> pizzasList = new ArrayList<>();
+        for (Pizza pizza : pizzas.keySet()) {
+            for (int i = 0; i < pizzas.get(pizza); i++) {
+                pizzasList.add(pizza);
+            }
+        }
+        return pizzasList;
     }
 
     public Customer getCustomer() {
@@ -79,7 +103,7 @@ public class Order {
 
     public BigDecimal getPrice() {
         BigDecimal orderPrice = new BigDecimal("0.0");
-        for (Pizza pizza : pizzas) {
+        for (Pizza pizza : pizzas.keySet()) {
             orderPrice = orderPrice.add(pizza.getPrice());
         }
         return orderPrice;
