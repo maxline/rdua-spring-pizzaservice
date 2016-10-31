@@ -9,6 +9,7 @@ import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.infrastructure.Benchmark;
 import ua.rd.pizzaservice.repository.OrderRepository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +42,7 @@ public class SimpleOrderService implements OrderService {
         if (checkParameters(pizzaID)) {
             throw new IllegalArgumentException();
         }
-        List<Pizza> pizzas = new ArrayList<>();
-
-        for (Integer id : pizzaID) {
-            pizzas.add(findPizzaByID(id));  // get Pizza from predefined in-memory list
-        }
+        List<Pizza> pizzas = getPizzasByIds(pizzaID);
 
         //Order newOrder = new Order(customer, pizzas);
         Order newOrder = createNewOrder();
@@ -53,12 +50,24 @@ public class SimpleOrderService implements OrderService {
         newOrder.setPizzas(pizzas);
 
         saveOrder(newOrder);  // set Order Id and save Order to in-memory list
-
-        //todo можно ли дергать кастомера напрямую (увеличивать его счет) или надо как-то через сервисы?
-        customer.getCustomerCard().increaseBalance(newOrder.getPriceWithDiscount());
         return newOrder;
     }
 
+    private List<Pizza> getPizzasByIds(int... pizzaID) {
+        List<Pizza> pizzas = new ArrayList<>();
+        for (Integer id : pizzaID) {
+            pizzas.add(findPizzaByID(id));  // get Pizza from predefined in-memory list
+        }
+        return pizzas;
+    }
+
+    @Override
+    public Order doPayment(Order order) {
+        //todo можно ли дергать кастомера напрямую (увеличивать его счет) или надо как-то через сервисы?
+        BigDecimal price = order.getPriceWithDiscount();
+        order.getCustomer().getCustomerCard().increaseBalance(price);
+        return null;
+    }
 
     @Lookup
     protected Order createNewOrder() {
@@ -85,7 +94,20 @@ public class SimpleOrderService implements OrderService {
     }
 
     private void saveOrder(Order newOrder) {
+        checkCustomer(newOrder);
+        checkAddress(newOrder);
         orderRepository.save(newOrder);
     }
 
+    private void checkCustomer(Order newOrder) {
+        if (newOrder.getCustomer() == null) {
+            throw new NullPointerException("Exception! Customer can not be null!");
+        }
+    }
+
+    private void checkAddress(Order newOrder) {
+        if (newOrder.getCustomer().getAddress() == null || newOrder.getCustomer().getAddress().equals("")) {
+            throw new NullPointerException("Exception! Customer address can not be empty!");
+        }
+    }
 }

@@ -18,60 +18,71 @@ public class SimpleOrderServiceTest extends Mockito {
 
     private PizzaService pizzaServiceMock;
     private OrderRepository orderRepositoryMock;
-    private SimpleOrderService orderService;
+    private SimpleOrderService orderServiceSpy;
     private Customer customer;
     private Order orderMock;
+    private Order order;
+    private Pizza pizza;
 
     @Before
     public void setup() {
         customer = new Customer("Adam", new Address("Earth"), new CustomerCard());
+        order = new Order();
+
+        orderMock = mock(Order.class);
         pizzaServiceMock = mock(PizzaService.class);
         orderRepositoryMock = mock(OrderRepository.class);
-        //orderService = new SimpleOrderService(orderRepositoryMock, pizzaServiceMock);
-        orderService = spy(new SimpleOrderService(orderRepositoryMock, pizzaServiceMock));
-        when(orderRepositoryMock.save(any(Order.class))).thenReturn(orderMock);
+        //orderServiceSpy = new SimpleOrderService(orderRepositoryMock, pizzaServiceMock);
+        orderServiceSpy = spy(new SimpleOrderService(orderRepositoryMock, pizzaServiceMock));
+
+        //when(orderRepositoryMock.save(any(Order.class))).thenReturn(orderMock);
     }
 
 
     @Test(expected = NullPointerException.class)
     public void placeNewOrderNullCustomer() {
-        doReturn(orderMock).when(orderService).createNewOrder();
-        orderService.placeNewOrder(null, 1);
+        doReturn(orderMock).when(orderServiceSpy).createNewOrder();
+        orderServiceSpy.placeNewOrder(null, 1);
         verify(pizzaServiceMock).find(1);
     }
 
 
 //    @Test(expected = NullPointerException.class)
 //    public void placeNewOrderNullCustomer() {
-//        orderService.placeNewOrder(null, 1);
+//        orderServiceSpy.placeNewOrder(null, 1);
 //    }
 
     @Test(expected = IllegalArgumentException.class)
     public void placeOrderMoreThenTen() {
-        orderService.placeNewOrder(customer, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);  //pizza ids
+        orderServiceSpy.placeNewOrder(customer, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);  //pizza ids
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void placeOrderLessThenOne() {
-        orderService.placeNewOrder(customer);
+        orderServiceSpy.placeNewOrder(customer);
     }
 
-    @Ignore //todo
+
     @Test
     public void increaseCustomerCardBalanceOnePizza() {
         // given
-        int PIZZA_ID = 1;
-        Pizza pizza = mock(Pizza.class);
-        when(pizza.getPrice()).thenReturn(new BigDecimal("100.00"));
-        when(pizzaServiceMock.find(PIZZA_ID)).thenReturn(pizza);
+        pizza = new Pizza(1, "Sea", Pizza.PizzaType.SEA, new BigDecimal("100.00"));
+        //Pizza pizzaMock = mock(Pizza.class);
+//        when(pizzaMock.getPrice()).thenReturn(new BigDecimal("100.00"));
+//        when(pizzaServiceMock.find(PIZZA_ID)).thenReturn(pizzaMock);
+        //orderMock = new Order();
+        doReturn(order).when(orderServiceSpy).createNewOrder();
+        when(pizzaServiceMock.find(1)).thenReturn(pizza);
 
-        doReturn(orderMock).when(orderService).createNewOrder();
-        orderService.placeNewOrder(customer, PIZZA_ID);
+        //when(orderServiceSpy.createNewOrder()).thenReturn(order);
+        //doReturn(customer).when(orderMock).getCustomer();
 
+        Order newOrder = orderServiceSpy.placeNewOrder(customer, 1);
+        orderServiceSpy.doPayment(newOrder);
         assertEquals(new BigDecimal("100.00"), customer.getCustomerCard().getBalance());
     }
 
-    @Ignore //todo
+
     @Test
     public void increaseCustomerCardBalanceTwoPizza() {
         // given
@@ -85,9 +96,32 @@ public class SimpleOrderServiceTest extends Mockito {
         when(pizza2.getPrice()).thenReturn(new BigDecimal("200.00"));
         when(pizzaServiceMock.find(PIZZA_ID2)).thenReturn(pizza2);
 
-        orderService.placeNewOrder(customer, PIZZA_ID2);
-        orderService.placeNewOrder(customer, PIZZA_ID1, PIZZA_ID2);
+        doReturn(order).when(orderServiceSpy).createNewOrder();
+        Order newOrder = orderServiceSpy.placeNewOrder(customer, PIZZA_ID2);
+        orderServiceSpy.doPayment(newOrder);
+
+        newOrder = orderServiceSpy.placeNewOrder(customer, PIZZA_ID1, PIZZA_ID2);
+        orderServiceSpy.doPayment(newOrder);
 
         assertEquals(new BigDecimal("480.00"), customer.getCustomerCard().getBalance());
     }
+
+
+    @Test(expected = NullPointerException.class)
+    public void setNullCustomer() throws Exception {
+        doReturn(order).when(orderServiceSpy).createNewOrder();
+        orderServiceSpy.placeNewOrder(null, 1);
+    }
+
+
+    @Test(expected = NullPointerException.class)
+    public void setEmptyCustomerAddress() throws Exception {
+        Customer customerEmptyAddress = new Customer("Adam", null, null);
+        doReturn(order).when(orderServiceSpy).createNewOrder();
+        orderServiceSpy.placeNewOrder(customerEmptyAddress, 1);
+
+        //new Order(customerEmptyAddress, defaultPizzas);
+    }
+
+
 }

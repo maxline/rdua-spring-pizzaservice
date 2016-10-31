@@ -3,7 +3,6 @@ package ua.rd.pizzaservice.domain;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import ua.rd.pizzaservice.domain.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -40,7 +39,6 @@ public class OrderTest {
         assertEquals(new BigDecimal("400.00"), order.getPriceWithDiscount());
     }
 
-    //todo добавить тест второй скидки
     @Test
     public void getPriceWithDiscountFourPizza() throws Exception {
         List<Pizza> pizzas = new ArrayList<>(5);
@@ -111,14 +109,5 @@ public class OrderTest {
         order.changeStatus(NEW);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void setNullCustomer() throws Exception {
-        new Order(null, defaultPizzas);
-    }
 
-    @Test(expected = NullPointerException.class)
-    public void setEmptyCustomerAddress() throws Exception {
-        Customer customerEmptyAddress = new Customer("Adam", null, null);
-        new Order(customerEmptyAddress, defaultPizzas);
-    }
 }

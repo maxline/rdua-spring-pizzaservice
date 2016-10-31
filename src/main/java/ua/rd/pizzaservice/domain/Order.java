@@ -27,16 +27,10 @@ public class Order {
     List<Discount> discountList = Arrays.asList(new DiscountFourPizza(), new DiscountCardBalance());
 
     public Order() {
+        id = 1L;  //todo
     }
 
     public Order(Customer customer, List<Pizza> pizzas, Status status) {
-        if (customer == null) {
-            throw new NullPointerException("Exception! Customer can not be null!");
-        }
-        if (customer.getAddress() == null || customer.getAddress().equals("")) {
-            throw new NullPointerException("Exception! Customer address can not be empty!");
-        }
-
         this.pizzas = pizzas;
         this.customer = customer;
         this.status = status;
