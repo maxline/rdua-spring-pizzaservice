@@ -53,6 +53,10 @@ public class SimpleOrderService implements OrderService {
         return newOrder;
     }
 
+    private boolean checkParameters(int[] pizzaID) {
+        return (pizzaID.length < 1) || (pizzaID.length > maxOrderCount);
+    }
+
     private List<Pizza> getPizzasByIds(int... pizzaID) {
         List<Pizza> pizzas = new ArrayList<>();
         for (Integer id : pizzaID) {
@@ -83,10 +87,6 @@ public class SimpleOrderService implements OrderService {
     @Override
     public void changeOrderStatus(Order order, Status status) {
         order.changeStatus(status);
-    }
-
-    private boolean checkParameters(int[] pizzaID) {
-        return (pizzaID.length < 1) || (pizzaID.length > maxOrderCount);
     }
 
     private Pizza findPizzaByID(Integer id) {
