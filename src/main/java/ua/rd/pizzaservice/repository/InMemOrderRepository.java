@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author andrii
  */
-@Repository
+@Repository("orderRepository")
 public class InMemOrderRepository implements OrderRepository {
 
     private final List<Order> orders = new ArrayList<>();

@@ -30,13 +30,17 @@ public class SpringAppRunner {
         //((SimpleOrderService)orderService).setContext(appContext);
 
         CustomerService customerService = (CustomerService) appContext.getBean("simpleCustomerService");
+        System.out.println("customerService.find(1): " + customerService.find(1));
 
         PizzaService pizzaService = (PizzaService) appContext.getBean("simplePizzaService");
-        System.out.println(pizzaService.find(1));
+        System.out.println("pizzaService.find(1): " + pizzaService.find(1));
 
         Order order = orderService.placeNewOrder(customerService.find(1), 1, 1, 1, 2, 3);
-        System.out.println(order);
+        System.out.println("order 11123: " + order);
         System.out.println(orderService.getClass());  // сделает прокси
+
+        order = orderService.placeNewOrder(customerService.find(1), 1);
+        System.out.println("order 1: " + order);
 
         orderService.changeOrderStatus(order, IN_PROGRESS);
         System.out.println(order);

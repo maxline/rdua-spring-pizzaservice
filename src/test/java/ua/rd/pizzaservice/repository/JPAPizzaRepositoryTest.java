@@ -1,5 +1,6 @@
 package ua.rd.pizzaservice.repository;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -17,6 +18,7 @@ public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
         //jdbcTemplate.query()   и т.д. чтобы проверять насколько правильно отработали запросы
     }
 
+    @Ignore //todo
     @Test
     @Rollback(false)
     public void save() throws Exception {

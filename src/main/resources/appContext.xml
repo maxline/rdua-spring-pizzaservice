@@ -9,7 +9,7 @@
 
     <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanProcessor" />
 
-    <bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService"></bean>
+    <!--<bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService"></bean>-->
 
     <context:component-scan base-package="ua.rd.pizzaservice.services"/>
     <context:component-scan base-package="ua.rd.pizzaservice.domain"/>

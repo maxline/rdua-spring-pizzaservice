@@ -1,6 +1,8 @@
 package ua.rd.pizzaservice.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
+import org.springframework.stereotype.Service;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.domain.Pizza;
@@ -16,7 +18,7 @@ import static ua.rd.pizzaservice.domain.StatusManager.Status;
 /**
  * @author andrii
  */
-//@Service - не ставим, прописано создание бина в хмл
+@Service("orderService")
 public class SimpleOrderService implements OrderService {
 
     public static final int MAX_ORDER_COUNT_DEFAULT = 10;
@@ -45,8 +47,8 @@ public class SimpleOrderService implements OrderService {
             pizzas.add(findPizzaByID(id));  // get Pizza from predefined in-memory list
         }
 
-        //todo будет ли контейнер создавать новые объекты для ордеров в таком случае, или будет синглтон?
-        Order newOrder = new Order(customer, pizzas);
+        //Order newOrder = new Order(customer, pizzas);
+        Order newOrder = createNewOrder();
         newOrder.setCustomer(customer);
         newOrder.setPizzas(pizzas);
 
@@ -56,6 +58,18 @@ public class SimpleOrderService implements OrderService {
         customer.getCustomerCard().increaseBalance(newOrder.getPriceWithDiscount());
         return newOrder;
     }
+
+
+    @Lookup
+    protected Order createNewOrder() {
+        throw new IllegalStateException("Container can not get bean Order!");
+//        try {
+//            return (Order) context.getBean("order");
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+    }
+
 
     @Override
     public void changeOrderStatus(Order order, Status status) {
