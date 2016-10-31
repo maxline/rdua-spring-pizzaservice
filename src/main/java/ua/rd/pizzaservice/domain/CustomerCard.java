@@ -1,11 +1,20 @@
 package ua.rd.pizzaservice.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
 /**
  * @author Serhii_Mykhliuk
  */
+@Entity
 public class CustomerCard {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+
     private BigDecimal balance = new BigDecimal("0.00");
 
     public CustomerCard() {
@@ -26,4 +35,7 @@ public class CustomerCard {
         }
         this.balance = balance;
     }
+
+
+
 }

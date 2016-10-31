@@ -7,6 +7,8 @@ import ua.rd.pizzaservice.domain.Order;
  */
 public interface OrderRepository {
 
+    Order find(Long id);
+
     Order save(Order order);
 
 }

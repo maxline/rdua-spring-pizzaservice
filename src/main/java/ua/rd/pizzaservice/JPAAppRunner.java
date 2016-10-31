@@ -1,5 +1,8 @@
 package ua.rd.pizzaservice;
 
+import ua.rd.pizzaservice.domain.Address;
+import ua.rd.pizzaservice.domain.Customer;
+import ua.rd.pizzaservice.domain.CustomerCard;
 import ua.rd.pizzaservice.domain.Pizza;
 
 import javax.persistence.EntityManager;
@@ -13,9 +16,28 @@ import java.math.BigDecimal;
  */
 public class JPAAppRunner {
     public static void main(String[] args) {
+        //pizzaExample();
+        customerExample();
+    }
+
+    private static void customerExample() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");  //персистенс юнит который мы прописали в xml
+        EntityManager em = emf.createEntityManager();
+
+        Customer customer = new Customer("Adam", new Address("Earth"), new CustomerCard());
+
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.merge(customer);
+        transaction.commit(); // update будет делаться на коммите
+
+        em.close();
+        emf.close();
+    }
+
+    private static void pizzaExample() {
         //надо поднять контейнер entity manager
         //чем меньше он живет тем лучше, каждый раз создается новый, не так как спринг, а потом будем инжектить
-
 
         //создаем фабрику
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");  //персистенс юнит который мы прописали в xml
@@ -52,6 +74,5 @@ public class JPAAppRunner {
 
         em.close();
         emf.close();
-
     }
 }

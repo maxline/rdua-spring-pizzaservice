@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 import ua.rd.pizzaservice.domain.StatusManager.Status;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -15,12 +19,16 @@ import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
 /**
  * @author andrii
  */
+//@Entity
 @Component
 @Scope("prototype")
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private List<Pizza> pizzas;
+
     private Customer customer;
     private Status status;
 

@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author andrii
  */
-@Repository("pizzaRepository")
+//@Repository("pizzaRepository")
 public class InMemPizzaRepository implements PizzaRepository {
 
     private final Map<Integer, Pizza> pizzas = new HashMap<>();

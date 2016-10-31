@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-@Repository("jpaPizzaRepository")
+@Repository("pizzaRepository")
 public class JPAPizzaRepository implements PizzaRepository {
 
 //    @PersistenceUnit

@@ -9,10 +9,15 @@ import java.util.List;
 /**
  * @author andrii
  */
-@Repository("orderRepository")
+//@Repository("orderRepository")
 public class InMemOrderRepository implements OrderRepository {
 
     private final List<Order> orders = new ArrayList<>();
+
+    @Override
+    public Order find(Long id) {
+        return null;
+    }
 
     @Override
     public Order save(Order order) {
