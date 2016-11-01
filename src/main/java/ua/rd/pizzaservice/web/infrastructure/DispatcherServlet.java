@@ -1,5 +1,7 @@
 package ua.rd.pizzaservice.web.infrastructure;
 
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.rd.pizzaservice.web.HelloController;
 
 import javax.servlet.ServletException;
@@ -15,6 +17,13 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "DispatcherServlet")
 public class DispatcherServlet extends HttpServlet {
+    private ConfigurableApplicationContext webContext;
+
+    @Override
+    public void init() {
+        webContext = new ClassPathXmlApplicationContext(new String[]{"webContext.xml"});
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -25,17 +34,16 @@ public class DispatcherServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        // http://localhost:8081/s-pizza-service/servlet/hello
         String url = request.getRequestURI(); // отрежем конечную часть ControllerName /...
         String controllerName = getControllerName(url);
+        System.out.println("controllerName: " + controllerName);
 
-        MyController controller = new HelloController(); //getController(controllerName);
+        MyController controller = (MyController) webContext.getBean(controllerName); //getController(controllerName);
 
         if (controller != null) {
-
             controller.handleRequest(request, response);
-
         }
-
 
         try (PrintWriter out = response.getWriter()) {
             out.println("Hello from servlet!" + controllerName);
@@ -49,5 +57,9 @@ public class DispatcherServlet extends HttpServlet {
         return url.substring(url.lastIndexOf("/"));
     }
 
+    @Override
+    public void destroy() {
+        webContext.close();
+    }
 
 }

@@ -8,11 +8,15 @@
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>ua.rd.pizzaservice.web.infrastructure.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+        <!--чтобы при ините подымался и спринговый контейнер-->
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
         <url-pattern>/servlet/*</url-pattern>
     </servlet-mapping>
+
+
 
 
 </web-app>

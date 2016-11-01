@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 /**
  * @author Serhii_Mykhliuk
  */
-@Controller
+@Controller("/hello")
 public class HelloController implements MyController {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
