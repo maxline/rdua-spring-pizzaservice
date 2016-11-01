@@ -5,9 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ua.rd</groupId>
-    <artifactId>PizzaService</artifactId>
+    <artifactId>s-pizza-service</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <!--превратили в веб приложение-->
+    <packaging>war</packaging>
     <properties>
         <project.build.souceEncoding>UTF-8</project.build.souceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -96,6 +97,32 @@
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>jstl</artifactId>-->
+            <!--<version>1.2</version>-->
+        <!--</dependency>-->
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8081</port>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
