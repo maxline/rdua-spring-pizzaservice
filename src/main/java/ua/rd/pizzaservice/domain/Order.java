@@ -1,13 +1,14 @@
 package ua.rd.pizzaservice.domain;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ua.rd.pizzaservice.domain.StatusManager.Status;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -26,13 +27,20 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-
+    @ManyToOne
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     private Customer customer;
     private Status status;
 
 
+    @ElementCollection
+    @CollectionTable(name = "orders_to_pizzas")
+    @MapKeyJoinColumn(name = "pizza_id")
+    @Column(name = "quantity")
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     private Map<Pizza, Integer> pizzas;
 
+    @Transient
     List<Discount> discountList = Arrays.asList(new DiscountFourPizza(), new DiscountCardBalance());
 
     public Order() {
