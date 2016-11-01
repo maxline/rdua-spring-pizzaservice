@@ -10,6 +10,10 @@
         <servlet-class>ua.rd.pizzaservice.web.infrastructure.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
         <!--чтобы при ините подымался и спринговый контейнер-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:/webContext.xml</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>

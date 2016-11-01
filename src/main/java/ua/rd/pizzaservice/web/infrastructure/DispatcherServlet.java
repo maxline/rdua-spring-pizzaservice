@@ -21,7 +21,8 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     public void init() {
-        webContext = new ClassPathXmlApplicationContext(new String[]{"webContext.xml"});
+        String contextConfigLocation = getInitParameter("contextConfigLocation");
+        webContext = new ClassPathXmlApplicationContext(new String[]{contextConfigLocation});
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
