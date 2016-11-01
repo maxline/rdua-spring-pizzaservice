@@ -1,15 +1,19 @@
 package ua.rd.pizzaservice.runners;
 
-import ua.rd.pizzaservice.domain.Address;
-import ua.rd.pizzaservice.domain.Customer;
-import ua.rd.pizzaservice.domain.CustomerCard;
-import ua.rd.pizzaservice.domain.Pizza;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ua.rd.pizzaservice.domain.*;
+import ua.rd.pizzaservice.repository.PizzaRepository;
+import ua.rd.pizzaservice.services.CustomerService;
+import ua.rd.pizzaservice.services.OrderService;
+import ua.rd.pizzaservice.services.PizzaService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 /**
  *
@@ -17,8 +21,69 @@ import java.math.BigDecimal;
 public class JPAAppRunner {
     public static void main(String[] args) {
         //pizzaExample();
-        customerExample();
+        //customerExample();
+        orderSpringExample();
+        //pizzaSpringExample();
+
     }
+
+    private static void orderSpringExample() {
+
+        ConfigurableApplicationContext repoContext =
+                new ClassPathXmlApplicationContext(
+                        "repoContext.xml");
+        System.out.println(Arrays.toString(repoContext.getBeanDefinitionNames()));
+
+        ConfigurableApplicationContext appContext =
+                new ClassPathXmlApplicationContext(
+                        new String[]{"appContext.xml"}, repoContext);
+        System.out.println("appContext.xml: " + Arrays.toString(appContext.getBeanDefinitionNames()));
+
+        PizzaRepository pizzaRepository = (PizzaRepository) appContext.getBean("pizzaRepository"); //см аннотацию Repository
+        OrderService orderService = (OrderService) appContext.getBean("orderService");
+
+        Pizza pizza = new Pizza(4, "Sea2", Pizza.PizzaType.SEA, new BigDecimal("1.01"));
+        //pizza = pizzaRepository.save(pizza);
+
+
+        PizzaService pizzaService = (PizzaService) appContext.getBean("simplePizzaService");
+        System.out.println("pizzaService.find(1): " + pizzaService.find(1));
+
+        Customer customer = new Customer("Adam", new Address("Earth"), new CustomerCard());
+
+        Order order = orderService.placeNewOrder(customer, 1, 1, 1, 2, 3);
+
+
+        System.out.println(pizza);
+
+    }
+
+
+    private static void pizzaSpringExample() {
+
+        ConfigurableApplicationContext repoContext =
+                new ClassPathXmlApplicationContext(
+                        "repoContext.xml");
+        System.out.println(Arrays.toString(repoContext.getBeanDefinitionNames()));
+
+        ConfigurableApplicationContext appContext =
+                new ClassPathXmlApplicationContext(
+                        new String[]{"appContext.xml"}, repoContext);
+        System.out.println("appContext.xml: " + Arrays.toString(appContext.getBeanDefinitionNames()));
+
+
+        //по типу не сможем получить
+        PizzaRepository pizzaRepository = (PizzaRepository) appContext.getBean("pizzaRepository"); //см аннотацию Repository
+
+        Pizza pizza = new Pizza();
+        pizza.setName("Sea1");
+        pizza.setPizzaType(Pizza.PizzaType.SEA);
+
+        pizza = pizzaRepository.save(pizza);
+
+        System.out.println(pizza);
+    }
+
 
     private static void customerExample() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");  //персистенс юнит который мы прописали в xml
@@ -34,6 +99,7 @@ public class JPAAppRunner {
         em.close();
         emf.close();
     }
+
 
     private static void pizzaExample() {
         //надо поднять контейнер entity manager

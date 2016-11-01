@@ -9,6 +9,7 @@ import ua.rd.pizzaservice.domain.StatusManager.Status;
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -18,18 +19,21 @@ import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
 /**
  * @author andrii
  */
-//@Entity
+@Entity
 @Component
 @Scope("prototype")
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     private Customer customer;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
 
@@ -38,6 +42,12 @@ public class Order {
     @MapKeyJoinColumn(name = "pizza_id")
     @Column(name = "quantity")
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+
+
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @CollectionTable(name = "pizzas_quantities", joinColumns = @JoinColumn(name = "order_id", nullable = false))
+//    @MapKeyJoinColumn(name = "pizza_id")
+//    @Column(name = "quantity", nullable = false)
     private Map<Pizza, Integer> pizzas;
 
     @Transient

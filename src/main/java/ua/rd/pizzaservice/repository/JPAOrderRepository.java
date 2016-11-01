@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 /**
  * @author Sergey Mikhluk.
  */
-//@Repository("orderRepository")
+@Repository("orderRepository")
 public class JPAOrderRepository implements OrderRepository {
 
     @PersistenceContext

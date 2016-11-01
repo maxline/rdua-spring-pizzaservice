@@ -59,4 +59,27 @@ public class Pizza implements Serializable {
     public String toString() {
         return "Pizza{" + id + ", name=" + name + ", pizzaType=" + pizzaType + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pizza pizza = (Pizza) o;
+
+        if (id != null ? !id.equals(pizza.id) : pizza.id != null) return false;
+        if (!name.equals(pizza.name)) return false;
+        if (pizzaType != pizza.pizzaType) return false;
+        return price.equals(pizza.price);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + pizzaType.hashCode();
+        result = 31 * result + price.hashCode();
+        return result;
+    }
 }
