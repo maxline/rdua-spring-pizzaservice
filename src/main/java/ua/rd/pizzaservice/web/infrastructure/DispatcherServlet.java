@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * @author Serhii_Mykhliuk
@@ -18,11 +19,35 @@ import java.io.PrintWriter;
 @WebServlet(name = "DispatcherServlet")
 public class DispatcherServlet extends HttpServlet {
     private ConfigurableApplicationContext webContext;
+    ConfigurableApplicationContext[] applicationContexts;
 
     @Override
     public void init() {
-        String contextConfigLocation = getInitParameter("contextConfigLocation");
-        webContext = new ClassPathXmlApplicationContext(new String[]{contextConfigLocation});
+        //вернет строку контекстов через пробел
+        String contextsLocations = getServletContext().getInitParameter("contextConfigLocation");
+        String[] contexts = contextsLocations.split(" ");
+        //хардкод
+        //хотим чтобы наследовались, чтобы закрывать
+        applicationContexts = new ConfigurableApplicationContext[contexts.length];
+
+        for (int i = 0; i < applicationContexts.length; i++) {
+            ConfigurableApplicationContext context;
+            if (i == 0) {
+                context = new ClassPathXmlApplicationContext(contexts[i]);
+
+            } else {
+                context = new ClassPathXmlApplicationContext(
+                        new String[]{contexts[i]},
+                        applicationContexts[i - 1]);
+            }
+            applicationContexts[i] = context;
+            System.out.println("context[i]: " + context);
+        }
+
+        String webContextConfigLocation = getInitParameter("contextConfigLocation");
+        webContext = new ClassPathXmlApplicationContext(
+                new String[]{webContextConfigLocation},
+                applicationContexts[applicationContexts.length - 1]);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,6 +86,9 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     public void destroy() {
         webContext.close();
+        for(int i = applicationContexts.length-1; i >= 0; i--){
+            applicationContexts[i].close();
+        }
     }
 
 }
