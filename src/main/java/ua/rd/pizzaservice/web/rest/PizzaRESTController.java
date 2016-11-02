@@ -3,6 +3,7 @@ package ua.rd.pizzaservice.web.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PizzaRESTController {
-    @RequestMapping("/hello")
+    //можно специфицировать много параметров, например только гет запрос
+    @RequestMapping(value = "/hello", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String hello(){
         // http://localhost:8081/s-pizza-service/rest/hello
