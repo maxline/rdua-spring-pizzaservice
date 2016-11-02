@@ -1,6 +1,8 @@
 package ua.rd.pizzaservice.web.infrastructure;
 
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Serhii_Mykhliuk
  */
-public class SimpleURLHandlerMapping implements HandlerMapping {
+public class SimpleURLHandlerMapping implements HandlerMapping, ApplicationContextAware {
     private ApplicationContext webContext;
 
-    public SimpleURLHandlerMapping(ConfigurableApplicationContext webContext) {
-        this.webContext = webContext;
-    }
+//    public SimpleURLHandlerMapping(ConfigurableApplicationContext webContext) {
+//        this.webContext = webContext;
+//    }
 
     @Override
     public MyController getController(HttpServletRequest request) {
@@ -31,5 +33,8 @@ public class SimpleURLHandlerMapping implements HandlerMapping {
         return url.substring(url.lastIndexOf("/"));
     }
 
-
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.webContext = applicationContext;
+    }
 }

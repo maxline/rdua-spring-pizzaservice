@@ -58,7 +58,8 @@ public class DispatcherServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //SimpleURLHandlerMapping синглтон, спринг заинжектить не может (не управляет), вопрос как его сюда засунуть
-        HandlerMapping handlerMapping = new SimpleURLHandlerMapping(webContext);
+        HandlerMapping handlerMapping = webContext.getBean("handlerMappingStrategy", HandlerMapping.class);
+                //new SimpleURLHandlerMapping(webContext);
 
         MyController controller = handlerMapping.getController(request);
                 //(MyController) webContext.getBean(controllerName); //getController(controllerName);

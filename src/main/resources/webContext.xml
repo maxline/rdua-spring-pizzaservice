@@ -7,8 +7,10 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-
     <context:component-scan base-package="ua.rd.pizzaservice.web"/>
+
+    <!--создадим явно а не через скан иначе никто не поймет откуда он берется и зачем нужен-->
+    <bean name="handlerMappingStrategy" class="ua.rd.pizzaservice.web.infrastructure.SimpleURLHandlerMapping"/>
 
     <!--<context:annotation-config/>-->
     <!--не надо находится в середине component-scan-->
