@@ -2,10 +2,7 @@ package ua.rd.pizzaservice.web.rest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.services.PizzaService;
 
@@ -35,4 +32,11 @@ public class PizzaRESTController {
         return pizzaService.find(pizzaID);
     }
 
+    //из реквеста формируем объект
+    @RequestMapping(value = "/pizza",  method = RequestMethod.POST
+            //consumes = "application/json"
+    )
+    public void pizza(@RequestBody Pizza pizza) {
+        System.out.println(pizza);
+    }
 }
