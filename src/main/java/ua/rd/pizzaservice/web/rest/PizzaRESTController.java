@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PizzaRESTController {
     //можно специфицировать много параметров, например только гет запрос
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello() {
+    public String[] hello() {
         // http://localhost:8081/s-pizza-service/rest/hello
         //текст это не вью, а просто хотим вернуть в респонс, будет как output writer
-        return "<b>Hello from REST Controller!</b>";
+        //строку не захотело, сделали массив
+        return new String[]{"Hello from REST Controller!"};
     }
 
 

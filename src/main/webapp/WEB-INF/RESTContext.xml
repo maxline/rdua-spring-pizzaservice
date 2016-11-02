@@ -10,6 +10,8 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <!--за нас сама прописывает конфигурации маршаллера для возврата JSON и XML
+    но спринг не включает стандартный конвертор-->
     <mvc:annotation-driven/>
 
     <context:component-scan base-package="ua.rd.pizzaservice.web.rest"/>
