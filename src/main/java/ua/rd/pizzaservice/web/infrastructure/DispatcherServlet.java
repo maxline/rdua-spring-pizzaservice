@@ -1,5 +1,6 @@
 package ua.rd.pizzaservice.web.infrastructure;
 
+import org.springframework.beans.BeansException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -16,23 +17,24 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "DispatcherServlet")
 public class DispatcherServlet extends HttpServlet {
-    private ConfigurableApplicationContext webContext;
-    ConfigurableApplicationContext[] applicationContexts;
 
-    @Override
-    public void init() {
-        //вернет строку контекстов через пробел
-        String contextsLocations = getServletContext().getInitParameter("contextConfigLocation");
-        String[] contexts = contextsLocations.split(" ");
-        //хардкод
-        //хотим чтобы наследовались, чтобы закрывать
-        applicationContexts = new ConfigurableApplicationContext[contexts.length];
+    private ConfigurableApplicationContext[] rootSpringContexts;
+    private ConfigurableApplicationContext webContext;
+
+    private String[] getRootContextsNames() {
+        String contexts = getServletContext().getInitParameter("contextConfigLocation");
+        String[] contextsNames = contexts.split(" ");
+        return contextsNames;
+    }
+
+    private ConfigurableApplicationContext[] createRootSpringContexts(String[] contexts) throws BeansException {
+        ConfigurableApplicationContext[] applicationContexts
+                = new ConfigurableApplicationContext[contexts.length];
 
         for (int i = 0; i < applicationContexts.length; i++) {
             ConfigurableApplicationContext context;
             if (i == 0) {
                 context = new ClassPathXmlApplicationContext(contexts[i]);
-
             } else {
                 context = new ClassPathXmlApplicationContext(
                         new String[]{contexts[i]},
@@ -41,11 +43,27 @@ public class DispatcherServlet extends HttpServlet {
             applicationContexts[i] = context;
             System.out.println("context[i]: " + context);
         }
+        return applicationContexts;
+    }
 
+
+    private ConfigurableApplicationContext createWebSpringContext(ConfigurableApplicationContext[] rootContexts) throws BeansException {
         String webContextConfigLocation = getInitParameter("contextConfigLocation");
-        webContext = new ClassPathXmlApplicationContext(
-                new String[]{webContextConfigLocation},
-                applicationContexts[applicationContexts.length - 1]);
+        if (rootContexts.length == 0) {
+            return new ClassPathXmlApplicationContext(webContextConfigLocation);
+        } else {
+            return new ClassPathXmlApplicationContext(
+                    new String[]{webContextConfigLocation},
+                    rootContexts[rootContexts.length - 1]
+            );
+        }
+    }
+
+    @Override
+    public void init() throws ServletException {
+        String[] rootContexts = getRootContextsNames();
+        rootSpringContexts = createRootSpringContexts(rootContexts);
+        webContext = createWebSpringContext(rootSpringContexts);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,14 +92,13 @@ public class DispatcherServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     @Override
     public void destroy() {
         webContext.close();
-        for (int i = applicationContexts.length - 1; i >= 0; i--) {
-            applicationContexts[i].close();
+        for (int i = rootSpringContexts.length - 1; i >= 0; i--) {
+            rootSpringContexts[i].close();
         }
     }
-
 }
