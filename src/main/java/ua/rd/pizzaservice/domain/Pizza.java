@@ -50,6 +50,13 @@ public class Pizza implements Serializable {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public PizzaType getPizzaType() {
+        return pizzaType;
+    }
 
     public void setPizzaType(PizzaType pizzaType) {
         this.pizzaType = pizzaType;
