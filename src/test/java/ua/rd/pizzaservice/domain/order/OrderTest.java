@@ -1,8 +1,9 @@
-package ua.rd.pizzaservice.domain;
+package ua.rd.pizzaservice.domain.order;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.domain.customer.Address;
 import ua.rd.pizzaservice.domain.customer.Customer;
 import ua.rd.pizzaservice.domain.customer.CustomerCard;

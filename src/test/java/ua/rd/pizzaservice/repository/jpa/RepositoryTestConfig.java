@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice.repository;
+package ua.rd.pizzaservice.repository.jpa;
 
 import org.junit.Ignore;
 import org.junit.runner.RunWith;

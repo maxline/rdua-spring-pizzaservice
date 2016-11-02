@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice.domain;
+package ua.rd.pizzaservice.domain.discount;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice.domain;
+package ua.rd.pizzaservice.domain.customer;
 
 import org.junit.Test;
 import ua.rd.pizzaservice.domain.customer.CustomerCard;
