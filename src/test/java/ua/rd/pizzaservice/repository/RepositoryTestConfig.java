@@ -13,6 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 //там есть @Transactional и jdbc template  application context и logger
 //..можем юзать во время тестов
 @Ignore  //java.lang.Exception: No runnable methods
-public class RepositoryTestConfig extends AbstractTransactionalJUnit4SpringContextTests{
+public class RepositoryTestConfig extends AbstractTransactionalJUnit4SpringContextTests {
 
 }

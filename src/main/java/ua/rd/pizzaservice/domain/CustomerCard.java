@@ -30,12 +30,11 @@ public class CustomerCard {
     }
 
     public void setBalance(BigDecimal balance) {
-        if (balance.compareTo(new BigDecimal("0.0")) ==-1 ){
+        if (balance.compareTo(new BigDecimal("0.0")) == -1) {
             throw new IllegalArgumentException("Card balance must be positive number!");
         }
         this.balance = balance;
     }
-
 
 
 }

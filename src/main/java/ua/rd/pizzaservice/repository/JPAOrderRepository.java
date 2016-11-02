@@ -24,7 +24,7 @@ public class JPAOrderRepository implements OrderRepository {
     @Override
     @Transactional
     public Order save(Order order) {
-        Order newOrder =  em.merge(order);
+        Order newOrder = em.merge(order);
         return newOrder;
     }
 }

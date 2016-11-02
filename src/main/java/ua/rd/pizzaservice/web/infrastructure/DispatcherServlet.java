@@ -2,7 +2,6 @@ package ua.rd.pizzaservice.web.infrastructure;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.rd.pizzaservice.web.HelloController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * @author Serhii_Mykhliuk
@@ -86,7 +84,7 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     public void destroy() {
         webContext.close();
-        for(int i = applicationContexts.length-1; i >= 0; i--){
+        for (int i = applicationContexts.length - 1; i >= 0; i--) {
             applicationContexts[i].close();
         }
     }

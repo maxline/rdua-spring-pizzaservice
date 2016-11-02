@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanProcessor" />
+    <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanProcessor"/>
 
     <!--<bean name="orderService" class="ua.rd.pizzaservice.services.SimpleOrderService"></bean>-->
 

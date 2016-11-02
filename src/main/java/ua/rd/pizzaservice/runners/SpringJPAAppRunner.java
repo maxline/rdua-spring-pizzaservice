@@ -2,15 +2,10 @@ package ua.rd.pizzaservice.runners;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.rd.pizzaservice.domain.Order;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.repository.PizzaRepository;
-import ua.rd.pizzaservice.services.CustomerService;
-import ua.rd.pizzaservice.services.OrderService;
 
 import java.util.Arrays;
-
-import static ua.rd.pizzaservice.domain.StatusManager.Status.IN_PROGRESS;
 
 /**
  * @author andrii
@@ -29,7 +24,7 @@ public class SpringJPAAppRunner {
 
 
         //по типу не сможем получить
-        PizzaRepository  pizzaRepository = (PizzaRepository) appContext.getBean("pizzaRepository"); //см аннотацию Repository
+        PizzaRepository pizzaRepository = (PizzaRepository) appContext.getBean("pizzaRepository"); //см аннотацию Repository
 
         Pizza pizza = new Pizza();
         pizza.setName("Sea");

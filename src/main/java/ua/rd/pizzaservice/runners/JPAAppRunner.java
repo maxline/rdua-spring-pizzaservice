@@ -4,7 +4,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.rd.pizzaservice.domain.*;
 import ua.rd.pizzaservice.repository.PizzaRepository;
-import ua.rd.pizzaservice.services.CustomerService;
 import ua.rd.pizzaservice.services.OrderService;
 import ua.rd.pizzaservice.services.PizzaService;
 

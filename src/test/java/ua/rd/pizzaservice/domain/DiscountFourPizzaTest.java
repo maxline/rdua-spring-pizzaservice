@@ -2,15 +2,12 @@ package ua.rd.pizzaservice.domain;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.rd.pizzaservice.repository.OrderRepository;
-import ua.rd.pizzaservice.services.PizzaService;
-import ua.rd.pizzaservice.services.SimpleOrderService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Serhii_Mykhliuk

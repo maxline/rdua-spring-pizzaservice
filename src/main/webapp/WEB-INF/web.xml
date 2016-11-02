@@ -9,7 +9,7 @@
         <!--доступны для всех сервлетов которые определены в данном хмл-->
         <param-name>contextConfigLocation</param-name>
         <!--имя конктестов в порядке инициализации, порядок важен!-->
-        <param-value>classpath:/repoContext.xml classpath:/appContext.xml </param-value>
+        <param-value>classpath:/repoContext.xml classpath:/appContext.xml</param-value>
     </context-param>
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>

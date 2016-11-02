@@ -1,11 +1,10 @@
 package ua.rd.pizzaservice.domain;
 
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
 
 /**
  * @author andrii

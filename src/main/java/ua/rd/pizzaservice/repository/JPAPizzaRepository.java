@@ -5,9 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.rd.pizzaservice.domain.Pizza;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 
 @Repository("pizzaRepository")
 public class JPAPizzaRepository implements PizzaRepository {
@@ -30,7 +28,7 @@ public class JPAPizzaRepository implements PizzaRepository {
     @Override
     @Transactional  //надо, если хотим чтобы все методы были транзакционными, аннотакция над классом
     public Pizza save(Pizza pizza) {
-        Pizza newPizza =  em.merge(pizza);
+        Pizza newPizza = em.merge(pizza);
         return newPizza;
     }
 }

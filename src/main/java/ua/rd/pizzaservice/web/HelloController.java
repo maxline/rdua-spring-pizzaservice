@@ -22,10 +22,10 @@ public class HelloController implements MyController {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        try (PrintWriter out = response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
             out.println("Hello from HelloController!");
 
-            for(int i = 0; i < 50; i++){
+            for (int i = 0; i < 50; i++) {
                 out.println(pizzaService.find(i));
             }
 

@@ -1,6 +1,6 @@
 package ua.rd.pizzaservice.domain;
 
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -8,8 +8,6 @@ import ua.rd.pizzaservice.domain.StatusManager.Status;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.*;
 

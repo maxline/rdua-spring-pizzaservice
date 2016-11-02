@@ -19,7 +19,7 @@ public class CustomerCardTest {
         assertEquals(new BigDecimal("30.00"), customerCard.getBalance());
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void setNegativeBalance() throws Exception {
         CustomerCard customerCard = new CustomerCard();
         customerCard.setBalance(new BigDecimal("-10.00"));
