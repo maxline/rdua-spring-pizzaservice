@@ -11,6 +11,12 @@
         <!--имя конктестов в порядке инициализации, порядок важен!-->
         <param-value>classpath:/repoContext.xml classpath:/appContext.xml</param-value>
     </context-param>
+
+    <!--listener подымает repoContext и appContext то что делали вручную в цикле-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>ua.rd.pizzaservice.web.infrastructure.DispatcherServlet</servlet-class>
