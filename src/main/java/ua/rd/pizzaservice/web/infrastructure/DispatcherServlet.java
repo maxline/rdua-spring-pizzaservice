@@ -57,30 +57,24 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //SimpleURLHandlerMapping синглтон, спринг заинжектить не может (не управляет), вопрос как его сюда засунуть
+        HandlerMapping handlerMapping = new SimpleURLHandlerMapping(webContext);
 
-        // http://localhost:8081/s-pizza-service/servlet/hello
-        String url = request.getRequestURI(); // отрежем конечную часть ControllerName /...
-        String controllerName = getControllerName(url);
-        System.out.println("controllerName: " + controllerName);
-
-        MyController controller = (MyController) webContext.getBean(controllerName); //getController(controllerName);
+        MyController controller = handlerMapping.getController(request);
+                //(MyController) webContext.getBean(controllerName); //getController(controllerName);
 
         if (controller != null) {
             controller.handleRequest(request, response);
         }
 
         try (PrintWriter out = response.getWriter()) {
-            out.println("Hello from servlet!" + controllerName);
+            //out.println("Hello from servlet!" + controllerName);
+            out.println("Hello from servlet!");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-
-    private String getControllerName(String url) {
-        return url.substring(url.lastIndexOf("/"));
-    }
-
     @Override
     public void destroy() {
         webContext.close();
