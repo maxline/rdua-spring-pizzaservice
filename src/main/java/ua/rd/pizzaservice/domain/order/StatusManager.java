@@ -1,8 +1,8 @@
-package ua.rd.pizzaservice.domain;
+package ua.rd.pizzaservice.domain.order;
 
 import java.util.*;
 
-import static ua.rd.pizzaservice.domain.StatusManager.Status.*;
+import static ua.rd.pizzaservice.domain.order.StatusManager.Status.*;
 
 /**
  *

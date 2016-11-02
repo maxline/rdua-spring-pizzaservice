@@ -1,4 +1,7 @@
-package ua.rd.pizzaservice.domain;
+package ua.rd.pizzaservice.domain.discount;
+
+import ua.rd.pizzaservice.domain.order.Order;
+import ua.rd.pizzaservice.domain.Pizza;
 
 import java.math.BigDecimal;
 

@@ -1,6 +1,7 @@
 package ua.rd.pizzaservice.domain;
 
 import org.junit.Test;
+import ua.rd.pizzaservice.domain.customer.CustomerCard;
 
 import java.math.BigDecimal;
 

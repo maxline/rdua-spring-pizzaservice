@@ -2,14 +2,14 @@ package ua.rd.pizzaservice.runners;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.rd.pizzaservice.domain.Order;
+import ua.rd.pizzaservice.domain.order.Order;
 import ua.rd.pizzaservice.services.CustomerService;
 import ua.rd.pizzaservice.services.OrderService;
 import ua.rd.pizzaservice.services.PizzaService;
 
 import java.util.Arrays;
 
-import static ua.rd.pizzaservice.domain.StatusManager.Status.IN_PROGRESS;
+import static ua.rd.pizzaservice.domain.order.StatusManager.Status.IN_PROGRESS;
 
 /**
  * @author andrii

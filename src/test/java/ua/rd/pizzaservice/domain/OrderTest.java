@@ -3,13 +3,17 @@ package ua.rd.pizzaservice.domain;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import ua.rd.pizzaservice.domain.customer.Address;
+import ua.rd.pizzaservice.domain.customer.Customer;
+import ua.rd.pizzaservice.domain.customer.CustomerCard;
+import ua.rd.pizzaservice.domain.order.Order;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static ua.rd.pizzaservice.domain.StatusManager.Status.*;
+import static ua.rd.pizzaservice.domain.order.StatusManager.Status.*;
 
 public class OrderTest {
 

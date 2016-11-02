@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice.repository;
+package ua.rd.pizzaservice.repository.memory;
 
 /**
  * @author andrii
@@ -6,6 +6,7 @@ package ua.rd.pizzaservice.repository;
 
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.infrastructure.Benchmark;
+import ua.rd.pizzaservice.repository.PizzaRepository;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;

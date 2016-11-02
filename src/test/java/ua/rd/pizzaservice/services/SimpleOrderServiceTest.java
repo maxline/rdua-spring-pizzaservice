@@ -4,6 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import ua.rd.pizzaservice.domain.*;
+import ua.rd.pizzaservice.domain.customer.Address;
+import ua.rd.pizzaservice.domain.customer.Customer;
+import ua.rd.pizzaservice.domain.customer.CustomerCard;
+import ua.rd.pizzaservice.domain.order.Order;
 import ua.rd.pizzaservice.repository.OrderRepository;
 
 import java.math.BigDecimal;

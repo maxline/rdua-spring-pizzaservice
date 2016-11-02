@@ -1,8 +1,8 @@
 package ua.rd.pizzaservice.infrastructure;
 
-import ua.rd.pizzaservice.repository.InMemCustomerRepository;
-import ua.rd.pizzaservice.repository.InMemOrderRepository;
-import ua.rd.pizzaservice.repository.InMemPizzaRepository;
+import ua.rd.pizzaservice.repository.memory.InMemCustomerRepository;
+import ua.rd.pizzaservice.repository.memory.InMemOrderRepository;
+import ua.rd.pizzaservice.repository.memory.InMemPizzaRepository;
 import ua.rd.pizzaservice.services.SimpleOrderService;
 import ua.rd.pizzaservice.services.SimplePizzaService;
 

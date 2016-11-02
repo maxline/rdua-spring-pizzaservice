@@ -1,8 +1,8 @@
 package ua.rd.pizzaservice.services;
 
-import ua.rd.pizzaservice.domain.Customer;
-import ua.rd.pizzaservice.domain.Order;
-import ua.rd.pizzaservice.domain.StatusManager;
+import ua.rd.pizzaservice.domain.customer.Customer;
+import ua.rd.pizzaservice.domain.order.Order;
+import ua.rd.pizzaservice.domain.order.StatusManager;
 
 /**
  * @author andrii

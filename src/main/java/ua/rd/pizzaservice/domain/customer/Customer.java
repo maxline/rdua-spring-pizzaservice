@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice.domain;
+package ua.rd.pizzaservice.domain.customer;
 
 
 import org.hibernate.annotations.Cascade;

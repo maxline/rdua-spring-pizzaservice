@@ -1,6 +1,7 @@
-package ua.rd.pizzaservice.repository;
+package ua.rd.pizzaservice.repository.memory;
 
-import ua.rd.pizzaservice.domain.Order;
+import ua.rd.pizzaservice.domain.order.Order;
+import ua.rd.pizzaservice.repository.OrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;

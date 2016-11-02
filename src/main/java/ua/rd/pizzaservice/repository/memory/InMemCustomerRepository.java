@@ -1,9 +1,10 @@
-package ua.rd.pizzaservice.repository;
+package ua.rd.pizzaservice.repository.memory;
 
 import org.springframework.stereotype.Repository;
-import ua.rd.pizzaservice.domain.Address;
-import ua.rd.pizzaservice.domain.Customer;
-import ua.rd.pizzaservice.domain.CustomerCard;
+import ua.rd.pizzaservice.domain.customer.Address;
+import ua.rd.pizzaservice.domain.customer.Customer;
+import ua.rd.pizzaservice.domain.customer.CustomerCard;
+import ua.rd.pizzaservice.repository.CustomerRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;

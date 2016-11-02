@@ -1,18 +1,23 @@
-package ua.rd.pizzaservice.domain;
+package ua.rd.pizzaservice.domain.order;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ua.rd.pizzaservice.domain.StatusManager.Status;
+import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.domain.order.StatusManager.Status;
+import ua.rd.pizzaservice.domain.customer.Customer;
+import ua.rd.pizzaservice.domain.discount.Discount;
+import ua.rd.pizzaservice.domain.discount.DiscountCardBalance;
+import ua.rd.pizzaservice.domain.discount.DiscountFourPizza;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static ua.rd.pizzaservice.domain.StatusManager.Status.NEW;
-import static ua.rd.pizzaservice.domain.StatusManager.isTransitionAllowed;
+import static ua.rd.pizzaservice.domain.order.StatusManager.Status.NEW;
+import static ua.rd.pizzaservice.domain.order.StatusManager.isTransitionAllowed;
 
 /**
  * @author andrii
