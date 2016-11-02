@@ -45,6 +45,13 @@
             <version>${spring-context.version}</version>
         </dependency>
 
+        <!--находится диспатчер сервлетов-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-context.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -109,6 +116,8 @@
         <!--<artifactId>jstl</artifactId>-->
         <!--<version>1.2</version>-->
         <!--</dependency>-->
+
+
     </dependencies>
 
     <build>

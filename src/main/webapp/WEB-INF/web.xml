@@ -14,17 +14,34 @@
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>ua.rd.pizzaservice.web.infrastructure.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-        <!--чтобы при ините подымался и спринговый контейнер-->
+        <!--<load-on-startup>1</load-on-startup>-->
+        <!--чтобы не запускался-->
         <init-param>
             <!--доступны только внутри одного сервлета-->
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:/webContext.xml</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>SpringRESTDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+
+        <init-param>
+            <!--доступны только внутри одного сервлета-->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/RESTContext.xml</param-value>
+        </init-param>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
         <url-pattern>/servlet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SpringRESTDispatcherServlet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
