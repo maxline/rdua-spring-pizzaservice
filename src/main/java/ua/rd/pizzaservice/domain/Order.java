@@ -121,7 +121,7 @@ public class Order {
 
     public BigDecimal getPrice() {
         BigDecimal orderPrice = new BigDecimal("0.0");
-        for (Pizza pizza : pizzas.keySet()) {
+        for (Pizza pizza : getPizzas()) {
             orderPrice = orderPrice.add(pizza.getPrice());
         }
         return orderPrice;
