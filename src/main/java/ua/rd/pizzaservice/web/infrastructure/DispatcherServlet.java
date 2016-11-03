@@ -75,22 +75,19 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        //out.println("Hello from servlet!" + controllerName);
+        out.println("Hello from servlet!");
+
         //SimpleURLHandlerMapping синглтон, спринг заинжектить не может (не управляет), вопрос как его сюда засунуть
         HandlerMapping handlerMapping = webContext.getBean("handlerMappingStrategy", HandlerMapping.class);
-                //new SimpleURLHandlerMapping(webContext);
+        //new SimpleURLHandlerMapping(webContext);
 
         MyController controller = handlerMapping.getController(request);
-                //(MyController) webContext.getBean(controllerName); //getController(controllerName);
+        //(MyController) webContext.getBean(controllerName); //getController(controllerName);
 
         if (controller != null) {
             controller.handleRequest(request, response);
-        }
-
-        try (PrintWriter out = response.getWriter()) {
-            //out.println("Hello from servlet!" + controllerName);
-            out.println("Hello from servlet!");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
