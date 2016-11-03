@@ -1,7 +1,5 @@
 package ua.rd.pizzaservice.domain.order;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ua.rd.pizzaservice.domain.Pizza;
@@ -33,20 +31,16 @@ public class Order {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade= CascadeType.ALL)
     private Customer customer;
     @Enumerated(EnumType.STRING)
     private Status status;
-
 
     @ElementCollection
     @CollectionTable(name = "orders_to_pizzas")
     @MapKeyJoinColumn(name = "pizza_id")
     @Column(name = "quantity")
-    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
-
-
+    //@Cascade({CascadeType.PERSIST, CascadeType.MERGE})
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    @CollectionTable(name = "pizzas_quantities", joinColumns = @JoinColumn(name = "order_id", nullable = false))
 //    @MapKeyJoinColumn(name = "pizza_id")

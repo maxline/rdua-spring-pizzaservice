@@ -52,7 +52,7 @@ public class JPAAppRunner {
         PizzaService pizzaService = (PizzaService) appContext.getBean("simplePizzaService");
         System.out.println("pizzaService.find(1): " + pizzaService.find(1));
 
-        Customer customer = new Customer("Adam", new Address("Earth"), new CustomerCard());
+        Customer customer = new Customer("Adam", new Address("Earth"), new CustomerCard(new BigDecimal("5.57")));
 
         Order order = orderService.placeNewOrder(customer, 1, 1, 1, 2, 3);
 
@@ -92,7 +92,7 @@ public class JPAAppRunner {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");  //персистенс юнит который мы прописали в xml
         EntityManager em = emf.createEntityManager();
 
-        Customer customer = new Customer("Adam", new Address("Earth"), new CustomerCard());
+        Customer customer = new Customer("Adam", new Address("Earth"), new CustomerCard(new BigDecimal("3.22")));
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();

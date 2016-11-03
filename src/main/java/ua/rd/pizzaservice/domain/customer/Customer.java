@@ -1,8 +1,8 @@
 package ua.rd.pizzaservice.domain.customer;
 
+//import org.hibernate.annotations.Cascade;
+//import org.hibernate.annotations.CascadeType;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 
@@ -17,12 +17,10 @@ public class Customer {
     private int id;
     private String name;
 
-    @OneToOne
-    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @OneToOne
-    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade=CascadeType.ALL)
     private CustomerCard customerCard;
 
     public Customer() {

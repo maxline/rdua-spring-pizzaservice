@@ -20,6 +20,10 @@ public class CustomerCard {
     public CustomerCard() {
     }
 
+    public CustomerCard(BigDecimal balance) {
+        this.balance = balance;
+    }
+
     public void increaseBalance(BigDecimal sum) {
         balance = balance.add(sum);
     }
