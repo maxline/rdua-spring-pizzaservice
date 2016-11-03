@@ -2,6 +2,7 @@ package ua.rd.pizzaservice.web.rest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.PizzaService;
+
+import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 
 /**
@@ -44,11 +48,15 @@ public class PizzaRESTController {
     //плюс можем добавлять какие заголовки будет содержать
 
     @RequestMapping(value = "/pizza/{pizzaID}", method = RequestMethod.GET)
-    public ResponseEntity<Pizza> pizza(@PathVariable("PizzaID") Integer PizzaID){
-        Pizza pizza = pizzaService.find(PizzaID);
+    public ResponseEntity<Pizza> find(@PathVariable("pizzaID") Integer pizzaID){
+        Pizza pizza = pizzaService.find(pizzaID);
         if (pizza==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        //черз хатеоас появился набор дополлнительных аттрибутов
+        Link link = linkTo(methodOn(PizzaRESTController.class).find(pizzaID)).withSelfRel();
+        pizza.add(link);
+
         return new ResponseEntity<>(pizza, HttpStatus.FOUND);
     }
 
@@ -65,13 +73,14 @@ public class PizzaRESTController {
     @RequestMapping(value = "/pizza",  method = RequestMethod.POST,
             consumes = "application/json"
     )
+
     public ResponseEntity<Void> create(@RequestBody Pizza pizza,
                                        UriComponentsBuilder builder) {
         //todo поменять на pizzaService
         Pizza p = pizzaRepository.save(pizza);
         System.out.println(pizza);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/pizza/{id}").buildAndExpand(p.getId()).toUri());
+        headers.setLocation(builder.path("/pizza/{id}").buildAndExpand(p.getPizzaId()).toUri());
         //хотим засетить Ид, помогает билдер
         //включаем хидер в респонсЕнтити
 

@@ -28,6 +28,6 @@ public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
         pizza.setPizzaType(Pizza.PizzaType.SEA);
         pizza = pizzaRepository.save(pizza);
 
-        assertNotNull(pizza.getId());
+        assertNotNull(pizza.getPizzaId());
     }
 }

@@ -25,8 +25,8 @@ public class JPAAppRunner {
     public static void main(String[] args) {
         //pizzaExample();
         //customerExample();
-        orderSpringExample();
-        //pizzaSpringExample();
+        //orderSpringExample();
+        pizzaSpringExample();
 
     }
 
@@ -125,13 +125,13 @@ public class JPAAppRunner {
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        System.out.println("Before persist " + pizza.getId());
+        System.out.println("Before persist " + pizza.getPizzaId());
 
         em.persist(pizza);  //сохраняет объект, кладет в Entity context, не в базу, по этому нужно создать транзакцию
         em.persist(pizza2); //два селекта будет, не оптимально (если знает что будет много сохраняться, делать диапазон   @SequenceGenerator сколько за раз брать
         em.flush(); // надо сохранить на сейчас
         pizza.setName("Hawai");  //сохраняет состояние на момент коммита! а не персист
-        System.out.println(pizza.getId());
+        System.out.println(pizza.getPizzaId());
 
         //transaction.rollback();
         transaction.commit(); // update будет делаться на коммите

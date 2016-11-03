@@ -1,5 +1,7 @@
 package ua.rd.pizzaservice.domain;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ import java.math.BigDecimal;
  * @author andrii
  */
 @Entity
-public class Pizza implements Serializable {
+public class Pizza extends ResourceSupport implements Serializable {
 
     public enum PizzaType {
         VEGETARIAN, SEA, MEAT;
@@ -22,7 +24,7 @@ public class Pizza implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
 //    @SequenceGenerator(name = "PizzaSEQ", allocationSize = 10)
 //    @Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "PizzaSEQ")
-    private Integer id;
+    private Integer pizzaId;
     private String name;
     private PizzaType pizzaType;
     private BigDecimal price;
@@ -31,12 +33,13 @@ public class Pizza implements Serializable {
     public Pizza() {
     }
 
-    public Integer getId() {
-        return id;
+
+    public Integer getPizzaId() {
+        return pizzaId;
     }
 
-    public Pizza(Integer id, String name, PizzaType pizzaType, BigDecimal price) {
-        this.id = id;
+    public Pizza(Integer pizzaId, String name, PizzaType pizzaType, BigDecimal price) {
+        this.pizzaId = pizzaId;
         this.name = name;
         this.pizzaType = pizzaType;
         this.price = price;
@@ -64,7 +67,7 @@ public class Pizza implements Serializable {
 
     @Override
     public String toString() {
-        return "Pizza{" + id + ", name=" + name + ", pizzaType=" + pizzaType + '}';
+        return "Pizza{" + pizzaId + ", name=" + name + ", pizzaType=" + pizzaType + '}';
     }
 
     @Override
@@ -74,7 +77,7 @@ public class Pizza implements Serializable {
 
         Pizza pizza = (Pizza) o;
 
-        if (id != null ? !id.equals(pizza.id) : pizza.id != null) return false;
+        if (pizzaId != null ? !pizzaId.equals(pizza.pizzaId) : pizza.pizzaId != null) return false;
         if (!name.equals(pizza.name)) return false;
         if (pizzaType != pizza.pizzaType) return false;
         return price.equals(pizza.price);
@@ -83,7 +86,7 @@ public class Pizza implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = pizzaId != null ? pizzaId.hashCode() : 0;
         result = 31 * result + name.hashCode();
         result = 31 * result + pizzaType.hashCode();
         result = 31 * result + price.hashCode();
