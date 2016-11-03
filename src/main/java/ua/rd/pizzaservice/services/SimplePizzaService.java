@@ -27,4 +27,9 @@ public class SimplePizzaService implements PizzaService {
         return pizzaRepository.find(id);
     }
 
+
+    @Override
+    public Pizza save(Pizza pizza) {
+        return pizzaRepository.save(pizza);
+    }
 }

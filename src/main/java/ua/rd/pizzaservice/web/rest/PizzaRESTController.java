@@ -25,8 +25,8 @@ public class PizzaRESTController {
     @Autowired
     private PizzaService pizzaService;
 
-    @Autowired
-    private PizzaRepository pizzaRepository;
+//    @Autowired
+//    private PizzaRepository pizzaRepository;
 
     //можно специфицировать много параметров, например только гет запрос
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -77,7 +77,7 @@ public class PizzaRESTController {
     public ResponseEntity<Void> create(@RequestBody Pizza pizza,
                                        UriComponentsBuilder builder) {
         //todo поменять на pizzaService
-        Pizza p = pizzaRepository.save(pizza);
+        Pizza p = pizzaService.save(pizza);
         System.out.println(pizza);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(builder.path("/pizza/{id}").buildAndExpand(p.getPizzaId()).toUri());
