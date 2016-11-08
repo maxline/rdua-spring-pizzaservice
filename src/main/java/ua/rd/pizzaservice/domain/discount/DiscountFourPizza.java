@@ -16,10 +16,10 @@ public class DiscountFourPizza implements Discount {
     @Override
     public BigDecimal calculateDiscount(Order order) {
         if (!isDiscountNeeded(order)) {
-            return new BigDecimal("0.00");
+            return BigDecimal.ZERO;
         }
 
-        BigDecimal maxPrice = new BigDecimal("0.00");
+        BigDecimal maxPrice = BigDecimal.ZERO;
         for (Pizza pizza : order.getPizzas()) {
             maxPrice = maxPrice.max(pizza.getPrice());
         }

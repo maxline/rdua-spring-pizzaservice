@@ -45,8 +45,6 @@ public class DiscountFourPizzaTest {
 
         Order order = new Order(defaultCustomer, pizzas);
 
-        assertEquals(new BigDecimal("0.00"), new DiscountFourPizza().calculateDiscount(order));
+        assertEquals(BigDecimal.ZERO, new DiscountFourPizza().calculateDiscount(order));
     }
-
-
 }

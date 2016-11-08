@@ -114,7 +114,7 @@ public class Order {
     }
 
     public BigDecimal getPrice() {
-        BigDecimal orderPrice = new BigDecimal("0.0");
+        BigDecimal orderPrice = BigDecimal.ZERO;
         for (Pizza pizza : getPizzas()) {
             orderPrice = orderPrice.add(pizza.getPrice());
         }
@@ -126,7 +126,7 @@ public class Order {
     }
 
     private BigDecimal calculateTotalDiscount() {
-        BigDecimal discountTotal = new BigDecimal("0.00");
+        BigDecimal discountTotal = BigDecimal.ZERO;
 
         for (Discount discount : discountList) {
             discountTotal = discountTotal.add(discount.calculateDiscount(this));

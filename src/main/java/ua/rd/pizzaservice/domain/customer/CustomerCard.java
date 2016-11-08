@@ -10,7 +10,7 @@ public class CustomerCard {
     @Column(name = "id", nullable = false)
     private int id;
 
-    private BigDecimal balance = new BigDecimal("0.00");
+    private BigDecimal balance = BigDecimal.ZERO;
 
     public CustomerCard() {
     }
@@ -29,7 +29,7 @@ public class CustomerCard {
     }
 
     public void setBalance(BigDecimal balance) {
-        if (balance.compareTo(new BigDecimal("0.0")) == -1) {
+        if (balance.compareTo(BigDecimal.ZERO) == -1) {
             throw new IllegalArgumentException("Card balance must be positive number!");
         }
         this.balance = balance;
@@ -44,7 +44,6 @@ public class CustomerCard {
 
         if (id != that.id) return false;
         return balance.equals(that.balance);
-
     }
 
     @Override

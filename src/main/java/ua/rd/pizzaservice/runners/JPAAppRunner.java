@@ -109,8 +109,8 @@ public class JPAAppRunner {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");  //персистенс юнит который мы прописали в xml
         EntityManager em = emf.createEntityManager();
 
-        Pizza pizza = new Pizza(null, "Bavarian", Pizza.PizzaType.MEAT, new BigDecimal("0.00"));
-        Pizza pizza2 = new Pizza(null, "Bavarian2", Pizza.PizzaType.MEAT, new BigDecimal("0.00"));
+        Pizza pizza = new Pizza(null, "Bavarian", Pizza.PizzaType.MEAT, BigDecimal.ZERO);
+        Pizza pizza2 = new Pizza(null, "Bavarian2", Pizza.PizzaType.MEAT, BigDecimal.ZERO);
         //надо получить ентити менеджер, это как процедурное программирование, передаем параметр объект, и он с ним что-то делает
         //также можно передавать запросы, как нативные так и gpql
         //управляет жизненным циклом объекта
