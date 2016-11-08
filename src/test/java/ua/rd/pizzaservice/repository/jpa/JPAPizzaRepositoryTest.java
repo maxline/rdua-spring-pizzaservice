@@ -19,7 +19,7 @@ public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
         //jdbcTemplate.query()   и т.д. чтобы проверять насколько правильно отработали запросы
     }
 
-    @Ignore //todo
+    //@Ignore //todo
     @Test
     @Rollback(false)
     public void save() throws Exception {

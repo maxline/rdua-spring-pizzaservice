@@ -24,9 +24,9 @@ import java.util.Arrays;
 public class JPAAppRunner {
     public static void main(String[] args) {
         //pizzaExample();
-        //customerExample();
+        customerExample();
         //orderSpringExample();
-        pizzaSpringExample();
+        //pizzaSpringExample();
 
     }
 

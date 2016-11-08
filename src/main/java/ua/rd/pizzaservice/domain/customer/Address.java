@@ -1,9 +1,6 @@
 package ua.rd.pizzaservice.domain.customer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Serhii_Mykhliuk
@@ -12,8 +9,10 @@ import javax.persistence.Id;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private int id;
 
+    @Column(name = "address", nullable = false)
     private String Address;
 
     public Address() {
@@ -46,8 +45,9 @@ public class Address {
                 '}';
     }
 
-    @Override
+
     //todo хотя equals сравнивает без id, все равно при сохранении нового кастомера, каждый раз в базу пишется новый адрес, даже если такой существует
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -59,8 +59,6 @@ public class Address {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + Address.hashCode();
-        return result;
+        return Address.hashCode();
     }
 }

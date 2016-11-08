@@ -7,12 +7,13 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/repoContext.xml"})
+@ContextConfiguration(locations = {"classpath:/repoContext.xml"})
 //теперь создает все в памяти, и пропадает, не портит базу mysql
-@ContextConfiguration(locations = {"classpath:/repoContextForH2.xml"})
+//@ContextConfiguration(locations = {"classpath:/repoContextForH2.xml"})
 //там есть @Transactional и jdbc template  application context и logger
 //..можем юзать во время тестов
-@Ignore  //java.lang.Exception: No runnable methods
+//java.lang.Exception: No runnable methods
+@Ignore
 public class RepositoryTestConfig extends AbstractTransactionalJUnit4SpringContextTests {
 
 }

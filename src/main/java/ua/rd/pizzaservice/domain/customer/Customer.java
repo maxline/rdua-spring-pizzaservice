@@ -10,14 +10,19 @@ import javax.persistence.*;
  * @author andrii
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.name=:name"),
+})
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private int id;
     private String name;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @OneToOne(cascade=CascadeType.ALL)

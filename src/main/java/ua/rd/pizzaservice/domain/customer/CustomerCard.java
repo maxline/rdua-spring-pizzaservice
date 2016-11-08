@@ -1,9 +1,6 @@
 package ua.rd.pizzaservice.domain.customer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -13,6 +10,7 @@ import java.math.BigDecimal;
 public class CustomerCard {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private int id;
 
     private BigDecimal balance = new BigDecimal("0.00");
@@ -40,5 +38,22 @@ public class CustomerCard {
         this.balance = balance;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        CustomerCard that = (CustomerCard) o;
+
+        if (id != that.id) return false;
+        return balance.equals(that.balance);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + balance.hashCode();
+        return result;
+    }
 }
