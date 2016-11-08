@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.domain.customer.Address;
@@ -27,10 +26,9 @@ public class SimpleOrderServiceTest extends Mockito {
     OrderRepository orderRepositoryMock;
 
     private SimpleOrderService orderServiceSpy;
-
     private Customer defaultCustomer;
-
     private Order defaultOrder;
+
     private static final int PIZZA_ID_1 = 1;
     private static final int PIZZA_ID_2 = 2;
 
