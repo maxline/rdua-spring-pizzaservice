@@ -2,7 +2,11 @@ package ua.rd.pizzaservice.services;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.domain.customer.Address;
 import ua.rd.pizzaservice.domain.customer.Customer;
@@ -14,12 +18,18 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SimpleOrderServiceTest extends Mockito {
 
-    private PizzaService pizzaServiceMock;
-    private OrderRepository orderRepositoryMock;
+    @Mock
+    PizzaService pizzaServiceMock;
+    @Mock
+    OrderRepository orderRepositoryMock;
+
     private SimpleOrderService orderServiceSpy;
+
     private Customer defaultCustomer;
+
     private Order defaultOrder;
     private static final int PIZZA_ID_1 = 1;
     private static final int PIZZA_ID_2 = 2;
@@ -28,9 +38,6 @@ public class SimpleOrderServiceTest extends Mockito {
     public void setup() {
         defaultCustomer = new Customer("Adam", new Address("Earth"), new CustomerCard());
         defaultOrder = new Order();
-
-        pizzaServiceMock = mock(PizzaService.class);
-        orderRepositoryMock = mock(OrderRepository.class);
 
         orderServiceSpy = spy(new SimpleOrderService(orderRepositoryMock, pizzaServiceMock));
     }
