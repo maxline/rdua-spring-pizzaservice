@@ -9,9 +9,6 @@ import ua.rd.pizzaservice.repository.CustomerRepository;
 import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.OrderService;
 
-/**
- * @author andrii
- */
 public class AppRunner {
     public static void main(String[] args) throws Exception {
         System.out.println("Pizza Service");

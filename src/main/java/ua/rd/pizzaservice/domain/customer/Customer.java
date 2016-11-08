@@ -6,9 +6,6 @@ package ua.rd.pizzaservice.domain.customer;
 
 import javax.persistence.*;
 
-/**
- * @author andrii
- */
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.name=:name"),

@@ -4,9 +4,6 @@ import ua.rd.pizzaservice.domain.order.Order;
 
 import java.math.BigDecimal;
 
-/**
- *
- */
 public class DiscountCardBalance implements Discount {
     private static final BigDecimal DISCOUNT_FOR_CARD_BALANCE = new BigDecimal("0.1");
     private static final BigDecimal DISCOUNT_PERCENT_FOR_ORDER_PRICE = new BigDecimal("0.3");

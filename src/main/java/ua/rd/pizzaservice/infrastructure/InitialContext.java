@@ -1,8 +1,5 @@
 package ua.rd.pizzaservice.infrastructure;
 
-/**
- * @author andrii
- */
 public class InitialContext {
 
     private static Config config = new JavaConfig();

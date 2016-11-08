@@ -1,9 +1,5 @@
 package ua.rd.pizzaservice.repository.memory;
 
-/**
- * @author andrii
- */
-
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.infrastructure.Benchmark;
 import ua.rd.pizzaservice.repository.PizzaRepository;
@@ -13,9 +9,6 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author andrii
- */
 //@Repository("pizzaRepository")
 public class InMemPizzaRepository implements PizzaRepository {
 

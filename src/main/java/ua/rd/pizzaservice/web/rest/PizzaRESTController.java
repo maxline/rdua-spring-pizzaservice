@@ -14,11 +14,6 @@ import ua.rd.pizzaservice.services.PizzaService;
 import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
-
-/**
- * @author Serhii_Mykhliuk
- */
-
 @RestController // чтобы не писать над каждым методом ResponseBody
 public class PizzaRESTController {
     @Autowired

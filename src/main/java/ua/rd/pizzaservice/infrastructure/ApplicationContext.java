@@ -6,9 +6,6 @@ import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author andrii
- */
 public class ApplicationContext implements Context {
 
     private final Config config;

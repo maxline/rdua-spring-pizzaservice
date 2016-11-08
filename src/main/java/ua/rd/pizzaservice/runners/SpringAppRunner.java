@@ -11,9 +11,6 @@ import java.util.Arrays;
 
 import static ua.rd.pizzaservice.domain.order.StatusManager.Status.IN_PROGRESS;
 
-/**
- * @author andrii
- */
 public class SpringAppRunner {
     public static void main(String[] args) {
         ConfigurableApplicationContext repoContext =

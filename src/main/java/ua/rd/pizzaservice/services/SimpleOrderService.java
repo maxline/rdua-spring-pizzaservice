@@ -16,9 +16,6 @@ import java.util.List;
 import static ua.rd.pizzaservice.domain.order.StatusManager.Status;
 
 
-/**
- * @author andrii
- */
 @Service("orderService")
 public class SimpleOrderService implements OrderService {
 

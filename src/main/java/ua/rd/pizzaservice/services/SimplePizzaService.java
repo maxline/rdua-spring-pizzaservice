@@ -6,9 +6,6 @@ import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.infrastructure.Benchmark;
 import ua.rd.pizzaservice.repository.PizzaRepository;
 
-/**
- * @author andrii
- */
 @Service
 public class SimplePizzaService implements PizzaService {
 

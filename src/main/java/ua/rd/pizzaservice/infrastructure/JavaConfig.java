@@ -9,9 +9,6 @@ import ua.rd.pizzaservice.services.SimplePizzaService;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author andrii
- */
 public class JavaConfig implements Config {
 
     private Map<String, Class<?>> classes = new HashMap<>();

@@ -10,9 +10,6 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- */
 @Repository
 public class InMemCustomerRepository implements CustomerRepository {
 

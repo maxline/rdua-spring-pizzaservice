@@ -4,9 +4,6 @@ import java.util.*;
 
 import static ua.rd.pizzaservice.domain.order.StatusManager.Status.*;
 
-/**
- *
- */
 public class StatusManager {
 
     public enum Status {

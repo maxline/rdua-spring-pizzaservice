@@ -17,9 +17,6 @@ import java.util.*;
 import static ua.rd.pizzaservice.domain.order.StatusManager.Status.NEW;
 import static ua.rd.pizzaservice.domain.order.StatusManager.isTransitionAllowed;
 
-/**
- * @author andrii
- */
 @Entity
 @Component
 @Scope("prototype")

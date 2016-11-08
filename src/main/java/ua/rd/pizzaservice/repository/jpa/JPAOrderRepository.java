@@ -8,9 +8,6 @@ import ua.rd.pizzaservice.repository.OrderRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- * @author Sergey Mikhluk.
- */
 @Repository("orderRepository")
 public class JPAOrderRepository implements OrderRepository {
 

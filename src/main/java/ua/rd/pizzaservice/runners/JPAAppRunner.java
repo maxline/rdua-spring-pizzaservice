@@ -18,9 +18,6 @@ import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-/**
- *
- */
 public class JPAAppRunner {
     public static void main(String[] args) {
         //pizzaExample();

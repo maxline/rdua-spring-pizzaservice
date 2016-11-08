@@ -6,9 +6,6 @@ import ua.rd.pizzaservice.repository.OrderRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author andrii
- */
 //@Repository("orderRepository")
 public class InMemOrderRepository implements OrderRepository {
 

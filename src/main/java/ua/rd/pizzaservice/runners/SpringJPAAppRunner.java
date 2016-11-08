@@ -7,9 +7,6 @@ import ua.rd.pizzaservice.repository.PizzaRepository;
 
 import java.util.Arrays;
 
-/**
- * @author andrii
- */
 public class SpringJPAAppRunner {
     public static void main(String[] args) {
         ConfigurableApplicationContext repoContext =

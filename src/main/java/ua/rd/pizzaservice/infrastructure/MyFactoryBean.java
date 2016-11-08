@@ -5,9 +5,6 @@ import ua.rd.pizzaservice.domain.Pizza;
 
 import java.math.BigDecimal;
 
-/**
- *
- */
 public class MyFactoryBean implements FactoryBean<Pizza> {
 
     @Override

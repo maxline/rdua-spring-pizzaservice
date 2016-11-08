@@ -6,9 +6,6 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * @author Serhii_Mykhliuk
- */
 public class CustomerCardTest {
     @Test
     public void increaseCardBalance() throws Exception {

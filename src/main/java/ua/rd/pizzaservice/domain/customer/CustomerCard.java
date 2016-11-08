@@ -3,9 +3,6 @@ package ua.rd.pizzaservice.domain.customer;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * @author Serhii_Mykhliuk
- */
 @Entity
 public class CustomerCard {
     @Id

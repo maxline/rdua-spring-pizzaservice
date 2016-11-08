@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * @author Serhii_Mykhliuk
- */
 @WebServlet(name = "DispatcherServlet")
 public class DispatcherServlet extends HttpServlet {
 

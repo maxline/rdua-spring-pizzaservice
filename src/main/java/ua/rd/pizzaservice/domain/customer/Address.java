@@ -2,9 +2,6 @@ package ua.rd.pizzaservice.domain.customer;
 
 import javax.persistence.*;
 
-/**
- * @author Serhii_Mykhliuk
- */
 @Entity
 public class Address {
     @Id

@@ -14,9 +14,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * @author Serhii_Mykhliuk
- */
 public class DiscountFourPizzaTest {
     private Customer defaultCustomer;
 
