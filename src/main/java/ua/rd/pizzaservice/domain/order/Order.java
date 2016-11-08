@@ -3,11 +3,11 @@ package ua.rd.pizzaservice.domain.order;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ua.rd.pizzaservice.domain.Pizza;
-import ua.rd.pizzaservice.domain.order.StatusManager.Status;
 import ua.rd.pizzaservice.domain.customer.Customer;
 import ua.rd.pizzaservice.domain.discount.Discount;
 import ua.rd.pizzaservice.domain.discount.DiscountCardBalance;
 import ua.rd.pizzaservice.domain.discount.DiscountFourPizza;
+import ua.rd.pizzaservice.domain.order.StatusManager.Status;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -31,7 +31,7 @@ public class Order {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
     @Enumerated(EnumType.STRING)
     private Status status;

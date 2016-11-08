@@ -3,7 +3,6 @@ package ua.rd.pizzaservice.web.infrastructure;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,7 +23,7 @@ public class SimpleURLHandlerMapping implements HandlerMapping, ApplicationConte
         String controllerName = getControllerName(url);
         System.out.println("controllerName: " + controllerName);
         //return  webContext.getBean(controllerName, MyController.class)
-        return  (MyController) webContext.getBean(controllerName);
+        return (MyController) webContext.getBean(controllerName);
 
     }
 

@@ -2,7 +2,7 @@ package ua.rd.pizzaservice.runners;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.rd.pizzaservice.domain.*;
+import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.domain.customer.Address;
 import ua.rd.pizzaservice.domain.customer.Customer;
 import ua.rd.pizzaservice.domain.customer.CustomerCard;

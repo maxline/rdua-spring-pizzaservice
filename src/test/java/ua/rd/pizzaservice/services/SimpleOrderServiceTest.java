@@ -3,7 +3,7 @@ package ua.rd.pizzaservice.services;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ua.rd.pizzaservice.domain.*;
+import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.domain.customer.Address;
 import ua.rd.pizzaservice.domain.customer.Customer;
 import ua.rd.pizzaservice.domain.customer.CustomerCard;

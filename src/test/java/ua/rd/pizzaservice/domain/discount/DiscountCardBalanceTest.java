@@ -5,7 +5,6 @@ import org.junit.Test;
 import ua.rd.pizzaservice.domain.customer.Address;
 import ua.rd.pizzaservice.domain.customer.Customer;
 import ua.rd.pizzaservice.domain.customer.CustomerCard;
-import ua.rd.pizzaservice.domain.discount.DiscountCardBalance;
 import ua.rd.pizzaservice.domain.order.Order;
 
 import java.math.BigDecimal;

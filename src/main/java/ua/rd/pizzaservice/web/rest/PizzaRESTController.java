@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import ua.rd.pizzaservice.domain.Pizza;
-import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.PizzaService;
 
 import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
@@ -48,9 +47,9 @@ public class PizzaRESTController {
     //плюс можем добавлять какие заголовки будет содержать
 
     @RequestMapping(value = "/pizza/{pizzaID}", method = RequestMethod.GET)
-    public ResponseEntity<Pizza> find(@PathVariable("pizzaID") Integer pizzaID){
+    public ResponseEntity<Pizza> find(@PathVariable("pizzaID") Integer pizzaID) {
         Pizza pizza = pizzaService.find(pizzaID);
-        if (pizza==null){
+        if (pizza == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         //черз хатеоас появился набор дополлнительных аттрибутов
@@ -70,7 +69,7 @@ public class PizzaRESTController {
 
 
     //из реквеста формируем объект
-    @RequestMapping(value = "/pizza",  method = RequestMethod.POST,
+    @RequestMapping(value = "/pizza", method = RequestMethod.POST,
             consumes = "application/json"
     )
 
