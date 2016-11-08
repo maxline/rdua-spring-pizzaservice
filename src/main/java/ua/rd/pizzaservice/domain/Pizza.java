@@ -9,9 +9,6 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @author andrii
- */
 @Entity
 public class Pizza extends ResourceSupport implements Serializable {
 
@@ -19,23 +16,23 @@ public class Pizza extends ResourceSupport implements Serializable {
         VEGETARIAN, SEA, MEAT;
     }
 
-    //@Id @GeneratedValue(strategy = GenerationType.TABLE)   //создается отельная табличка hybernate_sequences, можно делать несколько сиквенсов, в табличке разными строчками
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    @SequenceGenerator(name = "PizzaSEQ", allocationSize = 10)
-//    @Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "PizzaSEQ")
+    //@GeneratedValue(strategy = GenerationType.TABLE)   //создается отельная табличка hybernate_sequences, можно делать несколько сиквенсов, в табличке разными строчками
+    //@SequenceGenerator(name = "PizzaSEQ", allocationSize = 10)
+    //@Id @GeneratedValue(strategy = GenerationType.AUTO, generator = "PizzaSEQ")
     private Integer pizzaId;
     private String name;
     private PizzaType pizzaType;
     private BigDecimal price;
 
-
     public Pizza() {
     }
 
-
-    public Integer getPizzaId() {
-        return pizzaId;
+    public Pizza(String name, PizzaType pizzaType, BigDecimal price) {
+        this.name = name;
+        this.pizzaType = pizzaType;
+        this.price = price;
     }
 
     public Pizza(Integer pizzaId, String name, PizzaType pizzaType, BigDecimal price) {
@@ -45,16 +42,28 @@ public class Pizza extends ResourceSupport implements Serializable {
         this.price = price;
     }
 
+    public Integer getPizzaId() {
+        return pizzaId;
+    }
+
+    public void setPizzaId(Integer pizzaId) {
+        this.pizzaId = pizzaId;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public PizzaType getPizzaType() {
@@ -81,7 +90,6 @@ public class Pizza extends ResourceSupport implements Serializable {
         if (!name.equals(pizza.name)) return false;
         if (pizzaType != pizza.pizzaType) return false;
         return price.equals(pizza.price);
-
     }
 
     @Override
