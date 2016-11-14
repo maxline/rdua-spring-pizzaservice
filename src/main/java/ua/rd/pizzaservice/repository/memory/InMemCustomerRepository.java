@@ -8,9 +8,10 @@ import ua.rd.pizzaservice.repository.CustomerRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@Repository
+//@Repository
 public class InMemCustomerRepository implements CustomerRepository {
 
     private final Map<Integer, Customer> customers = new HashMap<>();
@@ -23,5 +24,15 @@ public class InMemCustomerRepository implements CustomerRepository {
     @Override
     public Customer find(Integer id) {
         return customers.get(id);
+    }
+
+    @Override
+    public Customer find(String name) {
+        return null;
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        return null;
     }
 }
