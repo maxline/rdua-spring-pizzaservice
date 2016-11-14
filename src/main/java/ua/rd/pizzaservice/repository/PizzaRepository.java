@@ -4,7 +4,7 @@ import ua.rd.pizzaservice.domain.Pizza;
 
 public interface PizzaRepository {
 
-    Pizza find(Integer id);
+    Pizza findById(Integer id);
 
     Pizza save(Pizza pizza);
 

@@ -87,7 +87,7 @@ public class SimpleOrderService implements OrderService {
     }
 
     private Pizza findPizzaByID(Integer id) {
-        return pizzaService.find(id);
+        return pizzaService.findById(id);
     }
 
     private void saveOrder(Order newOrder) {

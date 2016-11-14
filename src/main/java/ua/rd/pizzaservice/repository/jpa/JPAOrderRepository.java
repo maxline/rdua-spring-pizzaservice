@@ -15,7 +15,7 @@ public class JPAOrderRepository implements OrderRepository {
     private EntityManager em;
 
     @Override
-    public Order find(Long id) {
+    public Order findById(Long id) {
         return em.find(Order.class, id);
     }
 

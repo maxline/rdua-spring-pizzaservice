@@ -15,7 +15,7 @@ public class SimpleCustomerService implements CustomerService {
     }
 
     @Override
-    public Customer find(Integer id) {
-        return customerRepository.find(id);
+    public Customer findById(Integer id) {
+        return customerRepository.findById(id);
     }
 }

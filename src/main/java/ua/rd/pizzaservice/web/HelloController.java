@@ -23,7 +23,7 @@ public class HelloController implements MyController {
             out.println("Hello from HelloController!");
 
             for (int i = 0; i < 50; i++) {
-                out.println(pizzaService.find(i));
+                out.println(pizzaService.findById(i));
             }
 
 

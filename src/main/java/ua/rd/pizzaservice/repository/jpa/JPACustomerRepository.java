@@ -20,13 +20,13 @@ public class JPACustomerRepository implements CustomerRepository {
     private EntityManager em;
 
     @Override
-    public Customer find(Integer id) {
+    public Customer findById(Integer id) {
         return em.find(Customer.class, id);
     }
 
     //todo добавить тесты
     @Override
-    public Customer find(String name) {
+    public Customer findByName(String name) {
         TypedQuery<Customer> query = em.createNamedQuery("Customer.findByName", Customer.class);
         return query.setParameter("name", name).getSingleResult();
     }

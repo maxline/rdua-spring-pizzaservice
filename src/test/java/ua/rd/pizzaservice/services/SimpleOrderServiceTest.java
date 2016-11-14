@@ -73,7 +73,7 @@ public class SimpleOrderServiceTest extends Mockito {
     public void increaseCustomerCardBalanceOnePizza() {
         //given
         Pizza defaultPizzaId1 = new Pizza(PIZZA_ID_1, "Sea", Pizza.PizzaType.SEA, new BigDecimal("100.00"));
-        when(pizzaServiceMock.find(PIZZA_ID_1)).thenReturn(defaultPizzaId1);
+        when(pizzaServiceMock.findById(PIZZA_ID_1)).thenReturn(defaultPizzaId1);
 
         doReturn(defaultOrder).when(orderServiceSpy).createNewOrder();
 
@@ -86,10 +86,10 @@ public class SimpleOrderServiceTest extends Mockito {
     public void increaseCustomerCardBalanceTwoPizza() {
         // given
         Pizza defaultPizzaId1 = new Pizza(PIZZA_ID_1, "Sea", Pizza.PizzaType.SEA, new BigDecimal("100.00"));
-        when(pizzaServiceMock.find(PIZZA_ID_1)).thenReturn(defaultPizzaId1);
+        when(pizzaServiceMock.findById(PIZZA_ID_1)).thenReturn(defaultPizzaId1);
 
         Pizza defaultPizzaId2 = new Pizza(PIZZA_ID_1, "Sea", Pizza.PizzaType.SEA, new BigDecimal("200.00"));
-        when(pizzaServiceMock.find(PIZZA_ID_2)).thenReturn(defaultPizzaId2);
+        when(pizzaServiceMock.findById(PIZZA_ID_2)).thenReturn(defaultPizzaId2);
 
         doReturn(defaultOrder).when(orderServiceSpy).createNewOrder();
         Order newOrder = orderServiceSpy.placeNewOrder(defaultCustomer, PIZZA_ID_2);

@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-       // @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
+        @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
         @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.name = :name")
 })
 public class Customer {

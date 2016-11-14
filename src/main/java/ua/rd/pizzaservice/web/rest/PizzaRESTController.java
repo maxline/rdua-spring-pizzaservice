@@ -35,7 +35,7 @@ public class PizzaRESTController {
 //    public Pizza pizza(@PathVariable("pizzaID") Integer pizzaID) {
 //        //http://localhost:8081/s-pizza-service/rest/pizza/1
 //        //надо связать плейсхолдер с переменной pizzaID
-//        return pizzaService.find(pizzaID);
+//        return pizzaService.findById(pizzaID);
 //    }
 
     //добавим код объека респонс ентити параметризуется тем объектом который реально находится в респонсе
@@ -43,7 +43,7 @@ public class PizzaRESTController {
 
     @RequestMapping(value = "/pizza/{pizzaID}", method = RequestMethod.GET)
     public ResponseEntity<Pizza> find(@PathVariable("pizzaID") Integer pizzaID) {
-        Pizza pizza = pizzaService.find(pizzaID);
+        Pizza pizza = pizzaService.findById(pizzaID);
         if (pizza == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

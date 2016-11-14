@@ -20,7 +20,7 @@ public class JPAPizzaRepository implements PizzaRepository {
 
 
     @Override
-    public Pizza find(Integer id) {
+    public Pizza findById(Integer id) {
         return em.find(Pizza.class, id);
 
     }

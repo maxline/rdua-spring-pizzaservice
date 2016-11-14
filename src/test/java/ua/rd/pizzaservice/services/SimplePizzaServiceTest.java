@@ -10,7 +10,6 @@ import ua.rd.pizzaservice.repository.PizzaRepository;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -29,10 +28,10 @@ public class SimplePizzaServiceTest {
 
     @Test
     public void find() throws Exception {
-        pizzaService.find(1);
-        verify(pizzaRepositoryMock).find(1);
+        pizzaService.findById(1);
+        verify(pizzaRepositoryMock).findById(1);
         //todo корректно ли тут просто проверять что вызывается метод pizzaRepozitory, а сам тест уже же писать в классе JPAPizzaRepositoryTest?
-        //или тут тоже надо было проверить положить что-то в репозиторий и проверить что найдет find()?
+        //или тут тоже надо было проверить положить что-то в репозиторий и проверить что найдет findById()?
     }
 
     @Test

@@ -12,7 +12,7 @@ public class InMemOrderRepository implements OrderRepository {
     private final List<Order> orders = new ArrayList<>();
 
     @Override
-    public Order find(Long id) {
+    public Order findById(Long id) {
         return null;
     }
 

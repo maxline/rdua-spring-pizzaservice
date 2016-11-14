@@ -22,12 +22,12 @@ public class InMemCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public Customer find(Integer id) {
+    public Customer findById(Integer id) {
         return customers.get(id);
     }
 
     @Override
-    public Customer find(String name) {
+    public Customer findByName(String name) {
         return null;
     }
 

@@ -20,8 +20,8 @@ public class SimplePizzaService implements PizzaService {
 
     @Benchmark
     @Override
-    public Pizza find(Integer id) {
-        return pizzaRepository.find(id);
+    public Pizza findById(Integer id) {
+        return pizzaRepository.findById(id);
     }
 
 

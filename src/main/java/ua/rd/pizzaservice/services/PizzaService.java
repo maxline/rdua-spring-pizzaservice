@@ -6,5 +6,5 @@ public interface PizzaService {
 
     Pizza save(Pizza pizza);
 
-    Pizza find(Integer id);
+    Pizza findById(Integer id);
 }

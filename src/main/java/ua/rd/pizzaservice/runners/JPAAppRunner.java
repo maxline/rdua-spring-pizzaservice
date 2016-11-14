@@ -47,7 +47,7 @@ public class JPAAppRunner {
 
 
         PizzaService pizzaService = (PizzaService) appContext.getBean("simplePizzaService");
-        System.out.println("pizzaService.find(1): " + pizzaService.find(1));
+        System.out.println("pizzaService.findById(1): " + pizzaService.findById(1));
 
         Customer customer = new Customer("Adam", new Address("Earth"), new CustomerCard(new BigDecimal("5.57")));
 

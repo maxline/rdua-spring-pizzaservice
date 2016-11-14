@@ -37,13 +37,13 @@ public class SpringJPAAppRunner {
 //
 //        CustomerService customerService = (CustomerService) appContext.getBean("simpleCustomerService");
 //
-//        Order order = orderService.placeNewOrder(customerService.find(1), 1, 1, 1, 2, 3);
+//        Order order = orderService.placeNewOrder(customerService.findById(1), 1, 1, 1, 2, 3);
 //        System.out.println(order);
 //        System.out.println(orderService.getClass());  // сделает прокси
 //
 //        orderService.changeOrderStatus(order, IN_PROGRESS);
 //        System.out.println(order);
-//        System.out.println(customerService.find(1));
+//        System.out.println(customerService.findById(1));
 
         repoContext.close();
         appContext.close();

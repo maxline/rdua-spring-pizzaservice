@@ -24,7 +24,7 @@ public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
                 pizza.getName(), pizza.getPrice(), pizza.getPizzaType().ordinal());
         //todo корректно ли тут использовать ordinal()? в таблице pizza pizzaType имеет тип int
 
-        pizza = pizzaRepository.find(1);
+        pizza = pizzaRepository.findById(1);
         Integer id = pizza.getPizzaId();
         assertEquals(new Integer(1), id);
     }
@@ -37,4 +37,6 @@ public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
 
         assertNotNull(pizza.getPizzaId());
     }
+
+
 }
