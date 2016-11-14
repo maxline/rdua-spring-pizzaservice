@@ -27,19 +27,18 @@ public class SimplePizzaServiceTest {
     }
 
     @Test
-    public void find() throws Exception {
+    public void findPizzaById() throws Exception {
         pizzaService.findById(1);
         verify(pizzaRepositoryMock).findById(1);
-        //todo корректно ли тут просто проверять что вызывается метод pizzaRepozitory, а сам тест уже же писать в классе JPAPizzaRepositoryTest?
-        //или тут тоже надо было проверить положить что-то в репозиторий и проверить что найдет findById()?
+        //todo корректно ли тут просто проверять что вызывается метод pizzaRepozitory, а сам тест уже же писать в классе JPAPizzaRepositoryIT?
+        //или тут тоже надо было проверить положить что-то в репозиторий и проверить что найдет findPizzaById()?
     }
 
     @Test
-    public void save() throws Exception {
+    public void savePizza() throws Exception {
         Pizza pizza = new Pizza("Sea", Pizza.PizzaType.SEA, BigDecimal.ZERO);
 
         pizzaService.save(pizza);
         verify(pizzaRepositoryMock).save(pizza);
     }
-
 }

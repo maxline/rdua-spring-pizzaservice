@@ -23,6 +23,10 @@ public class CustomerCard {
         balance = balance.add(sum);
     }
 
+    public int getId() {
+        return id;
+    }
+
     //todo unitTest
     public BigDecimal getBalance() {
         return balance;

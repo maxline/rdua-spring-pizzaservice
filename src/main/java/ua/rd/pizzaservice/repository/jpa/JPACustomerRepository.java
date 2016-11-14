@@ -24,21 +24,19 @@ public class JPACustomerRepository implements CustomerRepository {
         return em.find(Customer.class, id);
     }
 
-    //todo добавить тесты
     @Override
     public Customer findByName(String name) {
         TypedQuery<Customer> query = em.createNamedQuery("Customer.findByName", Customer.class);
         return query.setParameter("name", name).getSingleResult();
     }
 
-    //todo добавить тесты
     @Override
     public List<Customer> findAll() {
         TypedQuery<Customer> query = em.createNamedQuery("Customer.findAll", Customer.class);
         return query.getResultList();
     }
 
-    //@Override
+    @Override
     @Transactional
     public Customer save(Customer customer) {
         Customer newCustomer = em.merge(customer);

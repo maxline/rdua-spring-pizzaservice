@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class JPAPizzaRepositoryTest extends RepositoryTestConfig {
+public class JPAPizzaRepositoryIT extends RepositoryTestConfig {
 
     @Autowired
     private PizzaRepository pizzaRepository;

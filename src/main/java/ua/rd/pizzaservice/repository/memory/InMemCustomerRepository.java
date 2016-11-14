@@ -35,4 +35,9 @@ public class InMemCustomerRepository implements CustomerRepository {
     public List<Customer> findAll() {
         return null;
     }
+
+    @Override
+    public Customer save(Customer customer) {
+        return null;
+    }
 }
