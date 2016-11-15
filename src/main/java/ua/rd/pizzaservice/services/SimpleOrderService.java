@@ -23,7 +23,6 @@ public class SimpleOrderService implements OrderService {
     private final OrderRepository orderRepository;  //тут ссылка на интерфейс, завязка не на конкретный экземпляр, а на абстакцию - на это направлен IoC
     private final PizzaService pizzaService;
 
-
     private int maxOrderCount;
 
     @Autowired

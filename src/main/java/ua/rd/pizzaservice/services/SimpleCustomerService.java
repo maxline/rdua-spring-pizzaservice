@@ -9,6 +9,9 @@ import ua.rd.pizzaservice.repository.CustomerRepository;
 public class SimpleCustomerService implements CustomerService {
     private CustomerRepository customerRepository;
 
+    public SimpleCustomerService() {
+    }
+
     @Autowired
     public SimpleCustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
