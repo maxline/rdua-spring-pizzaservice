@@ -50,6 +50,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring-context.version}</version>
+            <!--не работало ошибка 500 http://localhost:8081/s-pizza-service/app/hello-->
         </dependency>
 
         <!--конвертор JSON, можно подключить любой который поддерживается спрингом -->
@@ -126,24 +127,55 @@
         </dependency>
 
         <!--<dependency>-->
-        <!--<groupId>javax.servlet</groupId>-->
-        <!--<artifactId>jstl</artifactId>-->
-        <!--<version>1.2</version>-->
+        <!--<groupId>javax.servlet.jsp</groupId>-->
+        <!--<artifactId>jsp-api</artifactId>-->
+        <!--<version>2.2</version>-->
+        <!--&lt;!&ndash;у томката старая версия, у спринга новая&ndash;&gt;-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
+
+
+        <!--*************-->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
 
 
     </dependencies>
 
     <build>
         <plugins>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.tomcat.maven</groupId>-->
+            <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+            <!--<version>2.2</version>-->
+            <!--<configuration>-->
+            <!--<port>8081</port>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <!--не работало ошибка 500 http://localhost:8081/s-pizza-service/app/hello-->
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.11.v20150529</version>
+
                 <configuration>
-                    <port>8081</port>
+                    <httpConnector>
+                        <port>8081</port>
+                    </httpConnector>
+
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/s-pizza-service</contextPath>
+                    </webApp>
                 </configuration>
+
             </plugin>
+
         </plugins>
     </build>
 
