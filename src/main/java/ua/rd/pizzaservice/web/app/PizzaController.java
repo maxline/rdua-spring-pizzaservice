@@ -3,6 +3,7 @@ package ua.rd.pizzaservice.web.app;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,14 +32,25 @@ public class PizzaController {
         return "hello";
     }
 
+//    @RequestMapping("/pizzas")
+//    public ModelAndView pizzas() {
+//        ModelAndView mv = new ModelAndView("pizzas");
+//        mv.setStatus(HttpStatus.OK);
+//        mv.addObject("pizzaList", pizzaService.findAll());
+//
+//        System.out.println(pizzaService.findAll());
+//        return mv;
+//    }
+
+    //другой вариант /pizzas
     @RequestMapping("/pizzas")
-    public ModelAndView pizzas() {
-        ModelAndView mv = new ModelAndView("pizzas");
-        mv.setStatus(HttpStatus.OK);
-        mv.addObject("pizzaList", pizzaService.findAll());
+    public String pizzas(Model model) {
+        model.addAttribute("pizzaList", pizzaService.findAll());
+
         System.out.println(pizzaService.findAll());
-        return mv;
+        return "pizzas";
     }
+
 
     @RequestMapping("/create")
     public String create() {
