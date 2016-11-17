@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.services.CustomerService;
@@ -55,16 +56,23 @@ public class PizzaController {
     @RequestMapping("/create")
     public String create() {
         //model.addAttribute("pet", pet);
-        return "modifyPizza";  //расценивается как имя view, желательно не хардкодить, но оно не привязано
+        return "newPizza";  //расценивается как имя view, желательно не хардкодить, но оно не привязано
     }
 
     @RequestMapping(value = "/addNew", method = RequestMethod.POST)
-    public String addNew(@ModelAttribute Pizza pizza) {  //сделай сам объект из аттрибутов
+    public String addNew(@ModelAttribute Pizza pizza, Model model) {  //сделай сам объект из аттрибутов
         System.out.println(pizza);
         pizzaService.save(pizza);
+        model.addAttribute("status", "created");
 
         return "redirect:pizzas";  //расценивается как имя view, желательно не хардкодить, но оно не привязано
     }
+
+//    @ModelAttribute
+//    public void status(@RequestParam(name="status", required = false)){
+//        System.out.println(status);
+//
+//    }
 
     //todo не получает список кастомеров
     @RequestMapping("/customers")
