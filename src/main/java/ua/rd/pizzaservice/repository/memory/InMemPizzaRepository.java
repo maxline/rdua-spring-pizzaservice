@@ -7,6 +7,7 @@ import ua.rd.pizzaservice.repository.PizzaRepository;
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //@Repository("pizzaRepository")
@@ -21,13 +22,16 @@ public class InMemPizzaRepository implements PizzaRepository {
         pizzas.put(3, new Pizza(3, "vega", Pizza.PizzaType.VEGETARIAN, new BigDecimal(100.00)));
     }
 
-
     @Benchmark
     @Override
     public Pizza findById(Integer id) {
         return pizzas.get(id);
     }
 
+    @Override
+    public List<Pizza> findAll() {
+        return null;
+    }
 
     @Override
     public Pizza save(Pizza pizza) {

@@ -2,14 +2,14 @@ package ua.rd.pizzaservice.domain;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Pizza.findAll", query = "SELECT p FROM Pizza p"),
+})
 public class Pizza extends ResourceSupport implements Serializable {
 
     public enum PizzaType {

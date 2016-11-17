@@ -7,6 +7,8 @@ import ua.rd.pizzaservice.repository.PizzaRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 @Repository("pizzaRepository")
 public class JPAPizzaRepository implements PizzaRepository {
@@ -23,6 +25,12 @@ public class JPAPizzaRepository implements PizzaRepository {
     public Pizza findById(Integer id) {
         return em.find(Pizza.class, id);
 
+    }
+
+    @Override
+    public List<Pizza> findAll() {
+        TypedQuery<Pizza> query = em.createNamedQuery("Pizza.findAll", Pizza.class);
+        return query.getResultList();
     }
 
     //должен возвращать пицуу с ИД, если медот ничего не возвращает, то не должен менять состояние объекта
