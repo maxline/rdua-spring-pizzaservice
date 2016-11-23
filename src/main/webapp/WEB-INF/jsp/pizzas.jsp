@@ -28,20 +28,17 @@
         <th>Edit</th>
     </tr>
 
-    <%--<tr>--%>
-    <%--<td><c:out value="${pizza.id}"></c:out></td>--%>
-    <%--<td><c:out value="${pizza.name}"></c:out></td>--%>
-
     <c:forEach items="${pizzaList}" var="pizza">
         <tr>
             <td><c:out value="${pizza.pizzaId}"></c:out></td>
             <td><c:out value="${pizza.name}"></c:out></td>
             <td><c:out value="${pizza.pizzaType}"></c:out></td>
             <td><c:out value="${pizza.price}"></c:out></td>
-            <td></td>
-
-            <%--todo добавить ссылку на edit форма--%>
-
+            <td>
+                <form action="${pageContext.request.contextPath}/app/edit/${pizza.pizzaId}" method="get">
+                    <button type="submit">EDIT</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
 

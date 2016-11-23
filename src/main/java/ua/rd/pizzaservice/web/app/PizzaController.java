@@ -41,7 +41,7 @@ public class PizzaController {
 //    }
 
     //другой вариант /pizzas
-    @RequestMapping(value="/{pizzaId}", method = RequestMethod.GET)
+    @RequestMapping(value="/edit/{pizzaId}", method = RequestMethod.GET)
     public String pizza(@PathVariable("pizzaId") Integer pizzaId, Model model) {
         model.addAttribute("pizza", pizzaService.findById(pizzaId));
 
@@ -74,7 +74,7 @@ public class PizzaController {
         return "redirect:pizzas";  //расценивается как имя view, желательно не хардкодить, но оно не привязано
     }
 
-    @RequestMapping(value = "/modify", method = RequestMethod.PUT)
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify(@ModelAttribute Pizza pizza, Model model) {  //сделай сам объект из аттрибутов
         System.out.println(pizza);
         pizzaService.save(pizza);
