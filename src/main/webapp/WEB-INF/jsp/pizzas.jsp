@@ -23,6 +23,9 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Edit</th>
     </tr>
 
     <%--<tr>--%>
@@ -33,7 +36,9 @@
         <tr>
             <td><c:out value="${pizza.pizzaId}"></c:out></td>
             <td><c:out value="${pizza.name}"></c:out></td>
-                <%--<td><c:out value="${customer.address}"></c:out></td>--%>
+            <td><c:out value="${pizza.pizzaType}"></c:out></td>
+            <td><c:out value="${pizza.price}"></c:out></td>
+            <td></td>
 
             <%--todo добавить ссылку на edit форма--%>
 

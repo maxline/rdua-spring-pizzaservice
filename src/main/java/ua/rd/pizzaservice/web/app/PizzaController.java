@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.services.CustomerService;
@@ -44,6 +41,14 @@ public class PizzaController {
 //    }
 
     //другой вариант /pizzas
+    @RequestMapping(value="/{pizzaId}", method = RequestMethod.GET)
+    public String pizza(@PathVariable("pizzaId") Integer pizzaId, Model model) {
+        model.addAttribute("pizza", pizzaService.findById(pizzaId));
+
+        System.out.println(pizzaService.findById(pizzaId));
+        return "modifyPizza";
+    }
+
     @RequestMapping("/pizzas")
     public String pizzas(Model model) {
         model.addAttribute("pizzaList", pizzaService.findAll());
@@ -51,6 +56,7 @@ public class PizzaController {
         System.out.println(pizzaService.findAll());
         return "pizzas";
     }
+
 
 
     @RequestMapping("/create")
@@ -66,6 +72,15 @@ public class PizzaController {
         model.addAttribute("status", "created");
 
         return "redirect:pizzas";  //расценивается как имя view, желательно не хардкодить, но оно не привязано
+    }
+
+    @RequestMapping(value = "/modify", method = RequestMethod.PUT)
+    public String modify(@ModelAttribute Pizza pizza, Model model) {  //сделай сам объект из аттрибутов
+        System.out.println(pizza);
+        pizzaService.save(pizza);
+        model.addAttribute("status", "modified");
+
+        return "redirect:pizzas";
     }
 
 //    @ModelAttribute
