@@ -58,6 +58,11 @@ public class PizzaController {
     }
 
 
+    @RequestMapping("/exception")
+    public void exeption(){
+        throw new NumberFormatException("Artificial exception");
+    }
+
 
     @RequestMapping("/create")
     public String create() {

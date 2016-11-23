@@ -12,7 +12,17 @@
 
     <!--за нас сама прописывает конфигурации маршаллера для возврата JSON и XML
     но спринг не включает стандартный конвертор-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
+
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="ua.rd.pizzaservice.web.converter.CardIdToCardConverter"/>
+                <bean class="ua.rd.pizzaservice.web.converter.PizzaConverter"/>
+            </set>
+        </property>
+    </bean>
 
     <!--заменяет internalResourceViewResolver который раньше прописывали явно-->
     <mvc:view-resolvers>
@@ -21,4 +31,16 @@
                  view-class="org.springframework.web.servlet.view.JstlView"/>
     </mvc:view-resolvers>
     <context:component-scan base-package="ua.rd.pizzaservice.web.app"/>
+
+    <bean id="simpleMappingExeptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <map>
+                <entry key="NumberFormatExeption" value="error"/>
+            </map>
+        </property>
+        <property name="defaultErrorView" value="error"/>
+        <property name="exceptionAttribute" value="ex"/>
+        <!--logger нам не нужен-->
+    </bean>
 </beans>
