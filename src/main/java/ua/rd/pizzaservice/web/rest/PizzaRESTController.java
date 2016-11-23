@@ -38,7 +38,7 @@ public class PizzaRESTController {
 //        return pizzaService.findById(pizzaID);
 //    }
 
-    //добавим код объека респонс ентити параметризуется тем объектом который реально находится в респонсе
+    //добавим  код объека респонс ентити параметризуется тем объектом который реально находится в респонсе
     //плюс можем добавлять какие заголовки будет содержать
 
     @RequestMapping(value = "/pizza/{pizzaID}", method = RequestMethod.GET)
