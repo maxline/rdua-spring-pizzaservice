@@ -37,4 +37,8 @@ public class InMemPizzaRepository implements PizzaRepository {
     public Pizza save(Pizza pizza) {
         return null;
     }
+
+    @Override
+    public void delete(Integer id) {
+    }
 }

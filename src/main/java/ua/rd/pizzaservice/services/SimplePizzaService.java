@@ -35,4 +35,10 @@ public class SimplePizzaService implements PizzaService {
     public Pizza save(Pizza pizza) {
         return pizzaRepository.save(pizza);
     }
+
+
+    @Override
+    public void delete(Integer pizzaId) {
+        pizzaRepository.delete(pizzaId);
+    }
 }

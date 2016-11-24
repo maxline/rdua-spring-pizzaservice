@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Pizza.findAll", query = "SELECT p FROM Pizza p"),
+        @NamedQuery(name = "Pizza.deleteById", query = "DELETE FROM Pizza p WHERE p.pizzaId = :pizzaId")
 })
 public class Pizza extends ResourceSupport implements Serializable {
 

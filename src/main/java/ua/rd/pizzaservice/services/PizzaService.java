@@ -11,4 +11,6 @@ public interface PizzaService {
     List<Pizza> findAll();
 
     Pizza save(Pizza pizza);
+
+    void delete(Integer pizzaId);
 }

@@ -40,4 +40,11 @@ public class JPAPizzaRepository implements PizzaRepository {
         Pizza newPizza = em.merge(pizza);
         return newPizza;
     }
+
+    @Override
+    @Transactional
+    public void delete(Integer pizzaId) {
+        TypedQuery<Pizza> query = em.createNamedQuery("Pizza.deleteById", Pizza.class);
+        query.setParameter("pizzaId", pizzaId).getSingleResult();
+    }
 }
