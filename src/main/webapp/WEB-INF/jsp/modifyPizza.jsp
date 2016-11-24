@@ -7,6 +7,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 
 <html>
@@ -23,6 +24,7 @@
         Price: <input type="text" name="price" value="${pizza.price}">
 
         <input type="submit"/>
+        <sec:csrfInput/>
 
     </form>
 </body>

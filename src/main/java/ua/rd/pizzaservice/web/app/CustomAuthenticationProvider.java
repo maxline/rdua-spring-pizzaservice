@@ -17,9 +17,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String userName = authentication.getName();
         String password = authentication.getPrincipal().toString();
         if (userName.equals("user") && password.equals("user")) {
-            Authentication auth = new UsernamePasswordAuthenticationToken(userName, "", Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+            Authentication auth = new UsernamePasswordAuthenticationToken(userName, "", Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN")));
             return auth;
         }
+//        throw new AuthenticationException(){
+//
+//        };
         return null;
     }
 

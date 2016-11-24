@@ -39,6 +39,6 @@ public class InMemPizzaRepository implements PizzaRepository {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer pizzaId) {
     }
 }

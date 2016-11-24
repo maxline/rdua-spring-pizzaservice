@@ -12,6 +12,5 @@ public interface PizzaRepository {
 
     Pizza save(Pizza pizza);
 
-    void delete(Integer id);  //todo boolean
-
+    void delete(Integer pizzaId);//todo boolean
 }

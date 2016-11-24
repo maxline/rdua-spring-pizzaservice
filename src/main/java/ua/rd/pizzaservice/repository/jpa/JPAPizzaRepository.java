@@ -7,7 +7,6 @@ import ua.rd.pizzaservice.repository.PizzaRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -41,16 +40,10 @@ public class JPAPizzaRepository implements PizzaRepository {
     }
 
     @Override
+    @Transactional
     public void delete(Integer pizzaId) {
-
-        Query query = em.createQuery(
-                "DELETE FROM Pizza p WHERE p.pizzaId = :pizzaId");
-
-        int deletedCount = query.setParameter("pizzaId", pizzaId).executeUpdate();
-
-//        TypedQuery<Pizza> query = em.createNamedQuery("Pizza.deleteById", Pizza.class);
-//        System.out.println(query);
-//        query.setParameter("pizzaId", pizzaId);
-//        System.out.println(query.executeUpdate());
+        System.out.println(pizzaId);
+        Pizza pizza = findById(pizzaId);
+        em.remove(pizza);
     }
 }
