@@ -11,7 +11,7 @@
         <http/>
 
         <user-service>
-            <user name="user" password="password" authorities="ROLE_USER"/>
+            <user name="user" password="user" authorities="ROLE_USER"/>
         </user-service>
         <!--секюрити контекст будет расшаренный между всеми контекствами-->
     </b:beans>
