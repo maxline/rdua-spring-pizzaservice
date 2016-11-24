@@ -49,6 +49,15 @@ public class PizzaController {
         return "modifyPizza";
     }
 
+    @RequestMapping(value="/delete/{pizzaId}", method = RequestMethod.GET)
+    public String deletePizza(@PathVariable("pizzaId") Integer pizzaId, Model model) {
+        System.out.println("delete " + pizzaId);
+        pizzaService.delete(pizzaId);
+
+        return "pizzas";
+    }
+
+
     @RequestMapping("/pizzas")
     public String pizzas(Model model) {
         model.addAttribute("pizzaList", pizzaService.findAll());

@@ -8,11 +8,29 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
-        <http/>
 
-        <user-service>
-            <user name="user" password="user" authorities="ROLE_USER"/>
-        </user-service>
+        <http/>
+        <!--<http pattern="/app/**">-->
+        <!--<form-login />-->
+        <!--<intercept-url pattern="/**" access="hasRole('USER')"/>-->
+        <!--&lt;!&ndash;требуем чтобы была логин форм, можно кастомизировать&ndash;&gt;-->
+        <!--<logout/>-->
+        <!--</http>-->
+
+        <!--<user-service>-->
+        <!--<user name="user" password="user" authorities="ROLE_USER"/>-->
+        <!--<user name="user1" password="user1" authorities="ROLE_USER"/>-->
+        <!--</user-service>-->
+
+        <b:bean name = "authProvider" class="ua.rd.pizzaservice.web.app.CustomAuthenticationProvider">
+        </b:bean>
+
+        <authentication-manager>
+            <authentication-provider ref="authProvider"/>
+
+        </authentication-manager>
+
+
         <!--секюрити контекст будет расшаренный между всеми контекствами-->
     </b:beans>
 </beans>

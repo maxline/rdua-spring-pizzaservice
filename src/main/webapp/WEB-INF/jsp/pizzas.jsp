@@ -26,6 +26,7 @@
         <th>Type</th>
         <th>Price</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
 
     <c:forEach items="${pizzaList}" var="pizza">
@@ -39,6 +40,12 @@
                     <button type="submit">EDIT</button>
                 </form>
             </td>
+            <td>
+                <form action="${pageContext.request.contextPath}/app/delete/${pizza.pizzaId}" method="get">
+                    <button type="submit">DELETE</button>
+                </form>
+            </td>
+
         </tr>
     </c:forEach>
 
