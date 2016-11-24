@@ -133,8 +133,6 @@
         <!--&lt;!&ndash;у томката старая версия, у спринга новая&ndash;&gt;-->
         <!--<scope>provided</scope>-->
         <!--</dependency>-->
-
-
         <!--*************-->
 
         <dependency>
@@ -143,6 +141,17 @@
             <version>1.2</version>
         </dependency>
 
+        <!-- security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.2.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.2.0.RELEASE</version>
+        </dependency>
 
     </dependencies>
 

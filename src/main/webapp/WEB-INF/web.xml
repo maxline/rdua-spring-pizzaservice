@@ -9,13 +9,24 @@
         <!--доступны для всех сервлетов которые определены в данном хмл-->
         <param-name>contextConfigLocation</param-name>
         <!--имя конктестов в порядке инициализации, порядок важен!-->
-        <param-value>classpath:/repoContext.xml classpath:/appContext.xml</param-value>
+        <param-value>classpath:/repoContext.xml classpath:/appContext.xml /WEB-INF/securityContext.xml </param-value>
+
     </context-param>
 
     <!--listener подымает repoContext и appContext то что делали вручную в цикле-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+    <!--фильтр для security, xml-ная реализация securityContext.xml в web-inf -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <!--теперь будет веб страничка-->
     <servlet>
