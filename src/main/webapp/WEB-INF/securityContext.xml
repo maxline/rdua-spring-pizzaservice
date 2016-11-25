@@ -9,7 +9,30 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-        <http/>
+        <!--<http/>-->
+
+<!--2-->
+        <!--вообще не хотим защищать-->
+        <http pattern="/index.html" security="none"/>
+
+        <!--хотим сделать кастомную страничку логина, и страничка логин и логаут должна быть спрятана за апп-->
+
+        <http pattern="/app/**">
+            <intercept-url pattern="/app/loginp*" access="isAnonymous()"  method="GET"/>
+            <intercept-url pattern="/**" access="hasAnyRole('USER', 'ADMIN')"/>
+            <form-login login-page="/app/loginp"
+
+                        login-processing-url="/app/login"/>
+
+            <logout logout-url="/app/logout"/>
+        </http>
+
+        <!--always-use-default-target="true"-->
+        <!--default-target-url="/app/pizzas"-->
+
+        <!--/s-pizza-service-->
+
+        <!--1-->
         <!--<http pattern="/app/**">-->
         <!--<form-login />-->
         <!--<intercept-url pattern="/**" access="hasRole('USER')"/>-->

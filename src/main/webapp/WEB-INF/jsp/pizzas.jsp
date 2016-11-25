@@ -53,6 +53,15 @@
 
     </tbody>
 </table>
+<%--надо защищать еще на уровне методов--%>
+<sec:authorize access="hasRole('ADMIN')">
+    <c:url var="logoutUrl" value="/app/logout"/>
+    <form action="${logoutUrl}" method="post">
+        <input type="submit" value="Log out">
+        <sec:csrfInput/>
+    </form>
+
+</sec:authorize>
 
 </body>
 </html>
