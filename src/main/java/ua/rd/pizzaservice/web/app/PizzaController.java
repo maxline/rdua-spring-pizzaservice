@@ -3,6 +3,7 @@ package ua.rd.pizzaservice.web.app;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import ua.rd.pizzaservice.services.CustomerService;
 import ua.rd.pizzaservice.services.PizzaService;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * @author Serhii_Mykhliuk
@@ -74,11 +76,23 @@ public class PizzaController {
     @RequestMapping("/pizzas")
     @Secured("IS_AUTHENTICATED_FULLY")
     public String pizzas(Model model) {
-        model.addAttribute("pizzaList", pizzaService.findAll());
-
-        System.out.println(pizzaService.findAll());
+        //надо теперь удалить иначе перекрывает PostFilter
+//        model.addAttribute("pizzaList", pizzaService.findAll());
+//
+//        System.out.println(pizzaService.findAll());
         return "pizzas";
     }
+
+    //ua.rd ...
+    // /сработает первым перед /pizzas
+    @PostFilter("filterObject.pizzaType != T(ua.rd.pizzaservice.domain.Pizza.PizzaType).MEAT")
+    //@PostFilter("filterObject.pizzaId >= 20")
+    @ModelAttribute("pizzaList")
+    public List<Pizza>  getPizzas() {
+        List<Pizza> pizzas = pizzaService.findAll();
+        return pizzas;
+    }
+
 
     @RequestMapping("/exception")
     public void exeption(){
