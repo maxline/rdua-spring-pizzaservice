@@ -6,14 +6,18 @@ import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.services.PizzaService;
 
+import java.util.List;
+
 import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+@Secured("ROLE_ADMIN")
 @RestController // чтобы не писать над каждым методом ResponseBody
 public class PizzaRESTController {
     @Autowired
@@ -54,6 +58,18 @@ public class PizzaRESTController {
         return new ResponseEntity<>(pizza, HttpStatus.FOUND);
     }
 
+
+    @RequestMapping(value = "/pizzas}", method = RequestMethod.GET)
+    public ResponseEntity<List<Pizza>> findAll() {
+        List<Pizza> pizzas = pizzaService.findAll();
+//todo дописать linkTo
+//        Link link = linkTo(methodOn(PizzaRESTController.class).find(pizzaID)).withSelfRel();
+//        pizza.add(link);
+        //pizzas.forEach(p-> p.add(lintTo));
+
+        return new ResponseEntity<>(pizzas, HttpStatus.FOUND);
+    }
+
     //из реквеста формируем объект
 //    @RequestMapping(value = "/pizza",  method = RequestMethod.POST,
 //            consumes = "application/json"
@@ -80,5 +96,4 @@ public class PizzaRESTController {
 
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
-
 }

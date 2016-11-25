@@ -11,14 +11,14 @@
 
         <!--<http/>-->
 
-<!--2-->
+        <!--2-->
         <!--вообще не хотим защищать-->
         <http pattern="/index.html" security="none"/>
 
         <!--хотим сделать кастомную страничку логина, и страничка логин и логаут должна быть спрятана за апп-->
 
         <http pattern="/app/**">
-            <intercept-url pattern="/app/loginp*" access="isAnonymous()"  method="GET"/>
+            <intercept-url pattern="/app/loginp*" access="isAnonymous()" method="GET"/>
             <intercept-url pattern="/**" access="hasAnyRole('USER', 'ADMIN')"/>
             <form-login login-page="/app/loginp"
 
@@ -45,8 +45,23 @@
         <!--<user name="user1" password="user1" authorities="ROLE_USER"/>-->
         <!--</user-service>-->
 
-        <b:bean name = "authProvider" class="ua.rd.pizzaservice.web.app.CustomAuthenticationProvider">
+        <http pattern="/rest/**" create-session="stateless">
+            <http-basic />
+            <!--можно access isAuthenticated-->
+            <intercept-url pattern="/**" access="hasRole('USER')"/>
+            <csrf disabled="false"/>
+        </http>
+
+        <b:bean name="authProvider" class="ua.rd.pizzaservice.web.app.CustomAuthenticationProvider">
         </b:bean>
+
+
+        <!--<b:bean name="authProvider" class="ua.rd.pizzaservice.web.app.CustomAuthenticationProvider">-->
+            <!--<authentication-manager>-->
+                <!--<authentication-provider ref="authProvider"/>-->
+            <!--</authentication-manager>-->
+        <!--</b:bean>-->
+
 
         <authentication-manager>
             <authentication-provider ref="authProvider"/>
